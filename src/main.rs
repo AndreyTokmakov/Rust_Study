@@ -16,6 +16,7 @@ non_snake_case
 #[path = "Ownership/ownership.rs"] pub mod ownership;
 #[path = "Conditions/conditions.rs"] pub mod conditions;
 #[path = "Traits/traits.rs"] pub mod traits;
+#[path = "Networking/tcp_servers.rs"] pub mod tcp_servers;
 #[path = "Types/types_tests.rs"] pub mod types;
 #[path = "Memory/memory.rs"] pub mod memory;
 #[path = "Structures/structs.rs"] pub mod structs;
@@ -54,7 +55,7 @@ fn main()
      // pointers_and_reference::test_all();
      // console_io::test_all();
      // strings::test_all();
-     errors_handling::test_all();
+     // errors_handling::test_all();
      // files::test_all();
      // directories::test_all();
      // structs::test_all();
@@ -69,4 +70,6 @@ fn main()
      // tuples::test_all();
      // types::test_all();
      // generics::test_all();
+
+     tcp_servers::test_all();
 }
