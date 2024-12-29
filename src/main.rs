@@ -17,6 +17,7 @@ non_snake_case
 #[path = "Conditions/conditions.rs"] pub mod conditions;
 #[path = "Traits/traits.rs"] pub mod traits;
 #[path = "Networking/tcp_servers.rs"] pub mod tcp_servers;
+#[path = "Networking/udp_servers.rs"] pub mod udp_servers;
 #[path = "Types/types_tests.rs"] pub mod types;
 #[path = "Memory/memory.rs"] pub mod memory;
 #[path = "Structures/structs.rs"] pub mod structs;
@@ -71,5 +72,6 @@ fn main()
      // types::test_all();
      // generics::test_all();
 
-     tcp_servers::test_all();
+     // tcp_servers::test_all();
+     udp_servers::test_all();
 }
