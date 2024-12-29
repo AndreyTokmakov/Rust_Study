@@ -1,6 +1,6 @@
 
 use std::io::{Read, Write, Error};
-use std::net::{TcpListener, TcpStream};
+use std::net::{TcpListener, TcpStream, Shutdown};
 use std::thread;
 
 
@@ -22,29 +22,36 @@ fn start_server_1(host: &str, port: u16) -> std::io::Result<()>
 }
 
 
-fn handle_client_new_thread(mut stream: TcpStream) -> Result<(), Error>
+fn handle_client_new_thread(mut stream: TcpStream)
 {
-    println!("Incoming connection from: {}", stream.peer_addr()?);
     let mut buffer = [0; 512];
-    loop {
-        let bytesRead = stream.read(&mut buffer)?;
-        if bytesRead == 0 {
-            return Ok(())
+    while match stream.read(&mut buffer) {
+        Ok(size) => {
+            // echo everything!
+            stream.write(&buffer[0..size]).unwrap();
+            true
+        },
+        Err(_) => {
+            println!("An error occurred, terminating connection with {}", stream.peer_addr().unwrap());
+            stream.shutdown(Shutdown::Both).unwrap();
+            false
         }
-        stream.write(&buffer[..bytesRead])?;
-    }
+    } {}
 }
 
-fn start_server_multithreaded(host: &str, port: u16)
+fn start_echo_server_multithreaded(host: &str, port: u16)
 {
     let listener = TcpListener::bind(format!("{}:{}", host, port)).expect("Could not bind");
-    for stream in listener.incoming() {
+    for stream in listener.incoming()
+    {
         match stream {
-            Err(e) => { eprintln!("failed: {}", e) }
             Ok(stream) => {
-                thread::spawn(move || {
-                    handle_client_new_thread(stream).unwrap_or_else(|error| eprintln!("{:?}", error));
-                });
+                println!("New connection: {}", stream.peer_addr().unwrap());
+                thread::spawn(move || { handle_client_new_thread(stream); });
+            }
+            Err(error) => {
+                eprintln!("failed: {}", error)
+                /* connection failed */
             }
         }
     }
@@ -54,5 +61,5 @@ fn start_server_multithreaded(host: &str, port: u16)
 pub fn test_all()
 {
     // start_server_1("0.0.0.0", 52525).expect("TODO: panic message");
-    start_server_multithreaded("0.0.0.0", 52525);
+    start_echo_server_multithreaded("0.0.0.0", 52525);
 }
