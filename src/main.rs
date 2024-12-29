@@ -7,6 +7,7 @@ non_snake_case
 )]
 
 #[path = "Attributes/attributes.rs"] pub mod attributes;
+#[path = "Databases/sql_lite_tests.rs"] pub mod sql_lite_tests;
 #[path = "Autotests/autotests.rs"] pub mod autotests;
 #[path = "Functions/functions.rs"] pub mod functions;
 #[path = "Input_Arguments/read_from_input.rs"] pub mod read_from_input;
@@ -73,7 +74,9 @@ fn main()
      // types::test_all();
      // generics::test_all();
 
-     tcp_servers::test_all();
+     // tcp_servers::test_all();
      // udp_servers::test_all();
      // ProxyServer::test_all();
+
+     sql_lite_tests::test_all();
 }
