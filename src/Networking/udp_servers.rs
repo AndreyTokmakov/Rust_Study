@@ -13,7 +13,6 @@ fn run_server(host: &str, port: u16) -> std::io::Result<()>
             println!("Received {} bytes from {}: {:?}", bytes, src, payload);
         }
     } // the socket is closed here
-    Ok(())
 }
 
 fn run_server_echo(host: &str, port: u16) -> std::io::Result<()>
