@@ -52,7 +52,7 @@ fn main()
      // memory::test_all();
      // read_from_input::test_all();
      // random::test_all();
-     // ownership::test_all();
+     ownership::test_all();
      // loops::test_all();
      // slices::test_all();
      // pointers_and_reference::test_all();
@@ -78,5 +78,5 @@ fn main()
      // udp_servers::test_all();
      // ProxyServer::test_all();
 
-     sql_lite_tests::test_all();
+     // sql_lite_tests::test_all();
 }
