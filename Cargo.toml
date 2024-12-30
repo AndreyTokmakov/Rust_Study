@@ -9,3 +9,4 @@ edition = "2021"
 rand = "0.8.3"
 walkdir = "2"
 rusqlite = { version = "0.32.0", features = ["bundled"] }
+tokio = { version = "1", features = ["rt", "net", "rt-multi-thread", "macros", "sync"] }

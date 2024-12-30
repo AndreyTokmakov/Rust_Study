@@ -39,6 +39,7 @@ non_snake_case
 #[path = "Tuples/tuples.rs"] pub mod tuples;
 #[path = "Console_IO/console_io.rs"] pub mod console_io;
 #[path = "Pointers_and_References/pointers_and_reference.rs"] pub mod pointers_and_reference;
+#[path = "Networking_Tokio/udp_tests.rs"] pub mod udp_tests;
 
 
 
@@ -52,7 +53,7 @@ fn main()
      // memory::test_all();
      // read_from_input::test_all();
      // random::test_all();
-     ownership::test_all();
+     // ownership::test_all();
      // loops::test_all();
      // slices::test_all();
      // pointers_and_reference::test_all();
@@ -79,4 +80,6 @@ fn main()
      // ProxyServer::test_all();
 
      // sql_lite_tests::test_all();
+
+     udp_tests::test_all();
 }
