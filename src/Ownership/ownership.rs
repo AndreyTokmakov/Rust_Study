@@ -4,6 +4,11 @@ fn not_takes_ownership(str: &String)
     println!("{}", str);
 }
 
+fn calculate_length(s: &String) -> usize
+{
+    return s.len();
+}
+
 fn pass_by_const_reference()
 {
     let s: String = String::from("hello");
@@ -12,11 +17,6 @@ fn pass_by_const_reference()
     println!("String '{}', Length: {}", s, len);
 }
 
-
-fn calculate_length(s: &String) -> usize
-{
-    return s.len();
-}
 
 
 fn takes_ownership(some_string: String)

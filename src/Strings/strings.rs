@@ -14,14 +14,14 @@ pub fn test_all()
     split_string();
 }
 
-fn create() {
-    let data = "String one";
-    let s1 = data.to_string();
+fn create()
+{
+    let data = "One";
+    let s1: String = data.to_string();
+    let s2: String = "Two".to_string();
+    let s3: String = "Three".to_owned();
 
-    // the method also works on a literal directly:
-    let s2 = "String two".to_string();
-
-    println!("{} {}", s1, s2);
+    println!("{} {} {}", s1, s2, s3);
 }
 
 

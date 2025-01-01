@@ -7,6 +7,7 @@ non_snake_case
 )]
 
 #[path = "Attributes/attributes.rs"] pub mod attributes;
+#[path = "Environment/environment.rs"] pub mod environment;
 #[path = "Databases/sql_lite_tests.rs"] pub mod sql_lite_tests;
 #[path = "Autotests/autotests.rs"] pub mod autotests;
 #[path = "Functions/functions.rs"] pub mod functions;
@@ -39,13 +40,14 @@ non_snake_case
 #[path = "Tuples/tuples.rs"] pub mod tuples;
 #[path = "Console_IO/console_io.rs"] pub mod console_io;
 #[path = "Pointers_and_References/pointers_and_reference.rs"] pub mod pointers_and_reference;
-#[path = "Networking_Tokio/udp_tests.rs"] pub mod udp_tests;
+#[path = "Networking_Tokio/udp_tests.rs"] pub mod Tokio_udp_tests;
 
 
 
 fn main()
 {
      // attributes::test_all();
+     environment::test_all();
      // autotests::test_all();
      // compare::test_all();
      // functions::test_all();
@@ -78,8 +80,7 @@ fn main()
      // tcp_servers::test_all();
      // udp_servers::test_all();
      // ProxyServer::test_all();
+     // Tokio_udp_tests::test_all();
 
      // sql_lite_tests::test_all();
-
-     udp_tests::test_all();
 }
