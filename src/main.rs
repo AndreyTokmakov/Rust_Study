@@ -47,7 +47,7 @@ non_snake_case
 fn main()
 {
      // attributes::test_all();
-     environment::test_all();
+     // environment::test_all();
      // autotests::test_all();
      // compare::test_all();
      // functions::test_all();
@@ -65,7 +65,7 @@ fn main()
      // files::test_all();
      // directories::test_all();
      // structs::test_all();
-     // enums::test_all();
+     enums::test_all();
      // optional::test_all();
      // collections_arrays::test_all();
      // collections_vector::test_all();

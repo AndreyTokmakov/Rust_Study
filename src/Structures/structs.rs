@@ -154,15 +154,18 @@ fn create_one_instance_from_another() {
 
 pub fn test_all()
 {
+    // static_methods();
+
+    class_methods::tests();
+
     // create_class_instance();
     // create_one_instance_from_another();
     // test_rectangle();
     // test_rectangle_print();
 
-    // static_methods();
-    test_Point();
+    // test_Point();
 
-    // class_methods::tests();
+
     // tuple_structs::tests();
 
     // Long::tests();

@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 
 fn range_loop()
 {
@@ -41,20 +42,36 @@ fn while_loop()
     println!("Done");
 }
 
-fn collection_iterate_1() {
-    let a = [10, 20, 30, 40, 50];
-    for element in a {
-        println!("the value is: {}", element);
-    }
-}
-
-fn collection_iterate_2()
+fn collection_iterate_array()
 {
-    let a = [10, 20, 30, 40, 50];
+    let numbers = [10, 20, 30, 40, 50];
+
+    for element in numbers {
+        print!("{} ", element);
+    }
+    println!();
+
     let mut index = 0;
     while index < 5 {
-        println!("the value is: {}", a[index]);
+        print!("{} ", numbers[index]);
         index += 1;
+    }
+    println!();
+
+    for element in (1..5) {
+        print!("{element} ");
+    }
+    println!();
+}
+
+fn collection_iterate_map()
+{
+    let map: HashMap<&str, i32> = HashMap::from([
+        ("I", 1), ("II", 2), ("III", 3), ("IV", 4), ("V", 5),
+    ]);
+
+    for (key, value) in map.iter() {
+        println!("{key} = {value} ");
     }
 }
 
@@ -67,16 +84,41 @@ fn iterate_range()
 }
 
 
+fn loop_labels()
+{
+    let mut count = 0;
+    'loop_one: loop {
+        println!("count (loop_one): {count}");
+        let mut remaining = 10;
+
+        loop {
+            println!("remaining (inner loop): {remaining}");
+            if remaining == 9 {
+                break;
+            }
+            if count == 2 {
+                break 'loop_one;
+            }
+            remaining -= 1;
+        }
+
+        count += 1;
+    }
+    println!("End count = {count}");
+}
+
+
 pub fn test_all()
 {
-    range_loop();
+    // range_loop();
 
     // infinite_loop();
     // return_value_from_loop();
     // while_loop();
+    // loop_labels();
 
-    // collection_iterate_1();
-    // collection_iterate_2();
+    // collection_iterate_array();
+    collection_iterate_map();
 
     // iterate_range();
 }

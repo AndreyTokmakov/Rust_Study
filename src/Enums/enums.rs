@@ -3,72 +3,78 @@ mod enums_methods;
 mod enums_match;
 mod cpp_style_enums;
 
-enum IpAddrKind {
+#[derive(Debug)]
+enum ProtocolVersion
+{
     V4,
     V6,
 }
 
-struct IpAddr {
-    kind: IpAddrKind,
+#[derive(Debug)]
+struct IpAddr
+{
+    version: ProtocolVersion,
     address: String,
 }
 
-fn test1()
+fn basic_enum_demo()
 {
     let home = IpAddr {
-        kind: IpAddrKind::V4,
+        version: ProtocolVersion::V4,
         address: String::from("127.0.0.1"),
     };
 
     let loopback = IpAddr {
-        kind: IpAddrKind::V6,
+        version: ProtocolVersion::V6,
         address: String::from("::1"),
     };
+
+    println!("home: {:?}", home);
+    println!("loopback: {:?}", loopback);
 }
 
-//----------------------------------------------------------- Enums with String
+
 
 #[derive(Debug)]
-enum IpAddrEx {
+enum ProtocolVersionEx {
     V4(String),
     V6(String),
 }
 
-fn test2()
+fn sting_enum_demo()
 {
-    let home = IpAddrEx::V4(String::from("127.0.0.1"));
-    let loopback = IpAddrEx::V6(String::from("::1"));
+    let home = ProtocolVersionEx::V4(String::from("127.0.0.1"));
+    let loopback = ProtocolVersionEx::V6(String::from("::1"));
 
-    println!("{:?}", home);
-    println!("{:?}", loopback);
+    println!("home: {:?}", home);
+    println!("loopback: {:?}", loopback);
 }
 
-//----------------------------------------------------------- Enums diff types
-
-enum IpAddrEx2 {
+#[derive(Debug)]
+enum IpVersion
+{
     V4(u8, u8, u8, u8),
     V6(String),
 }
 
-fn test3()
+fn diff_types_enum_demo()
 {
-    let home = IpAddrEx2::V4(127, 0, 0, 1);
-    let loopback = IpAddrEx2::V6(String::from("::1"));
+    let home: IpVersion = IpVersion::V4(127, 0, 0, 1);
+    let loopback: IpVersion = IpVersion::V6(String::from("::1"));
+
+    println!("home: {:?}", home);
+    println!("loopback: {:?}", loopback);
 }
 
 
 
 pub fn test_all()
 {
-    // println!("Enums tests");
+    // basic_enum_demo();
+    // sting_enum_demo();
+    // diff_types_enum_demo();
 
-    // test1();
-    // test2();
-    // test3();
-
-    // enums_methods::tests();
-
+    enums_methods::tests();
     // enums_match::tests();
-
-    cpp_style_enums::tests();
+    // cpp_style_enums::tests();
 }

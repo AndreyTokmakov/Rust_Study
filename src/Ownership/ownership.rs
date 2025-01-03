@@ -72,12 +72,24 @@ fn mutable_borrowing()
     println!("{}", str_orig);
 }
 
+fn use_after_move()
+{
+    let s1 = String::from("hello");
+    let s2 = s1;
+
+    // println!("{s1}, world!"); // <---- WILL NOT COMPILE | ^^^^ value borrowed here after move
+    println!("{s2}, world!");
+}
+
 
 pub fn test_all()
 {
+
+    use_after_move();
+
     // test1();
     // pass_by_const_reference();
 
     // immutable_borrowing();
-    mutable_borrowing();
+    // mutable_borrowing();
 }
