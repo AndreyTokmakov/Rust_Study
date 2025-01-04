@@ -27,8 +27,11 @@ fn test_enum_method()
     let msgWrite: Message = Message::Write(String::from("hello"));
     msgWrite.call();
 
-    let message: Message = Message::Quit;
-    message.call();
+    let msgMessage: Message = Message::Quit;
+    msgMessage.call();
+
+    let msgMove: Message = Message::Move {x: 1, y: 2};
+    msgMove.call();
 
     let msgChangeColor: Message = Message::ChangeColor(1,2,3);
     msgChangeColor.call();
