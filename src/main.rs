@@ -65,8 +65,8 @@ fn main()
      // files::test_all();
      // directories::test_all();
      // structs::test_all();
-     enums::test_all();
-     // optional::test_all();
+     // enums::test_all();
+     optional::test_all();
      // collections_arrays::test_all();
      // collections_vector::test_all();
      // collections_hash_map::test_all();
