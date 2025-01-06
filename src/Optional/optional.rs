@@ -26,6 +26,58 @@ fn create_and_test()
     assert_eq!(x.is_none(), true);
 }
 
+fn take() // Takes the value out of the option, leaving a None in its place.
+{
+    let mut orig: Option<i32> = Some(2);
+    let res: Option<i32> = orig.take();
+
+    assert_eq!(orig, None);
+    assert_eq!(res, Some(2));
+
+    println!("{:?}", orig);
+    println!("{:?}", res);
+}
+
+fn take_if()
+{
+    println!("{}", "-".repeat(120).as_str());
+    {
+        let mut orig: Option<i32> = Some(123);
+        // FALSE - the 'orig' will NOT be transferred to 'res' (since 'orig' != 122)
+        let res: Option<i32> = orig.take_if(|v| *v == 122);
+
+        println!("orig = {:?}", orig);
+        println!("res =  {:?}", res);
+    }
+
+    println!("{}", "-".repeat(120).as_str());
+    {
+        let mut orig: Option<i32> = Some(123);
+        // OK - the 'orig' will be transferred to 'res'
+        let res: Option<i32> = orig.take_if(|v| *v == 123);
+
+        println!("orig = {:?}", orig);
+        println!("res =  {:?}", res);
+    }
+
+    println!("{}", "-".repeat(120).as_str());
+    {
+        let mut orig: Option<i32> = Some(123);
+
+        // No TAKE happens BUT orig will be changed to orig = oric - 23
+        let res: Option<i32> = orig.take_if(|v| if *v == 123 {
+            *v -= 23;
+            false
+        } else {
+            false
+        });
+
+        println!("orig = {:?}", orig);
+        println!("res =  {:?}", res);
+    }
+    println!("{}", "-".repeat(120).as_str());
+}
+
 fn sum_opts(a: Option<i32>, b: Option<i32>) -> Option<i32>
 {
     // Some(a + b)    //   --->   error[E0369]: cannot add `Option<i32>` to `Option<i32>`
@@ -71,7 +123,8 @@ pub fn test_all()
 {
     // create_optional();
     // create_and_test();
-    take();
+    // take();
+    take_if();
     // question_mark_operator();
 
 
