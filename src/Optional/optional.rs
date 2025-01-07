@@ -91,6 +91,27 @@ fn question_mark_operator()
     }
 }
 
+fn pattern_matching()
+{
+    let check_message = |opt_str: Option<&str>|
+    {
+        // Take a reference to the contained string
+        if let Some(m) = &opt_str {
+            println!("{}", *m);
+        }
+
+        // Remove the contained string, destroying the Option
+        let unwrapped_msg: &str = opt_str.unwrap_or("default message");
+        println!("{}\n", unwrapped_msg);
+    };
+
+    let msg: Option<&str> = Some("howdy");
+    check_message(msg);
+
+    let msg: Option<&str> = None;
+    check_message(msg);
+}
+
 fn is_none()
 {
     let a: Option<u32> = Some(2);
@@ -118,14 +139,51 @@ fn ok_or_else()
     assert_eq!(x.ok_or_else(|| 0), Err(0));
 }
 
+fn unwrap()
+{
+    let optStr: Option<&str> = Some("qwerty");
+    println!("{:?}", optStr.unwrap());
+
+    // unwrap panics with a generic message
+    let optStr: Option<&str> = None;
+    println!("{:?}", optStr.unwrap());
+}
+
+fn unwrap_or_else()
+{
+    // Returns the contained Some value or computes it from a closure.
+    let optStr: Option<&str> = Some("qwerty");
+    println!("{:?}", optStr.unwrap_or_else(|| "Default_Value")); // "qwerty"
+
+    let optStr: Option<&str> = None;
+    println!("{:?}", optStr.unwrap_or_else(|| "Default_Value")); // "Default_Value"
+}
+
+fn unwrap_unchecked()
+{
+    // Returns the contained Some value, consuming the self value, without checking that the value is not None.
+    // Calling this method on None is undefined behavior.
+
+    let optStr: Option<&str> = Some("qwerty");
+    println!("{:?}", unsafe { optStr.unwrap_unchecked()});
+
+    let optStr: Option<&str> = None;
+    println!("{:?}", unsafe { optStr.unwrap_unchecked()});
+}
 
 pub fn test_all()
 {
     // create_optional();
     // create_and_test();
     // take();
-    take_if();
+    // take_if();
     // question_mark_operator();
+    // pattern_matching();
+
+    // unwrap();
+    // unwrap_or();
+    // unwrap_or_else();
+    unwrap_unchecked();
 
 
     // is_none();

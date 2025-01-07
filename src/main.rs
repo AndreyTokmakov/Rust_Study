@@ -17,6 +17,7 @@ non_snake_case
 #[path = "Loops/loops.rs"] pub mod loops;
 #[path = "Ownership/ownership.rs"] pub mod ownership;
 #[path = "Conditions/conditions.rs"] pub mod conditions;
+#[path = "Lambdas/lambdas.rs"] pub mod lambdas;
 #[path = "Traits/traits.rs"] pub mod traits;
 #[path = "Networking/tcp_servers.rs"] pub mod tcp_servers;
 #[path = "Networking/udp_servers.rs"] pub mod udp_servers;
@@ -67,6 +68,7 @@ fn main()
      // structs::test_all();
      // enums::test_all();
      optional::test_all();
+     // lambdas::test_all();
      // collections_arrays::test_all();
      // collections_vector::test_all();
      // collections_hash_map::test_all();
