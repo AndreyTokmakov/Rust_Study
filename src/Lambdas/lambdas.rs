@@ -49,10 +49,22 @@ fn call_lambda_inplace()
 }
 
 
+fn examples__is_even()
+{
+    let is_even: fn(i32) -> bool = |n: i32| 0 == n & 1;
+
+    for v in 0.. 10 {
+        println!("Is {} even = {}", v, is_even(v));
+    }
+}
+
+
 pub fn test_all()
 {
     // simple_lambda_return();
     // simple_lambda_with_return();
     // check_optional_with_lambda();
-    call_lambda_inplace();
+    // call_lambda_inplace();
+
+    examples__is_even();
 }

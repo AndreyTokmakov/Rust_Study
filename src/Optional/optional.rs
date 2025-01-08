@@ -130,15 +130,6 @@ fn is_some()
     println!("b is_some: {}", b.is_some());
 }
 
-fn ok_or_else()
-{
-    let x: Option<&str> = Some("foo");
-    assert_eq!(x.ok_or_else(|| 0), Ok("foo"));
-
-    let x: Option<&str> = None;
-    assert_eq!(x.ok_or_else(|| 0), Err(0));
-}
-
 fn unwrap()
 {
     let optStr: Option<&str> = Some("qwerty");
@@ -171,6 +162,85 @@ fn unwrap_unchecked()
     println!("{:?}", unsafe { optStr.unwrap_unchecked()});
 }
 
+fn or()
+{
+    // Returns the option if it contains a value, otherwise returns .
+    let optStr: Option<&str> = Some("qwerty");
+    let defOptStr: Option<&str>= Some("Default_Value");
+    println!("{:?}", optStr.or(defOptStr));
+
+    let optStr: Option<&str> = None;
+    let defOptStr: Option<&str>= Some("Default_Value");
+    println!("{:?}", optStr.or(defOptStr));
+
+    // Output: Some("qwerty")
+    //         Some("Default_Value")
+}
+
+fn ok_or()
+{
+    // Transforms the Option<T> into a Result<T, E>, mapping Some(v) to Ok(v) and None to Err(err).
+    let optStr: Option<&str> = Some("qwerty");
+    println!("{:?}",optStr.ok_or(-1));
+
+    let optStr: Option<&str> = None;
+    println!("{:?}",optStr.ok_or(-1));
+
+    // Output: Ok("qwerty")
+    //         Err(-1)
+}
+
+fn ok_or_else()
+{
+    // Transforms the Option<T> into a Result<T, E>, mapping Some(v) to Ok(v) and None to Err(err()).
+
+    let optStr: Option<&str> = Some("qwerty");
+    println!("{:?}",optStr.ok_or_else(|| 123));
+
+    let optStr: Option<&str> = None;
+    println!("{:?}",optStr.ok_or_else(|| 123));
+
+    // Output: Ok("foo")
+    //         Err(123)
+}
+
+fn insert()
+{
+    // Inserts value into the option, then returns a mutable reference to it.
+    // If the option already contains a value, the old value is dropped.
+
+    let mut optStr: Option<&str> = Some("qwerty");
+    println!("Original value: {:}", optStr.unwrap());
+
+    let oldValue: &mut &str = optStr.insert("New_Value");
+    println!("Updated  value: {:}", oldValue);
+
+    // Output: Original value: qwerty
+    //         Updated  value: New_Value
+}
+
+fn get_or_insert()
+{
+    /// Inserts value into the option *** IF IT'S == None *** then returns a mutable reference to the contained value.
+    let mut optStr: Option<&str> = Some("qwerty");
+    println!("Original value: {:}", optStr.unwrap());
+
+    let oldValue: &mut &str = optStr.get_or_insert("New_Value");
+    println!("Updated  value: {:}", oldValue);
+
+    // Output: Original value: qwerty
+    //         Updated  value: qwerty
+}
+
+fn filter()
+{
+    let is_even: fn(&i32) -> bool = |n: &i32| 0 == n & 1;
+
+    println!("{:?}", None.filter(is_even));
+    println!("{:?}", Some(3).filter(is_even));
+    println!("{:?}", Some(4).filter(is_even));
+}
+
 pub fn test_all()
 {
     // create_optional();
@@ -183,12 +253,17 @@ pub fn test_all()
     // unwrap();
     // unwrap_or();
     // unwrap_or_else();
-    unwrap_unchecked();
-
+    // unwrap_unchecked();
+    // or();
+    // ok_or();
+    // ok_or_else();
 
     // is_none();
     // is_some();
-    // ok_or_else();
+
+    insert();
+    get_or_insert();
+    // filter();
 
     // examples::test_all();
 }
