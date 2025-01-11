@@ -36,6 +36,7 @@ non_snake_case
 #[path = "Slices/slices.rs"] pub mod slices;
 #[path = "ErrorsHandling/errors_handling.rs"] pub mod errors_handling;
 #[path = "Files/files.rs"] pub mod files;
+#[path = "Folders_Directories/folders_directories.rs"] pub mod folders_directories;
 #[path = "Generics_Templates/generics.rs"] pub mod generics;
 #[path = "Directories/directories.rs"] pub mod directories;
 #[path = "Tuples/tuples.rs"] pub mod tuples;
@@ -64,7 +65,8 @@ fn main()
      // console_io::test_all();
      // strings::test_all();
      // errors_handling::test_all();
-     files::test_all();
+     // files::test_all();
+     folders_directories::test_all();
      // directories::test_all();
      // structs::test_all();
      // enums::test_all();
