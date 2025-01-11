@@ -47,6 +47,7 @@ non_snake_case
 
 fn main()
 {
+     /** STD: **/
      // attributes::test_all();
      // environment::test_all();
      // autotests::test_all();
@@ -63,22 +64,25 @@ fn main()
      // console_io::test_all();
      // strings::test_all();
      // errors_handling::test_all();
-     // files::test_all();
+     files::test_all();
      // directories::test_all();
      // structs::test_all();
      // enums::test_all();
-     optional::test_all();
+     // optional::test_all();
      // lambdas::test_all();
-     // collections_arrays::test_all();
-     // collections_vector::test_all();
-     // collections_hash_map::test_all();
-     // LinkedList::test_all();
      // dynamic_dispatch::test_all();
      // traits::test_all();
      // tuples::test_all();
      // types::test_all();
      // generics::test_all();
 
+     // ** Collections: **/
+     // collections_arrays::test_all();
+     // collections_vector::test_all();
+     // collections_hash_map::test_all();
+     // LinkedList::test_all();
+
+     // ** Networking: **/
      // tcp_servers::test_all();
      // udp_servers::test_all();
      // ProxyServer::test_all();
