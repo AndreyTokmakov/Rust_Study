@@ -43,6 +43,7 @@ non_snake_case
 #[path = "Console_IO/console_io.rs"] pub mod console_io;
 #[path = "Pointers_and_References/pointers_and_reference.rs"] pub mod pointers_and_reference;
 #[path = "Networking_Tokio/udp_tests.rs"] pub mod Tokio_udp_tests;
+#[path = "Json/Json.rs"] pub mod Json;
 
 
 
@@ -66,7 +67,8 @@ fn main()
      // strings::test_all();
      // errors_handling::test_all();
      // files::test_all();
-     folders_directories::test_all();
+     // folders_directories::test_all();
+     Json::test_all();
      // directories::test_all();
      // structs::test_all();
      // enums::test_all();
