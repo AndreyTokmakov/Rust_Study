@@ -9,85 +9,90 @@ fn print_vector(vect: &Vec<i32>)
 
 fn iterate()
 {
-    {
-        let vect: Vec<i32> = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-        for i in &vect {
-            print!("{} ", i);
-        }
-    }
-
-    print!("\n");
-
-    {
-        let vect: Vec<i32> = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-        for i in vect {
-            print!("{} ", i);
-        }
+    let numbers: Vec<i32> = vec![1,2,3,4,5];
+    for i in &numbers {
+        print!("{} ", i);
     }
 }
 
-fn iterate_and_modify() {
-    let mut v = vec![0,1,2,3,4,5,6,7,8,9];
+fn iterate_pop()
+{
+    let mut numbers: Vec<i32> = vec![1, 2, 3, 4, 5];
+    while let Some(top) = numbers.pop() {
+        print!("{} ", top);
+    }
+}
 
-    print_vector(&v);
+fn iterate_and_modify()
+{
+    let mut numbers = vec![0,1,2,3,4,5,6,7,8,9];
+    print_vector(&numbers);
 
-    for i in &mut v {
+    for i in &mut numbers {
         *i += 10;
     }
 
-    print_vector(&v);
+    print_vector(&numbers);
 }
 
 
 fn create_test()
 {
     {
-        let mut vect = Vec::new();
+        let mut numbers: Vec<i32> = Vec::new();
 
-        vect.push(0);
-        vect.push(1);
-        vect.push(2);
-        vect.push(3);
+        numbers.push(1);
+        numbers.push(2);
+        numbers.push(3);
 
-        let third: &i32 = &vect[2];
-        println!("The third element is {}", third);
+        println!("{:?} of length {}", numbers, numbers.len());
     }
 
     {
-        let vect = vec![1, 2, 3, 4, 5];
-
-        let third: &i32 = &vect[2];
-        println!("The third element is {}", third);
+        let numbers: Vec<i32> = vec![1, 2, 3];
+        println!("{:?} of length {}", numbers, numbers.len());
     }
 
     {
-        let vec = vec![0; 5];
-        println!("{:?}", vec);
+        let numbers: Vec<i32> = vec![0; 5];
+        println!("{:?} of length {}", numbers, numbers.len());
     }
 
     {
-        let vec = Vec::from([1, 2, 3, 4]);
-        println!("{:?}", vec);
+        let numbers: Vec<i32> = Vec::from([1, 2, 3, 4]);
+        println!("{:?} of length {}", numbers, numbers.len());
     }
 }
 
-fn capacity() {
-    let vec: Vec<i32> = Vec::with_capacity(10);
-
-    println!("{:?}", vec);
-    println!("vec.len() = {:?}", vec.len());
-    println!("vec.capacity() = {:?}", vec.capacity());
+fn access_element()
+{
+    let numbers: Vec<i32> = vec![0, 1, 2, 3];
+    let second: &i32 = &numbers[1];
+    println!("The second element of collection {:?} is {}", &numbers, second);
 }
 
-fn modify_vector_element() {
-    {
-        let mut v = vec![1, 2, 3, 4, 5];
-        v[2] = 123;
-        println!("{:?}", v);
+fn size_and_capacity()
+{
+    let mut numbers: Vec<i32> = Vec::with_capacity(10);
+
+    for v in 0..3 {
+        numbers.push(v);
     }
+
+    println!("{:?} of length {:?} has capacity {}", numbers, numbers.len(), numbers.capacity());
 }
 
-fn vector_of_enums() {
+fn modify_vector_element()
+{
+    let mut numbers: Vec<i32> = vec![0, 1, 2, 3];
+    numbers[2] = 123;
+
+    println!("{:?}", numbers);
+    println!("last element = {:?}",  numbers.last());
+}
+
+fn vector_of_enums()
+{
 
     #[derive(Debug)]
     enum SpreadsheetCell {
@@ -155,15 +160,17 @@ fn experiments()
 pub fn test_all()
 {
     // create_test();
+    // access_element();
 
-    iterate();
-    // iterate_and_modify();
+    // size_and_capacity();
+
+    // iterate();
+    // iterate_pop();
+    iterate_and_modify();
 
     // modify_vector_element();
 
     // vector_of_enums();
-
-    // capacity();
 
     // out_of_borders();
 

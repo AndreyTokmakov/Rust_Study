@@ -10,6 +10,7 @@ non_snake_case
 #[path = "Environment/environment.rs"] pub mod environment;
 #[path = "Databases/sql_lite_tests.rs"] pub mod sql_lite_tests;
 #[path = "Autotests/autotests.rs"] pub mod autotests;
+#[path = "Collections/collections.rs"] pub mod collections;
 #[path = "Functions/functions.rs"] pub mod functions;
 #[path = "Input_Arguments/read_from_input.rs"] pub mod read_from_input;
 #[path = "Compare/compare.rs"] pub mod compare;
@@ -27,10 +28,6 @@ non_snake_case
 #[path = "Structures/structs.rs"] pub mod structs;
 #[path = "Enums/enums.rs"] pub mod enums;
 #[path = "Optional/optional.rs"] pub mod optional;
-#[path = "Collections/vector.rs"] pub mod collections_vector;
-#[path = "Collections/hash_map.rs"] pub mod collections_hash_map;
-#[path = "Collections/arrays.rs"] pub mod collections_arrays;
-#[path = "Collections/LinkedList.rs"] pub mod LinkedList;
 #[path = "Random/random.rs"] pub mod random;
 #[path = "Strings/strings.rs"] pub mod strings;
 #[path = "Slices/slices.rs"] pub mod slices;
@@ -68,7 +65,7 @@ fn main()
      // errors_handling::test_all();
      // files::test_all();
      // folders_directories::test_all();
-     Json::test_all();
+     // Json::test_all();
      // directories::test_all();
      // structs::test_all();
      // enums::test_all();
@@ -79,12 +76,7 @@ fn main()
      // tuples::test_all();
      // types::test_all();
      // generics::test_all();
-
-     // ** Collections: **/
-     // collections_arrays::test_all();
-     // collections_vector::test_all();
-     // collections_hash_map::test_all();
-     // LinkedList::test_all();
+     collections::test_all();
 
      // ** Networking: **/
      // tcp_servers::test_all();
