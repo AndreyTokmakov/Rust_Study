@@ -20,9 +20,6 @@ non_snake_case
 #[path = "Conditions/conditions.rs"] pub mod conditions;
 #[path = "Lambdas/lambdas.rs"] pub mod lambdas;
 #[path = "Traits/traits.rs"] pub mod traits;
-#[path = "Networking/tcp_servers.rs"] pub mod tcp_servers;
-#[path = "Networking/udp_servers.rs"] pub mod udp_servers;
-#[path = "Networking/ProxyServer.rs"] pub mod ProxyServer;
 #[path = "Types/types_tests.rs"] pub mod types;
 #[path = "Memory/memory.rs"] pub mod memory;
 #[path = "Structures/structs.rs"] pub mod structs;
@@ -39,8 +36,13 @@ non_snake_case
 #[path = "Tuples/tuples.rs"] pub mod tuples;
 #[path = "Console_IO/console_io.rs"] pub mod console_io;
 #[path = "Pointers_and_References/pointers_and_reference.rs"] pub mod pointers_and_reference;
-#[path = "Networking_Tokio/udp_tests.rs"] pub mod Tokio_udp_tests;
 #[path = "Json/Json.rs"] pub mod Json;
+
+#[path = "Networking/tcp_servers.rs"] pub mod tcp_servers;
+#[path = "Networking/udp_servers.rs"] pub mod udp_servers;
+#[path = "Networking/ProxyServer.rs"] pub mod ProxyServer;
+#[path = "Networking/web_sockets.rs"] pub mod web_sockets;
+#[path = "Networking_Tokio/web_sockets_tungstenite.rs"] pub mod Tokio_web_sockets;
 
 
 
@@ -76,13 +78,15 @@ fn main()
      // tuples::test_all();
      // types::test_all();
      // generics::test_all();
-     collections::test_all();
+     // collections::test_all();
 
      // ** Networking: **/
      // tcp_servers::test_all();
      // udp_servers::test_all();
+     // web_sockets::test_all();
      // ProxyServer::test_all();
      // Tokio_udp_tests::test_all();
+     Tokio_web_sockets::test_all();
 
      // sql_lite_tests::test_all();
 }
