@@ -60,10 +60,8 @@ fn main()
      // random::test_all();
      // ownership::test_all();
      // loops::test_all();
-     // slices::test_all();
      // pointers_and_reference::test_all();
      // console_io::test_all();
-     // strings::test_all();
      // errors_handling::test_all();
      // files::test_all();
      // folders_directories::test_all();
@@ -74,10 +72,13 @@ fn main()
      // optional::test_all();
      // lambdas::test_all();
      // dynamic_dispatch::test_all();
+     // strings::test_all();
      // traits::test_all();
      // tuples::test_all();
      // types::test_all();
      // generics::test_all();
+
+     slices::test_all();
      // collections::test_all();
 
      // ** Networking: **/
@@ -86,7 +87,7 @@ fn main()
      // web_sockets::test_all();
      // ProxyServer::test_all();
      // Tokio_udp_tests::test_all();
-     Tokio_web_sockets::test_all();
+     // Tokio_web_sockets::test_all();
 
      // sql_lite_tests::test_all();
 }

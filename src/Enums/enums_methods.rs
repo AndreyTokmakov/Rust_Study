@@ -19,7 +19,7 @@ impl Message
     fn call(&self)
     {
         print!("Enum method called for {:?}\n", self);
-    }
+    } 
 }
 
 fn test_enum_method()

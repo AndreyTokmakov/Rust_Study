@@ -75,9 +75,9 @@ pub fn test_all()
     // sting_enum_demo();
     // diff_types_enum_demo();
 
-    underlying_type::tests();
+    // underlying_type::tests();
 
-    // enums_methods::tests();
+    enums_methods::tests();
     // enums_match::tests();
 
     // cpp_style_enums::tests();

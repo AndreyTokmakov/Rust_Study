@@ -2,7 +2,7 @@
 pub fn test_all()
 {
     // create();
-    // append_to_string();
+    append_to_string();
     // append_with_string();
 
     // format_string();
@@ -11,7 +11,7 @@ pub fn test_all()
     // iterate_string_enumerate();
     // iterate_string_bytes();
 
-    split_string();
+    // split_string();
 }
 
 fn create()
@@ -25,13 +25,12 @@ fn create()
 }
 
 
-fn append_to_string() {
+fn append_to_string() 
+{
     let mut s = String::from("foo ");
-
     println!("{}", s);
 
     s.push_str("bar");
-
     println!("{}", s);
 }
 

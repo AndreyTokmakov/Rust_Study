@@ -73,10 +73,10 @@ fn update_value_in_function()
 
 pub fn test_all()
 {
-    another_function(5);
+    // another_function(5);
     // print_labeled_measurement(5, 'h');
     // func_with_macro();
     // init_variable_with_func();
-    // get_tuple();
+    get_tuple();
     // update_value_in_function();
 }

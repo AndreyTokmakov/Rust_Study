@@ -5,6 +5,13 @@ fn range_loop()
     for i in 0..10 {
         print!("{} ", i)
     }
+
+    for i in (0..10) {
+        print!("{} ", i)
+    }
+    
+    // 0 1 2 3 4 5 6 7 8 9 
+    // 0 1 2 3 4 5 6 7 8 9 
 }
 
 fn infinite_loop()
@@ -14,9 +21,11 @@ fn infinite_loop()
         if (counter == 10) {
             break;
         }
-        println!("{}", counter);
+        print!("{} ", counter);
         counter += 1;
     }
+    
+    // 0 1 2 3 4 5 6 7 8 9 
 }
 
 fn return_value_from_loop()
@@ -24,22 +33,26 @@ fn return_value_from_loop()
     let mut counter = 0;
     let result = loop {
         counter += 1;
+        print!("{} ", counter);
         if counter == 10 {
             break 1000 + counter ;
         }
     };
-    println!("The result is {}", result);
+    println!(" The result is {}", result);
+    
+    // 1 2 3 4 5 6 7 8 9 10  The result is 1010
 }
 
 fn while_loop()
 {
     let mut number = 3;
     while number != 0 {
-        println!("{}!", number);
+        print!("{} ", number);
         number -= 1;
     }
 
     println!("Done");
+    // 3 2 1 Done
 }
 
 fn collection_iterate_array()
@@ -58,8 +71,8 @@ fn collection_iterate_array()
     }
     println!();
 
-    for element in (1..5) {
-        print!("{element} ");
+    for idx in (0 .. numbers.len()) {
+        print!("{} ", numbers[idx]);
     }
     println!();
 }
@@ -75,12 +88,11 @@ fn collection_iterate_map()
     }
 }
 
-fn iterate_range()
+fn iterate_reversed()
 {
-    for number in (1..4).rev() {
-        println!("{}!", number);
+    for number in (0..4).rev() {
+        println!("{} ", number);
     }
-    println!("Done");
 }
 
 
@@ -116,9 +128,8 @@ pub fn test_all()
     // return_value_from_loop();
     // while_loop();
     // loop_labels();
+    //  iterate_reversed();
 
-    // collection_iterate_array();
-    collection_iterate_map();
-
-    // iterate_range();
+    collection_iterate_array();
+    // collection_iterate_map();
 }

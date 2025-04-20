@@ -21,12 +21,12 @@ impl TryFrom<i32> for GreaterThanZero {
     }
 }
 
-fn test_greater_than_zero() {
+fn test_greater_than_zero()
+{
     let big_number = 1_000_000_000_000i64;
     let small_number = 1_000;
 
-    // Silently truncates `big_number`, requires detecting
-    // and handling the truncation after the fact.
+    // Silently truncates `big_number`, requires detecting and handling the truncation after the fact.
     let smaller_number = big_number as i32;
 
     println!("{}\n", smaller_number);
