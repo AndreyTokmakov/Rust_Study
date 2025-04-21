@@ -43,6 +43,7 @@ non_snake_case
 #[path = "Networking/ProxyServer.rs"] pub mod ProxyServer;
 #[path = "Networking/web_sockets.rs"] pub mod web_sockets;
 #[path = "Networking_Tokio/web_sockets_tungstenite.rs"] pub mod Tokio_web_sockets;
+#[path = "Web_Framework/web_framework.rs"] pub mod web_framework;
 
 
 
@@ -78,7 +79,7 @@ fn main()
      // types::test_all();
      // generics::test_all();
 
-     slices::test_all();
+     // slices::test_all();
      // collections::test_all();
 
      // ** Networking: **/
@@ -89,5 +90,9 @@ fn main()
      // Tokio_udp_tests::test_all();
      // Tokio_web_sockets::test_all();
 
+     web_framework::test_all();
+
      // sql_lite_tests::test_all();
+     
+
 }

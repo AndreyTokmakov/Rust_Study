@@ -40,8 +40,8 @@ fn get_environment_variable_by_name(name: &String)
 
 fn get_environment_variable()
 {
-    let varName: String = "PATH".to_owned();
-    get_environment_variable_by_name(&varName);
+    let pathEnv = String::from("PATH");
+    get_environment_variable_by_name(&pathEnv);
 }
 
 fn list_environment_variables()
@@ -67,8 +67,8 @@ pub fn test_all()
     // current_exe();
     // temp_dir();
 
-    // get_environment_variable();
+    get_environment_variable();
     // list_environment_variables();
-    list_environment_os_variables();
+    // list_environment_os_variables();
 
 }

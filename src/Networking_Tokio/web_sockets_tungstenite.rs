@@ -87,7 +87,7 @@ async fn server_main() -> Result<()>
 #[tokio::main]
 async fn client_main() -> Result<()>
 {
-    let url = Url::parse("ws://127.0.0.1:6789   ")?;
+    let url = Url::parse("ws://127.0.0.1:6789")?;
     let (mut ws_stream, _) = connect_async(url.as_str()).await.expect("Failed to connect");
     println!("WebSocket client connected");
 
