@@ -2,6 +2,8 @@
 mod class_methods;
 mod tuple_structs;
 mod Long;
+mod static_variables_and_methods;
+mod inline_methods;
 
 struct User {
     active: bool,
@@ -11,7 +13,7 @@ struct User {
 }
 
 fn build_user(email: String, username: String) -> User {
-    User {
+    return User {
         email: email,
         username: username,
         active: true,
@@ -49,13 +51,6 @@ impl Point {
 }
 
 
-fn static_methods() {
-    let pt: Point = Point::new(3.0, 4.0);
-    println!("{:?}", pt);
-
-    let pt1: Point = Point::origin();
-    println!("{:?}", pt1);
-}
 
 fn test_Point() {
     let point: Point = Point { x: 10.3, y: 0.4 };
@@ -154,10 +149,10 @@ fn create_one_instance_from_another() {
 
 pub fn test_all()
 {
-    // static_methods();
-
-    class_methods::tests();
-
+    // class_methods::tests();
+    inline_methods::test_all();
+    // static_variables_and_methods::test_all();
+    
     // create_class_instance();
     // create_one_instance_from_another();
     // test_rectangle();

@@ -49,7 +49,6 @@ non_snake_case
 
 fn main()
 {
-     /** STD: **/
      // attributes::test_all();
      // environment::test_all();
      // autotests::test_all();
@@ -68,7 +67,6 @@ fn main()
      // folders_directories::test_all();
      // Json::test_all();
      // directories::test_all();
-     // structs::test_all();
      // enums::test_all();
      // optional::test_all();
      // lambdas::test_all();
@@ -78,6 +76,8 @@ fn main()
      // tuples::test_all();
      // types::test_all();
      // generics::test_all();
+
+     structs::test_all();
 
      // slices::test_all();
      // collections::test_all();
@@ -90,7 +90,7 @@ fn main()
      // Tokio_udp_tests::test_all();
      // Tokio_web_sockets::test_all();
 
-     web_framework::test_all();
+     // web_framework::test_all();
 
      // sql_lite_tests::test_all();
      
