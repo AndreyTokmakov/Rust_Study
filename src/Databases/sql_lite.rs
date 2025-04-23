@@ -4,7 +4,7 @@ extern crate rusqlite;
 use rusqlite::{params, Connection, Result, Transaction};
 
 fn connect_to_db() -> Result<Connection> {
-    let conn = Connection::open("/tmp/my_database.db")?;
+    let conn = Connection::open("../../resources/my_database.db")?;
     Ok(conn)
 }
 
@@ -58,7 +58,7 @@ fn get_users(conn: &Connection) -> Result<Vec<(i32, String, i32)>>
 
 pub fn test_all()
 {
-    let mut connection = connect_to_db().unwrap();
+    let connection = connect_to_db().unwrap();
 
     // create_table(&connection).unwrap();
     // insert_user(&connection, "John Dow", 123).unwrap();

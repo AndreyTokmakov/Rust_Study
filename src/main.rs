@@ -8,7 +8,7 @@ non_snake_case
 
 #[path = "Attributes/attributes.rs"] pub mod attributes;
 #[path = "Environment/environment.rs"] pub mod environment;
-#[path = "Databases/sql_lite_tests.rs"] pub mod sql_lite_tests;
+#[path = "Databases/databases.rs"] pub mod databases;
 #[path = "Autotests/autotests.rs"] pub mod autotests;
 #[path = "Collections/collections.rs"] pub mod collections;
 #[path = "Functions/functions.rs"] pub mod functions;
@@ -77,7 +77,7 @@ fn main()
      // types::test_all();
      // generics::test_all();
 
-     structs::test_all();
+     // structs::test_all();
 
      // slices::test_all();
      // collections::test_all();
@@ -92,7 +92,5 @@ fn main()
 
      // web_framework::test_all();
 
-     // sql_lite_tests::test_all();
-     
-
+     databases::test_all();
 }
