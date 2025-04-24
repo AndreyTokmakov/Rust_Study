@@ -67,7 +67,7 @@ fn main()
      // folders_directories::test_all();
      // Json::test_all();
      // directories::test_all();
-     enums::test_all();
+     // enums::test_all();
      // optional::test_all();
      // lambdas::test_all();
      // dynamic_dispatch::test_all();
@@ -75,7 +75,7 @@ fn main()
      // traits::test_all();
      // tuples::test_all();
      // types::test_all();
-     // generics::test_all();
+     generics::test_all();
 
      // structs::test_all();
 
