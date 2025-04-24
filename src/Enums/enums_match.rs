@@ -8,6 +8,22 @@ enum Coin
     Quarter,
 }
 
+#[derive(Debug)]
+enum UsState
+{
+    Alabama,
+    Alaska
+}
+
+#[derive(Debug)]
+enum CoinWithState
+{
+    Penny,
+    Nickel,
+    Dime,
+    Quarter(UsState)
+}
+
 fn to_cents(coin: &Coin) -> u8
 {
     match coin {
@@ -56,23 +72,6 @@ fn switch_enums_print()
 }
 
 
-
-#[derive(Debug)]
-enum UsState
-{
-    Alabama,
-    Alaska
-}
-
-#[derive(Debug)]
-enum CoinWithState
-{
-    Penny,
-    Nickel,
-    Dime,
-    Quarter(UsState)
-}
-
 fn to_cents_with_state(coin: &CoinWithState) -> u8
 {
     match coin {
@@ -103,19 +102,6 @@ fn switch_enums_with_state()
 }
 
 
-pub fn tests()
-{
-    // switch_enums();
-    // switch_enums_print();
-    switch_enums_with_state();
-
-    // handle_Other_Values__DEFAULT();
-}
-
-
-
-
-
 fn get_result(number: i32) -> i32 {
     match number {
         1 => action1(),
@@ -123,6 +109,15 @@ fn get_result(number: i32) -> i32 {
         other => actionOther(number),
     }
 }
+
+fn get_result_2(number: i32) -> i32 {
+    match number {
+        1 => action1(),
+        2 => action2(),
+        _ => actionOther(number),
+    }
+}
+
 
 fn action1() -> i32 {
     1
@@ -137,9 +132,23 @@ fn actionOther(number: i32) -> i32 {
     number
 }
 
-fn handle_Other_Values__DEFAULT() {
-
+fn handle_Other_Values__DEFAULT() 
+{
     println!("Result: {}", get_result(1));
     println!("Result: {}", get_result(2));
     println!("Result: {}", get_result(3));
+
+    println!("\nResult: {}", get_result_2(1));
+    println!("Result: {}", get_result_2(2));
+    println!("Result: {}", get_result_2(3));
+}
+
+
+
+pub fn tests()
+{
+    // switch_enums();
+    // switch_enums_print();
+    // switch_enums_with_state();
+    handle_Other_Values__DEFAULT();
 }

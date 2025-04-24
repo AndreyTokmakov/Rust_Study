@@ -247,7 +247,7 @@ pub fn test_all()
     // create_and_test();
     // take();
     // take_if();
-    // question_mark_operator();
+    question_mark_operator();
     // pattern_matching();
 
     // unwrap();
@@ -261,8 +261,8 @@ pub fn test_all()
     // is_none();
     // is_some();
 
-    insert();
-    get_or_insert();
+    // insert();
+    // get_or_insert();
     // filter();
 
     // examples::test_all();

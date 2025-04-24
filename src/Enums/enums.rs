@@ -3,6 +3,7 @@ mod enums_methods;
 mod enums_match;
 mod cpp_style_enums;
 mod underlying_type;
+mod control_flow_matching;
 
 #[derive(Debug)]
 enum ProtocolVersion
@@ -10,6 +11,23 @@ enum ProtocolVersion
     V4,
     V6,
 }
+
+#[derive(Debug)]
+enum ProtocolVersionEx
+{
+    V4(String),
+    V6(String),
+}
+
+#[derive(Debug)]
+enum IpVersion
+{
+    V4(u8, u8, u8, u8),
+    V6(String),
+}
+
+
+
 
 #[derive(Debug)]
 struct IpAddr
@@ -36,12 +54,6 @@ fn basic_enum_demo()
 
 
 
-#[derive(Debug)]
-enum ProtocolVersionEx {
-    V4(String),
-    V6(String),
-}
-
 fn sting_enum_demo()
 {
     let home = ProtocolVersionEx::V4(String::from("127.0.0.1"));
@@ -51,12 +63,6 @@ fn sting_enum_demo()
     println!("loopback: {:?}", loopback);
 }
 
-#[derive(Debug)]
-enum IpVersion
-{
-    V4(u8, u8, u8, u8),
-    V6(String),
-}
 
 fn diff_types_enum_demo()
 {
@@ -77,8 +83,9 @@ pub fn test_all()
 
     // underlying_type::tests();
 
-    enums_methods::tests();
+    // enums_methods::tests();
     // enums_match::tests();
+    control_flow_matching::test_all();
 
     // cpp_style_enums::tests();
 }

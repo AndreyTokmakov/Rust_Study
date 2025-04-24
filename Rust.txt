@@ -28,4 +28,32 @@
 • Collections
 
 
+   let mut rows: Vec<_> = Vec::with_capacity(width);
+
+
 • Generics
+
+
+   fn add<T>(i: Т, j: Т) -> Т 
+   {
+      i + j
+   }
+
+   # Фрагмент <Т: std: : ops: : Add<Output = Т>> предписывает, что в т должна быть реализация операции s td: : ops : : Add.
+
+   fn add<T: std::ops::Add<Output = T>>(i: Т, j: Т) -> Т {
+   {
+      i + j
+   }
+
+
+• Time - Duration
+
+
+   use std::time::{Duration};
+
+
+   let durations = add(
+      Duration: :new(5, О),
+      Duration::new(l0, О)
+   );

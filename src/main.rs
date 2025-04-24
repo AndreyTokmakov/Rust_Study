@@ -67,7 +67,7 @@ fn main()
      // folders_directories::test_all();
      // Json::test_all();
      // directories::test_all();
-     // enums::test_all();
+     enums::test_all();
      // optional::test_all();
      // lambdas::test_all();
      // dynamic_dispatch::test_all();
@@ -92,5 +92,5 @@ fn main()
 
      // web_framework::test_all();
 
-     databases::test_all();
+     // databases::test_all();
 }
