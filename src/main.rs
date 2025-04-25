@@ -19,10 +19,10 @@ non_snake_case
 #[path = "Ownership/ownership.rs"] pub mod ownership;
 #[path = "Conditions/conditions.rs"] pub mod conditions;
 #[path = "Lambdas/lambdas.rs"] pub mod lambdas;
-#[path = "Traits/traits.rs"] pub mod traits;
 #[path = "Types/types_tests.rs"] pub mod types;
 #[path = "Memory/memory.rs"] pub mod memory;
-#[path = "Structures/structs.rs"] pub mod structs;
+#[path = "OOP_Structures/structs.rs"] pub mod structs;
+#[path = "OOP_Traits/traits.rs"] pub mod traits;
 #[path = "Enums/enums.rs"] pub mod enums;
 #[path = "Optional/optional.rs"] pub mod optional;
 #[path = "Random/random.rs"] pub mod random;
@@ -72,12 +72,14 @@ fn main()
      // lambdas::test_all();
      // dynamic_dispatch::test_all();
      // strings::test_all();
-     // traits::test_all();
+
      // tuples::test_all();
      // types::test_all();
-     generics::test_all();
+
+     // generics::test_all();
 
      // structs::test_all();
+     traits::test_all();
 
      // slices::test_all();
      // collections::test_all();

@@ -8,6 +8,6 @@ fn simple_test() {
 }
 
 
-pub fn tests() {
+pub fn tests_all() {
     simple_test();
 }

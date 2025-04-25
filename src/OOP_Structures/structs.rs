@@ -150,7 +150,7 @@ fn create_one_instance_from_another() {
 pub fn test_all()
 {
     // class_methods::tests();
-    inline_methods::test_all();
+    // inline_methods::test_all();
     // static_variables_and_methods::test_all();
     
     // create_class_instance();
@@ -160,8 +160,7 @@ pub fn test_all()
 
     // test_Point();
 
-
-    // tuple_structs::tests();
+    // tuple_structs::tests_all();
 
     // Long::tests();
 }
