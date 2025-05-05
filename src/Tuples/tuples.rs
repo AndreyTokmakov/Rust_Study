@@ -42,6 +42,21 @@ fn structure_binding_1()
     println!("{} {} {} {}", a, b, c, d);
 }
 
+fn mutable_tuple_with_pointer()
+{
+    // A mutable tuple that includes a pointer
+    let mut mutable_tuple = (Box::new(5u32), 3u32);
+
+    {
+        // Destructure `mutable_tuple` to change the value of `last`.
+        let (_, ref mut last) = mutable_tuple;
+        *last = 2u32;
+    }
+
+    println!("tuple is {:?}", mutable_tuple);
+}
+
+
 
 pub fn test_all()
 {
@@ -53,4 +68,6 @@ pub fn test_all()
 
     // structure_binding();
     structure_binding_1();
+
+    mutable_tuple_with_pointer();
 }

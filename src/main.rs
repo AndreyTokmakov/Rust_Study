@@ -37,7 +37,7 @@ non_snake_case
 #[path = "Console_IO/console_io.rs"] pub mod console_io;
 #[path = "Pointers_and_References/pointers_and_reference.rs"] pub mod pointers_and_reference;
 #[path = "Json/Json.rs"] pub mod Json;
-#[path = "ScopingRules_RAII/scoping_rules.rs"] pub mod scoping_rules;
+#[path = "ScopingRules_LifeTIme_RAII/scoping_rules.rs"] pub mod scoping_rules;
 
 #[path = "Networking/tcp_servers.rs"] pub mod tcp_servers;
 #[path = "Networking/udp_servers.rs"] pub mod udp_servers;
