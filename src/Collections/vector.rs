@@ -159,14 +159,14 @@ fn experiments()
 
 pub fn test_all()
 {
-    // create_test();
+    create_test();
     // access_element();
 
     // size_and_capacity();
 
     // iterate();
     // iterate_pop();
-    iterate_and_modify();
+    // iterate_and_modify();
 
     // modify_vector_element();
 
