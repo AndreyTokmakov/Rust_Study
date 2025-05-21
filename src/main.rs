@@ -14,7 +14,7 @@ non_snake_case
 #[path = "Functions/functions.rs"] pub mod functions;
 #[path = "Input_Arguments/read_from_input.rs"] pub mod read_from_input;
 #[path = "Compare/compare.rs"] pub mod compare;
-#[path = "Time_Duration/duration.rs"] pub mod duration;
+#[path = "Time_Duration/tests.rs"] pub mod duration;
 #[path = "Dispatching/dynamic_dispatch.rs"] pub mod dynamic_dispatch;
 #[path = "Loops/loops.rs"] pub mod loops;
 #[path = "Ownership/ownership.rs"] pub mod ownership;

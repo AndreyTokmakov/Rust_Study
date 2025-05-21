@@ -21,18 +21,20 @@ https://doc.rust-lang.org/rust-by-example/scope/lifetime/explicit.html
    >  cargo run
 
 
+
+================================================================================================================================
+                                            Questions:
+================================================================================================================================
+
+Ownership & Borrowing
+Traits & Generics
+Error Handling
+Multithreading
+
+
 ================================================================================================================================
                                             TODO:
 ================================================================================================================================
-
-• Enums
-
-
-• Collections
-
-
-   let mut rows: Vec<_> = Vec::with_capacity(width);
-
 
 • Generics
 
@@ -49,14 +51,3 @@ https://doc.rust-lang.org/rust-by-example/scope/lifetime/explicit.html
       i + j
    }
 
-
-• Time - Duration
-
-
-   use std::time::{Duration};
-
-
-   let durations = add(
-      Duration: :new(5, О),
-      Duration::new(l0, О)
-   );
