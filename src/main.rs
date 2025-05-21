@@ -46,58 +46,61 @@ non_snake_case
 #[path = "Networking/web_sockets.rs"] pub mod web_sockets;
 #[path = "Networking_Tokio/web_sockets_tungstenite.rs"] pub mod Tokio_web_sockets;
 #[path = "Web_Framework/web_framework.rs"] pub mod web_framework;
-
+#[path = "Multithreading/threads_main.rs"] pub mod multithreading;
 
 
 fn main()
-{
-     // attributes::test_all();
-     // environment::test_all();
-     // autotests::test_all();
-     // compare::test_all();
-     // functions::test_all();
-     // conditions::test_all();
-     // memory::test_all();
-     // read_from_input::test_all();
-     // random::test_all();
-     // ownership::test_all();
-     // loops::test_all();
-     // pointers_and_reference::test_all();
-     // console_io::test_all();
-     // errors_handling::test_all();
-     // files::test_all();
-     // folders_directories::test_all();
-     // Json::test_all();
-     // directories::test_all();
-     // enums::test_all();
-     // optional::test_all();
-     // lambdas::test_all();
-     // dynamic_dispatch::test_all();
-     // strings::test_all();
-     // scoping_rules::test_all();
+{ 
+    // attributes::test_all();
+    // environment::test_all();
+    // autotests::test_all();
+    // compare::test_all();
+    // functions::test_all();
+    // conditions::test_all();
+    // memory::test_all();
+    // read_from_input::test_all();
+    // random::test_all();
+    // ownership::test_all();
+    // loops::test_all();
+    // pointers_and_reference::test_all();
+    // console_io::test_all();
+    // errors_handling::test_all();
+    // files::test_all();
+    // folders_directories::test_all();
+    // Json::test_all();
+    // directories::test_all();
+    // enums::test_all();
+    // optional::test_all();
+    // lambdas::test_all();
+    // dynamic_dispatch::test_all();
+    // strings::test_all();
+    // scoping_rules::test_all();
 
-    duration::test_all();
+    // duration::test_all();
 
-     // tuples::test_all();
-     // types::test_all();
+    // tuples::test_all();
+    // types::test_all();
 
-     // generics::test_all();
+    // generics::test_all();
 
-     // structs::test_all();
-     // traits::test_all();
+    // structs::test_all();
+    // traits::test_all();
 
-     // slices::test_all();
-     // collections::test_all();
+    // slices::test_all();
+    // collections::test_all();
 
-     // ** Networking: **/
-     // tcp_servers::test_all();
-     // udp_servers::test_all();
-     // web_sockets::test_all();
-     // ProxyServer::test_all();
-     // Tokio_udp_tests::test_all();
-     // Tokio_web_sockets::test_all();
+    // ** Networking: **/
+    // tcp_servers::test_all();
+    // udp_servers::test_all();
+    // web_sockets::test_all();
+    // ProxyServer::test_all();
+    // Tokio_udp_tests::test_all();
+    // Tokio_web_sockets::test_all();
 
-     // web_framework::test_all();
+    // web_framework::test_all();
+    
+    // * * * Multithreading * * *
+    multithreading::test_all();
 
-     // databases::test_all();
+    // databases::test_all();
 }

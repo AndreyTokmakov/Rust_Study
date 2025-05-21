@@ -33,6 +33,28 @@ Multithreading
 
 
 ================================================================================================================================
+                                            Multithreading:
+================================================================================================================================
+
+std::thread
+std::sync::mpsc::channel
+
+Mutex   : https://doc.rust-lang.org/std/sync/struct.Mutex.html
+Once    : https://doc.rust-lang.org/std/sync/struct.Once.html
+
+OnceLock: https://doc.rust-lang.org/std/sync/struct.OnceLock.html
+LazyLock: https://doc.rust-lang.org/std/sync/struct.LazyLock.html
+RwLock  : https://doc.rust-lang.org/std/sync/struct.RwLock.html
+
+Arc     : https://doc.rust-lang.org/std/sync/struct.Arc.html
+Barrier : https://doc.rust-lang.org/std/sync/struct.Barrier.html
+Condvar : https://doc.rust-lang.org/std/sync/struct.Condvar.html
+
+mpmc    : https://doc.rust-lang.org/std/sync/mpmc/index.html
+mpsc    : https://doc.rust-lang.org/std/sync/mpsc/index.html
+
+
+================================================================================================================================
                                             TODO:
 ================================================================================================================================
 
@@ -51,3 +73,9 @@ Multithreading
       i + j
    }
 
+
+
+
+Check out the fastest moving roles in London, UAE, and remote anywhere in Europe:
+
+ danny@durlstonpartners.com if
