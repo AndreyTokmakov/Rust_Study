@@ -32,6 +32,10 @@ Error Handling
 Multithreading
 
 
+asynchronous programming (e.g., async/await, tokio, futures).
+ryptographic ibraries   (e.g., ring, rustls, libsodium).
+
+
 ================================================================================================================================
                                             Multithreading:
 ================================================================================================================================
@@ -52,6 +56,9 @@ Condvar : https://doc.rust-lang.org/std/sync/struct.Condvar.html
 
 mpmc    : https://doc.rust-lang.org/std/sync/mpmc/index.html
 mpsc    : https://doc.rust-lang.org/std/sync/mpsc/index.html
+
+
+
 
 
 ================================================================================================================================

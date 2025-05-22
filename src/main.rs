@@ -76,11 +76,13 @@ fn main()
     // strings::test_all();
     // scoping_rules::test_all();
 
+    // ** Time - Duration: **/
     // duration::test_all();
 
     // tuples::test_all();
-    // types::test_all();
+    types::test_all();
 
+    // ** Generics - Templates: **/
     // generics::test_all();
 
     // structs::test_all();
@@ -100,7 +102,7 @@ fn main()
     // web_framework::test_all();
     
     // * * * Multithreading * * *
-    multithreading::test_all();
+    // multithreading::test_all();
 
     // databases::test_all();
 }

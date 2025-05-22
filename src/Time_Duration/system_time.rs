@@ -2,11 +2,9 @@
 use std::time::{Duration, SystemTime};
 use std::thread::sleep;
 
-pub fn test_all()
+fn test()
 {
     let now: SystemTime = SystemTime::now();
-
-    // we sleep for 2 seconds
     sleep(Duration::new(2, 0));
     match now.elapsed() {
         Ok(elapsed) => {
@@ -18,4 +16,12 @@ pub fn test_all()
             println!("Error: {e:?}");
         }
     }
+}
+
+pub fn test_all()
+{
+    // test();
+    
+    let now: SystemTime = SystemTime::now();
+    println!("{:?}", now);
 }

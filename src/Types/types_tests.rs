@@ -4,6 +4,7 @@ mod From_Into;
 mod Try_From;
 mod Try_Into;
 mod From_To_String;
+mod New_Type_Idiom;
 
 
 fn variable_scope()
@@ -96,6 +97,7 @@ pub fn test_all()
 
     // Try_From::test_all();
     // Try_Into::test_all();
+    New_Type_Idiom::test_all();
 
-    From_To_String::test_all();
+    // From_To_String::test_all();
 }
