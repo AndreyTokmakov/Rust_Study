@@ -63,5 +63,5 @@ pub fn server_test()
     // http://localhost:8000/
     // http://localhost:8000/time
 
-    start();
+    let _ = start();
 }

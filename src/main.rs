@@ -39,11 +39,7 @@ non_snake_case
 #[path = "Pointers_and_References/pointers_and_reference.rs"] pub mod pointers_and_reference;
 #[path = "Json/Json.rs"] pub mod Json;
 #[path = "ScopingRules_LifeTIme_RAII/scoping_rules.rs"] pub mod scoping_rules;
-
-#[path = "Networking/tcp_servers.rs"] pub mod tcp_servers;
-#[path = "Networking/udp_servers.rs"] pub mod udp_servers;
-#[path = "Networking/ProxyServer.rs"] pub mod ProxyServer;
-#[path = "Networking/web_sockets.rs"] pub mod web_sockets;
+#[path = "Networking/main.rs"] pub mod networking;
 #[path = "Networking_Tokio/web_sockets_tungstenite.rs"] pub mod Tokio_web_sockets;
 #[path = "Web_Framework/web_framework.rs"] pub mod web_framework;
 #[path = "Multithreading/threads_main.rs"] pub mod multithreading;
@@ -80,7 +76,7 @@ fn main()
     // duration::test_all();
 
     // tuples::test_all();
-    types::test_all();
+    // types::test_all();
 
     // ** Generics - Templates: **/
     // generics::test_all();
@@ -92,10 +88,7 @@ fn main()
     // collections::test_all();
 
     // ** Networking: **/
-    // tcp_servers::test_all();
-    // udp_servers::test_all();
-    // web_sockets::test_all();
-    // ProxyServer::test_all();
+    networking::test_all();
     // Tokio_udp_tests::test_all();
     // Tokio_web_sockets::test_all();
 
