@@ -3,6 +3,7 @@ use std::{io, thread};
 use std::thread::{sleep, ThreadId};
 use std::time::Duration;
 
+
 fn get_available_parallelism() -> io::Result<()>
 {
     let count = thread::available_parallelism()?.get();
@@ -37,6 +38,23 @@ fn create_thead_join()
     println!("Result = {result}");
 }
 
+fn create_parallel_thread()
+{
+    let handle = thread::spawn(|| {
+        for i in 1..10 {
+            println!("hi number {i} from the spawned thread!");
+            thread::sleep(Duration::from_millis(100));
+        }
+    });
+
+    for i in 1..5 {
+        println!("hi number {i} from the main thread!");
+        thread::sleep(Duration::from_millis(100));
+    }
+
+    handle.join().unwrap();
+}
+
 
 
 fn create_thead_builder()
@@ -49,9 +67,9 @@ fn create_thead_builder()
 
 pub fn test_all()
 {
-    get_parallelism();
-    
+    // get_parallelism();
     // create_thread_detached();
+    create_parallel_thread();
     // create_thead_join();
     // create_thead_builder();
 }
