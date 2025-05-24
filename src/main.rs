@@ -72,13 +72,13 @@ fn main()
     // strings::test_all();
     // scoping_rules::test_all();
 
-    // INFO: Time - Duration:
+    // NOTE: Time - Duration:
     // duration::test_all();
 
     // tuples::test_all();
     // types::test_all();
 
-    // INFO: Generics - Templates
+    // NOTE: Generics - Templates
     // generics::test_all();
 
     // structs::test_all();
@@ -87,14 +87,14 @@ fn main()
     // slices::test_all();
     // collections::test_all();
 
-    // INFO: Networking
+    // NOTE: Networking
     // networking::test_all();
     // Tokio_udp_tests::test_all();
     // Tokio_web_sockets::test_all();
 
     // web_framework::test_all();
 
-    // INFO:  Multithreading
+    // NOTE:  Multithreading
     multithreading::test_all();
 
     // databases::test_all();

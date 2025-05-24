@@ -26,44 +26,44 @@ https://doc.rust-lang.org/rust-by-example/scope/lifetime/explicit.html
                                             Questions:
 ================================================================================================================================
 
-Ownership & Borrowing
-Traits & Generics
-Error Handling
-Multithreading
+• Ownership & Borrowing
+• Traits & Generics
+• Error Handling
+• Multithreading
 
+• asynchronous programming
+  - async/await
+  - tokio
+  - futures
 
-asynchronous programming (e.g., async/await, tokio, futures).
-ryptographic ibraries   (e.g., ring, rustls, libsodium).
-
-
-================================================================================================================================
-                                            Multithreading:
-================================================================================================================================
-
-std::thread
-std::sync::mpsc::channel
-
-Mutex   : https://doc.rust-lang.org/std/sync/struct.Mutex.html
-Once    : https://doc.rust-lang.org/std/sync/struct.Once.html
-
-OnceLock: https://doc.rust-lang.org/std/sync/struct.OnceLock.html
-LazyLock: https://doc.rust-lang.org/std/sync/struct.LazyLock.html
-RwLock  : https://doc.rust-lang.org/std/sync/struct.RwLock.html
-
-Arc     : https://doc.rust-lang.org/std/sync/struct.Arc.html
-Barrier : https://doc.rust-lang.org/std/sync/struct.Barrier.html
-Condvar : https://doc.rust-lang.org/std/sync/struct.Condvar.html
-
-mpmc    : https://doc.rust-lang.org/std/sync/mpmc/index.html
-mpsc    : https://doc.rust-lang.org/std/sync/mpsc/index.html
-
-
-
-
+• cryptographic libraries
+  - ring
+  - rustls
+  - libsodium
 
 ================================================================================================================================
                                             TODO:
 ================================================================================================================================
+
+• Multithreading:
+  - std::thread
+  - Mutex
+  - Atomic
+  - Weak       <--- ' non-owning Weak pointer - to break cycles'
+  - Once
+  - OnceLock
+  - LazyLock
+  - RwLock
+  - Arc
+  - Barrier
+  - Condvar
+  - mpmc   (std::sync::mpmc::channel)
+  - mpsc   (std::sync::mpsc::channel)
+
+
+• Smart Pointers  # https://doc.rust-lang.org/book/ch15-00-smart-pointers.html
+
+
 
 • Generics
 
@@ -82,7 +82,37 @@ mpsc    : https://doc.rust-lang.org/std/sync/mpsc/index.html
 
 
 
+================================================================================================================================
+                                            Multithreading:  STUDY
+================================================================================================================================
 
-Check out the fastest moving roles in London, UAE, and remote anywhere in Europe:
+• Atomic
 
- danny@durlstonpartners.com if
+
+   use std::sync::Arc;
+   use std::sync::atomic::{AtomicUsize, Ordering};
+   use std::thread;
+
+   let val = Arc::new(AtomicUsize::new(5));
+
+   for _ in 0..10 {
+       let val = Arc::clone(&val);
+
+       thread::spawn(move || {
+           let v = val.fetch_add(1, Ordering::Relaxed);
+           println!("{v:?}");
+       });
+   }
+   
+
+• 
+   use std::sync::{Arc, Mutex};
+
+   fn example() {
+       // defining the counter variable
+       let counter = Arc::new(Mutex::new(0));
+       // lock the mutex to borrow
+       // it is automatically released when the borrow ends
+       let mut counter_lock = counter.lock().unwrap();
+       *counter_lock = *counter_lock + 1;
+   }
