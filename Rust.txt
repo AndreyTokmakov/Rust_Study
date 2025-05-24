@@ -86,6 +86,10 @@ https://doc.rust-lang.org/rust-by-example/scope/lifetime/explicit.html
                                             Multithreading:  STUDY
 ================================================================================================================================
 
+
+https://nuancesprog.ru/p/22996/
+
+
 • Atomic
 
 
@@ -103,7 +107,23 @@ https://doc.rust-lang.org/rust-by-example/scope/lifetime/explicit.html
            println!("{v:?}");
        });
    }
-   
+
+
+
+
+   use std::sync::{ atomic::{AtomicU32, Ordering}, Arc };
+
+   fn example() 
+   {
+       // define the counter variable
+       let counter = Arc::new(AtomicU32::new(0));
+
+       // increment the counter
+       // no lock or mutable borrow is necessary
+       counter.fetch_add(1, Ordering::SeqCst);
+   }
+
+
 
 • 
    use std::sync::{Arc, Mutex};
@@ -116,3 +136,29 @@ https://doc.rust-lang.org/rust-by-example/scope/lifetime/explicit.html
        let mut counter_lock = counter.lock().unwrap();
        *counter_lock = *counter_lock + 1;
    }
+
+
+
+fn main() {
+    let user_original = Arc::new(Mutex::new(User { name: String::from("sam") }));
+
+    let user = user_original.clone();
+    let t1 = thread::spawn(move || {
+        let mut locked_user = user.lock().unwrap();
+        locked_user.name = String::from("sam");
+        // После того как «locked_user» выйдет из области видимости, мьютекс снова разблокируется.
+        // Чтобы разблокировать его явно, применяется
+        // «drop(locked_user)».
+    });
+
+    let user = user_original.clone();
+    let t2 = thread::spawn(move || {
+        sleep(Duration::from_millis(10));
+
+        // Выведется «Hello sam»
+        println!("Hello {}", user.lock().unwrap().name);
+    });
+
+    t1.join().unwrap();
+    t2.join().unwrap();
+}   
