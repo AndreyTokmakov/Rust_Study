@@ -55,7 +55,7 @@ fn main()
     // conditions::test_all();
     // memory::test_all();
     // read_from_input::test_all();
-    // random::test_all();
+    random::test_all();
     // ownership::test_all();
     // loops::test_all();
     // pointers_and_reference::test_all();
@@ -95,7 +95,7 @@ fn main()
     // web_framework::test_all();
 
     // NOTE:  Multithreading
-    multithreading::test_all();
+    // multithreading::test_all();
 
     // databases::test_all();
 }
