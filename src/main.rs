@@ -11,7 +11,9 @@ non_snake_case
 #[path = "Databases/databases.rs"] pub mod databases;
 #[path = "Autotests/autotests.rs"] pub mod autotests;
 #[path = "Collections/collections.rs"] pub mod collections;
+#[path = "Cryptography/main.rs"] pub mod cryptography;
 #[path = "Functions/functions.rs"] pub mod functions;
+#[path = "Command_Line_Arguments/main_command_line.rs"] pub mod command_line;
 #[path = "Input_Arguments/read_from_input.rs"] pub mod read_from_input;
 #[path = "Compare/compare.rs"] pub mod compare;
 #[path = "Time_Duration/tests.rs"] pub mod duration;
@@ -52,10 +54,12 @@ fn main()
     // autotests::test_all();
     // compare::test_all();
     // functions::test_all();
+    // command_line::test_all();
     // conditions::test_all();
+    // cryptography::test_all();
     // memory::test_all();
     // read_from_input::test_all();
-    random::test_all();
+    // random::test_all();
     // ownership::test_all();
     // loops::test_all();
     // pointers_and_reference::test_all();
@@ -88,7 +92,7 @@ fn main()
     // collections::test_all();
 
     // NOTE: Networking
-    // networking::test_all();
+    networking::test_all();
     // Tokio_udp_tests::test_all();
     // Tokio_web_sockets::test_all();
 
@@ -97,5 +101,6 @@ fn main()
     // NOTE:  Multithreading
     // multithreading::test_all();
 
+    // NOTE:  Databases
     // databases::test_all();
 }

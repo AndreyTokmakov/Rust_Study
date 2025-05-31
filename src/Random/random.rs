@@ -1,5 +1,12 @@
 use rand::Rng;
 use rand::rngs::ThreadRng;
+// use rand::distributions::{Distribution, Standard};
+
+#[derive(Debug)]
+struct Point {
+    x: i32,
+    y: i32,
+}
 
 fn test1()
 {
@@ -23,11 +30,22 @@ fn test2()
 
 fn random_numbers_within_range()
 {
-    let mut rng: ThreadRng = rand::thread_rng();
-    println!("Integer: {}", rng.gen_range(0..10));
-    println!("Float: {}", rng.gen_range(0.0..10.0));
+    let mut rng: ThreadRng = rand::rng();
+    println!("Integer: {}", rng.random_range(0 .. 10));
+    println!("Float: {}", rng.random_range(0.0 .. 10.0));
 }
 
+/*
+impl Distribution<Point> for Standard {
+    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Point {
+        let (rand_x, rand_y) = rng.gen();
+        Point {
+            x: rand_x,
+            y: rand_y,
+        }
+    }
+}
+*/
 
 pub fn test_all()
 {
@@ -35,3 +53,5 @@ pub fn test_all()
     // test2();
     random_numbers_within_range();
 }
+
+// INFO: https://rust-lang-nursery.github.io/rust-cookbook/algorithms/randomness.html
