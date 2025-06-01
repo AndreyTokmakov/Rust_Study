@@ -31,6 +31,7 @@ non_snake_case
 #[path = "Random/random.rs"] pub mod random;
 #[path = "Strings/strings.rs"] pub mod strings;
 #[path = "Slices/slices.rs"] pub mod slices;
+#[path = "SmartPointers/main.rs"] pub mod smart_pointers;
 #[path = "ErrorsHandling/errors_handling.rs"] pub mod errors_handling;
 #[path = "Files/files.rs"] pub mod files;
 #[path = "Folders_Directories/folders_directories.rs"] pub mod folders_directories;
@@ -45,6 +46,7 @@ non_snake_case
 #[path = "Networking_Tokio/web_sockets_tungstenite.rs"] pub mod Tokio_web_sockets;
 #[path = "Web_Framework/web_framework.rs"] pub mod web_framework;
 #[path = "Multithreading/threads_main.rs"] pub mod multithreading;
+#[path = "Operators_Overload/main.rs"] pub mod operators_overload;
 
 
 fn main()
@@ -75,6 +77,10 @@ fn main()
     // dynamic_dispatch::test_all();
     // strings::test_all();
     // scoping_rules::test_all();
+    
+    smart_pointers::test_all();
+
+    // operators_overload::test_all();
 
     // NOTE: Time - Duration:
     // duration::test_all();
@@ -92,7 +98,7 @@ fn main()
     // collections::test_all();
 
     // NOTE: Networking
-    networking::test_all();
+    // networking::test_all();
     // Tokio_udp_tests::test_all();
     // Tokio_web_sockets::test_all();
 
