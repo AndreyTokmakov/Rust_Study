@@ -1,21 +1,33 @@
 
-https://doc.rust-lang.org/rust-by-example/scope/lifetime/explicit.html
+
+
+1 - Книга
+2 - Interview Questions 
+
+
+
+
+
+ --- the ? Operator ---
+
+• https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#a-shortcut-for-propagating-errors-the--operator
+
 
 ================================================================================================================================
                                             Cargo base commands:
 ================================================================================================================================
 
-▪ Version:
+• Version:
    >  cargo --version
 
-▪ Create a new project
+• Create a new project
    >  cargo new hello_cargo
    >  cd hello_cargo
 
-▪ Configuration
+• Configuration
     in the 'Cargo.toml' file
 
-▪ Build and RUn
+• Build and RUn
    >  cargo build
    >  cargo build --release
    >  cargo run
@@ -23,7 +35,7 @@ https://doc.rust-lang.org/rust-by-example/scope/lifetime/explicit.html
 
 
 ================================================================================================================================
-                                            Questions:
+                                            Topics:
 ================================================================================================================================
 
 • Ownership & Borrowing
@@ -136,3 +148,190 @@ https://rust-lang-nursery.github.io/rust-cookbook/web.html
 
 
 https://rust-lang-nursery.github.io/rust-cookbook/net/server.html#server
+
+
+
+
+================================================================================================================================
+                                            DPDK - Repo - ИЗУЧИТЬ
+================================================================================================================================
+
+
+https://github.com/Dmdv/dpdk_port
+
+
+
+
+================================================================================================================================
+                                            Questions: (answers)
+================================================================================================================================
+
+• RC vs ARC
+• Provide an example of an impl block in Rust   
+• How do you create an infinite loop in Rust
+• How can you mutate variables in Rust?
+• What happens to borrowed data at the end of a Rust function
+• What's the difference between .unwrap() and .expect() in Rust?
+• Why is the return keyword in Rust optional? Provide examples
+• What is an example of a match expression in Rust?
+• how to assign the result of a Rust match expression to a variable binding?
+• Printing information to the terminal
+
+• Can you create more than one variable using one line of Rust code?
+• What is a Rust trait
+• how continue an outer loop from an inner loop in Rust
+
+
+//--------------------------------------------------------------------------
+
+• RC vs ARC
+
+   The only difference between Rc and Arc is that Arc uses atomic operations when it updates the reference counts, and Rc does not. 
+   They occupy the same amount of memory.
+
+   Rc is !Send/!Sync so compiler won't let you share it.
+
+
+• Provide an example of an impl block in Rust   
+
+   struct Number(i32);
+
+   impl Number {
+       pub fn new(n: i32) -> Self {
+           Self(n)
+       }
+   }
+
+   let five = Number::new(5);
+
+
+• How do you create an infinite loop in Rust
+
+   loop {
+       // ...
+   }
+
+
+• How can you mutate variables in Rust?
+
+   By default, all data in Rust is immutable and cannot get changed without being marked as mutable.
+   Using the mut keyword changes this behavior and allows changing (mutating) the data:   
+
+   let mut a = 0;  // mutable
+   let b = 0;      // immutable
+
+
+• What happens to borrowed data at the end of a Rust function?  [ https://doc.rust-lang.org/rust-by-example/scope/borrow.html ]
+
+   When writing a function that borrows data, the borrowed data will remain available for use after the function ends. 
+   This is because ownership of the data does not transfer when borrowed.
+
+   Most of the time, we'd like to access data without taking ownership over it.
+   To accomplish this, Rust uses a borrowing mechanism. Instead of passing objects by value (T), objects can be passed by reference (&T).
+
+   The compiler statically guarantees (via its borrow checker) that references always point to valid objects.
+   That is, while references to an object exist, the object cannot be destroyed.
+
+
+• What's the difference between .unwrap() and .expect() in Rust?
+
+   Both .unwrap() and .expect() will trigger a panic if they execute.
+   ->  .unwrap() triggers a thread panic and then displays the line number containing the call to .unwrap().
+   ->  .expect() triggers a thread panic with a customized message, and then displays the line number containing the call to .expect().
+
+• Why is the return keyword in Rust optional? Provide examples
+
+   fn one() -> u32 {             |     fn two() -> u32 {
+       1                         |        return 2;
+   }                             |     }
+
+   The return keyword is for returning early from a function  - if there isn't a need to return early, then the omitting return keyword is appropriate.
+
+
+• What is an example of a match expression in Rust?   
+
+   This Rust match expression matches an Option.
+   When the Option contains Some, the data gets printed to the terminal.
+   When the Option contains None, the message there is no number gets printed to the terminal.
+
+   let foo = Some(1);
+   match foo {
+       Some(n) => println!("number is {n}"),
+       None => println!("there is no number"),
+   }
+
+• how to assign the result of a Rust match expression to a variable binding?
+
+   let t = true;
+   let one = match t {
+       true => 1,
+       false => 0,
+   };   
+
+
+• Printing information to the terminal
+                                                      
+                                                     let life = 42;
+   println!("hello world");                          dbg!(life);
+
+
+• Can you create more than one variable using one line of Rust code?
+   
+   let (a, b) = (1, 2);
+
+
+• What is a Rust trait
+
+   pub trait Summary {                                     pub struct NewsArticle {
+       fn summarize(&self) -> String;                          pub headline: String,
+   }                                                           pub location: author,  
+                                                           }
+                     impl Summary for NewsArticle {
+                        fn summarize(&self) -> String {
+                           format!("{}, by {} ({})", self.headline, self.author)
+                     }
+
+
+• How can you borrow data in a Rust structure
+
+   // Using borrowed data within a Rust structure requires the use of lifetime annotations.
+   // Lifetime annotations tell the compiler that we are borrowing some data from another part of the program:
+
+   // In the above example, the Name structure borrows a &str
+   // The lifetime of the &str is 'a
+   // Seeing a lifetime in a struct informs developers that some data needs to already exist before creating the structure.
+
+   #[derive(Debug)]
+   struct Name<'a> {                         let name = String::from("Bob");
+      name: &'a str,                         let n = Name { name: &name };  
+   }
+
+
+
+• How  continue an outer loop from an inner loop in Rust
+
+   // Rust support continuing an outer loop when executing an inner loop through the use of loop labels:
+   // Using loop labels with the break keyword instead of continue will enable an inner loop to exit both an inner and outer loop.
+
+   let mut a = 0;
+   'outer: loop {
+       a += 1;
+
+       let mut b = 0;
+       loop {
+           if b == 3 {
+               continue 'outer;
+           }
+           b += 1;
+       }
+   }
+
+
+• The question mark operator in Rust offers a convenient way to handle errors or missing data.
+
+   When used with 
+   Result, the question mark operator will |  Option, the question mark operator will                                                
+                                           |
+      unwrap an Ok   or return an Err      |     unwrap a Some   or return a None
+
+   // Because the question mark operator potentially returns values, the function signature must have either Result or Option set as the return type.   

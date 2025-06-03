@@ -47,6 +47,8 @@ non_snake_case
 #[path = "Web_Framework/web_framework.rs"] pub mod web_framework;
 #[path = "Multithreading/threads_main.rs"] pub mod multithreading;
 #[path = "Operators_Overload/main.rs"] pub mod operators_overload;
+#[path = "Unsafe_Features/unsafe_features.rs"] pub mod unsafe_features;
+#[path = "Operators/main.rs"] pub mod operators;
 
 
 fn main()
@@ -77,9 +79,13 @@ fn main()
     // dynamic_dispatch::test_all();
     // strings::test_all();
     // scoping_rules::test_all();
+    // unsafe_features::test_all();
     
-    smart_pointers::test_all();
 
+    // NOTE: Smart pointers
+    // smart_pointers::test_all();
+
+    operators::test_all();
     // operators_overload::test_all();
 
     // NOTE: Time - Duration:
