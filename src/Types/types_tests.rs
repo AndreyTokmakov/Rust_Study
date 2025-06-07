@@ -4,7 +4,8 @@ mod From_Into;
 mod Try_From;
 mod Try_Into;
 mod From_To_String;
-mod New_Type_Idiom;
+mod newtype_idiom;
+mod global_variables;
 
 
 fn variable_scope()
@@ -81,7 +82,7 @@ fn literals()
 
 pub fn test_all()
 {
-    // println!("Types tests");
+    global_variables::test_all();
 
     // variable_scope();
 
@@ -97,7 +98,7 @@ pub fn test_all()
 
     // Try_From::test_all();
     // Try_Into::test_all();
-    New_Type_Idiom::test_all();
+    // newtype_idiom::test_all();
 
     // From_To_String::test_all();
 }

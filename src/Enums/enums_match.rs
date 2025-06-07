@@ -95,14 +95,19 @@ fn coin_with_state_to_cents(coin: CoinWithState)
 
 fn switch_enums_with_state()
 {
-    for val in [CoinWithState::Penny, CoinWithState::Nickel, CoinWithState::Dime,
-                             CoinWithState::Quarter(UsState::Alaska), CoinWithState::Quarter(UsState::Alabama)] {
+    for val in [CoinWithState::Penny, 
+                             CoinWithState::Nickel,
+                             CoinWithState::Dime,
+                             CoinWithState::Quarter(UsState::Alaska), 
+                             CoinWithState::Quarter(UsState::Alabama)] 
+    {
         coin_with_state_to_cents(val);
     }
 }
 
 
-fn get_result(number: i32) -> i32 {
+fn get_result(number: i32) -> i32
+{
     match number {
         1 => action1(),
         2 => action2(),
@@ -110,14 +115,14 @@ fn get_result(number: i32) -> i32 {
     }
 }
 
-fn get_result_2(number: i32) -> i32 {
+fn get_result_2(number: i32) -> i32
+{
     match number {
         1 => action1(),
         2 => action2(),
         _ => actionOther(number),
     }
 }
-
 
 fn action1() -> i32 {
     1

@@ -49,10 +49,18 @@ non_snake_case
 #[path = "Operators_Overload/main.rs"] pub mod operators_overload;
 #[path = "Unsafe_Features/unsafe_features.rs"] pub mod unsafe_features;
 #[path = "Operators/main.rs"] pub mod operators;
+#[path = "Test_Experiments/tests_and_experiments.rs"] pub mod tests_and_experiments;
+#[path = "Display/main.rs"] pub mod display;
+#[path = "Documentation/main.rs"] pub mod documentation;
+
+
 
 
 fn main()
-{ 
+{
+    // tests_and_experiments::test_all();
+    
+    
     // attributes::test_all();
     // environment::test_all();
     // autotests::test_all();
@@ -73,6 +81,7 @@ fn main()
     // folders_directories::test_all();
     // Json::test_all();
     // directories::test_all();
+    // display::test_all();
     // enums::test_all();
     // optional::test_all();
     // lambdas::test_all();
@@ -81,11 +90,13 @@ fn main()
     // scoping_rules::test_all();
     // unsafe_features::test_all();
     
+    // NOTE: Documentation
+    documentation::test_all();
 
     // NOTE: Smart pointers
     // smart_pointers::test_all();
 
-    operators::test_all();
+    // operators::test_all();
     // operators_overload::test_all();
 
     // NOTE: Time - Duration:

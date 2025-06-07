@@ -5,6 +5,8 @@ use std::io::ErrorKind;
 use std::io::ErrorKind::InvalidData;
 use std::num::ParseIntError;
 
+mod function_return_result;
+
 fn string2Double(number_str: &str) -> Result<i32, ParseIntError>
 {
     match number_str.parse::<i32>() {
@@ -153,6 +155,8 @@ fn propagate_error_test_new_style() -> Result<String, io::Error>
 
 pub fn test_all()
 {
+    function_return_result::test_all();
+    
     // panic_test();
     // out_borders_index_error();
 
@@ -163,7 +167,7 @@ pub fn test_all()
     // simple_custom_error();
 
     // propagate_error_test();
-    let error: Result<String, io::Error> = propagate_error_test_manual_check();
+    // let error: Result<String, io::Error> = propagate_error_test_manual_check();
 
     // experiments();
 }

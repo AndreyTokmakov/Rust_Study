@@ -80,12 +80,9 @@ pub fn test_all()
     // basic_enum_demo();
     // sting_enum_demo();
     // diff_types_enum_demo();
-
     // underlying_type::tests();
-
     // enums_methods::tests();
-    // enums_match::tests();
-    control_flow_matching::test_all();
-
+    enums_match::tests();
+    // control_flow_matching::test_all();
     // cpp_style_enums::tests();
 }
