@@ -7,6 +7,7 @@ non_snake_case
 )]
 
 #[path = "Attributes/attributes.rs"] pub mod attributes;
+#[path = "Bytes_Bits/main.rs"] pub mod bytes_bits;
 #[path = "Environment/environment.rs"] pub mod environment;
 #[path = "Databases/databases.rs"] pub mod databases;
 #[path = "Autotests/autotests.rs"] pub mod autotests;
@@ -60,8 +61,8 @@ fn main()
 {
     // tests_and_experiments::test_all();
     
-    
     // attributes::test_all();
+    // bytes_bits::test_all();
     // environment::test_all();
     // autotests::test_all();
     // compare::test_all();
@@ -91,7 +92,7 @@ fn main()
     // unsafe_features::test_all();
     
     // NOTE: Documentation
-    documentation::test_all();
+    // documentation::test_all();
 
     // NOTE: Smart pointers
     // smart_pointers::test_all();
@@ -122,7 +123,7 @@ fn main()
     // web_framework::test_all();
 
     // NOTE:  Multithreading
-    // multithreading::test_all();
+    multithreading::test_all();
 
     // NOTE:  Databases
     // databases::test_all();
