@@ -34,8 +34,7 @@ non_snake_case
 #[path = "Slices/slices.rs"] pub mod slices;
 #[path = "SmartPointers/main.rs"] pub mod smart_pointers;
 #[path = "ErrorsHandling/errors_handling.rs"] pub mod errors_handling;
-#[path = "Files/files.rs"] pub mod files;
-#[path = "Folders_Directories/folders_directories.rs"] pub mod folders_directories;
+#[path = "Files_Folders_Directories/main.rs"] pub mod files_folders_directories;
 #[path = "Generics_Templates/generics.rs"] pub mod generics;
 #[path = "Directories/directories.rs"] pub mod directories;
 #[path = "Tuples/tuples.rs"] pub mod tuples;
@@ -78,7 +77,7 @@ fn main()
     // pointers_and_reference::test_all();
     // console_io::test_all();
     // errors_handling::test_all();
-    // files::test_all();
+    // files_folders_directories::test_all();
     // folders_directories::test_all();
     // Json::test_all();
     // directories::test_all();
@@ -116,14 +115,14 @@ fn main()
     // collections::test_all();
 
     // NOTE: Networking
-    // networking::test_all();
+    networking::test_all();
     // Tokio_udp_tests::test_all();
     // Tokio_web_sockets::test_all();
 
     // web_framework::test_all();
 
     // NOTE:  Multithreading
-    multithreading::test_all();
+    // multithreading::test_all();
 
     // NOTE:  Databases
     // databases::test_all();
