@@ -1,4 +1,5 @@
-
+use std::io::Write;
+use std::net::TcpStream;
 use http::{Request, Response};
 use http::request::Builder;
 use serde::{Deserialize, Serialize};
@@ -24,6 +25,20 @@ fn send_request()
     println!("{:#?}", response);
 }
 
+fn send_request_1()
+{
+    let response = reqwest::blocking::get("http://127.0.0.1:52525");
+    println!("{:#?}", response);
+}
+
+fn send_request_get_response_text()
+{
+    let response = reqwest::blocking::get("http://127.0.0.1:52525");
+
+    let content = response.unwrap().text();
+    println!("{:#?}", content);
+}
+
 fn send_request_2()
 {
     let result = reqwest::blocking::get("http://127.0.0.1:52525/binance/api/v3/account");
@@ -40,8 +55,26 @@ fn send_request_2()
     // println!("{:#?}", json_body);
 }
 
+fn send_request_TCP_Stream() -> std::io::Result<()>
+{
+    let host: &str = "0.0.0.0:52525";
+
+    let mut conn = TcpStream::connect(host)?;
+    
+    conn.write_all(format!("GET {} HTTP/1.1\r\n", host).as_bytes())?;
+    conn.write_all(b"Host: www.rustinaction.com\r\n")?;
+    conn.write_all(b"\r\n")?;
+
+    std::io::copy(&mut conn, &mut std::io::stdout())?;
+    Ok(())
+}
+
 pub fn test_all()
 {
-    send_request();
+    // send_request();
+    // send_request_1();
+    // send_request_get_response_text();
     // send_request_2();
+
+    send_request_TCP_Stream().expect("TODO: panic message");
 }

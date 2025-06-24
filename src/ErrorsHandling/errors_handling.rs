@@ -5,7 +5,6 @@ use std::io::ErrorKind;
 use std::io::ErrorKind::InvalidData;
 use std::num::ParseIntError;
 
-mod function_return_result;
 
 fn string2Double(number_str: &str) -> Result<i32, ParseIntError>
 {
@@ -155,7 +154,7 @@ fn propagate_error_test_new_style() -> Result<String, io::Error>
 
 pub fn test_all()
 {
-    function_return_result::test_all();
+
     
     // panic_test();
     // out_borders_index_error();

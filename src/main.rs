@@ -17,7 +17,7 @@ non_snake_case
 #[path = "Command_Line_Arguments/main_command_line.rs"] pub mod command_line;
 #[path = "Input_Arguments/read_from_input.rs"] pub mod read_from_input;
 #[path = "Compare/compare.rs"] pub mod compare;
-#[path = "Time_Duration/tests.rs"] pub mod duration;
+#[path = "Time_Duration/tests.rs"] pub mod time_and_duration;
 #[path = "Dispatching/dynamic_dispatch.rs"] pub mod dynamic_dispatch;
 #[path = "Loops/loops.rs"] pub mod loops;
 #[path = "Ownership/ownership.rs"] pub mod ownership;
@@ -33,7 +33,7 @@ non_snake_case
 #[path = "Strings/strings.rs"] pub mod strings;
 #[path = "Slices/slices.rs"] pub mod slices;
 #[path = "SmartPointers/main.rs"] pub mod smart_pointers;
-#[path = "ErrorsHandling/errors_handling.rs"] pub mod errors_handling;
+#[path = "ErrorsHandling/main.rs"] pub mod errors_handling;
 #[path = "Files_Folders_Directories/main.rs"] pub mod files_folders_directories;
 #[path = "Generics_Templates/generics.rs"] pub mod generics;
 #[path = "Directories/directories.rs"] pub mod directories;
@@ -43,7 +43,7 @@ non_snake_case
 #[path = "Json/Json.rs"] pub mod Json;
 #[path = "ScopingRules_LifeTIme_RAII/scoping_rules.rs"] pub mod scoping_rules;
 #[path = "Networking/main.rs"] pub mod networking;
-#[path = "Networking_Tokio/web_sockets_tungstenite.rs"] pub mod Tokio_web_sockets;
+#[path = "Tokio/main.rs"] pub mod tokio;
 #[path = "Web_Framework/web_framework.rs"] pub mod web_framework;
 #[path = "Multithreading/threads_main.rs"] pub mod multithreading;
 #[path = "Operators_Overload/main.rs"] pub mod operators_overload;
@@ -100,7 +100,7 @@ fn main()
     // operators_overload::test_all();
 
     // NOTE: Time - Duration:
-    // duration::test_all();
+    time_and_duration::test_all();
 
     // tuples::test_all();
     // types::test_all();
@@ -115,11 +115,11 @@ fn main()
     // collections::test_all();
 
     // NOTE: Networking
-    networking::test_all();
-    // Tokio_udp_tests::test_all();
-    // Tokio_web_sockets::test_all();
-
+    // networking::test_all();
     // web_framework::test_all();
+
+    // NOTE: Tokio
+    // tokio::test_all();
 
     // NOTE:  Multithreading
     // multithreading::test_all();
