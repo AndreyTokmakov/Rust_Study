@@ -45,5 +45,5 @@ pub fn server_test()
     // http://localhost:8000/
     // http://localhost:8000/time
     
-    start_server();
+    let _ = start_server();
 }

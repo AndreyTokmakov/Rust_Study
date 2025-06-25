@@ -20,6 +20,7 @@ non_snake_case
 #[path = "Time_Duration/tests.rs"] pub mod time_and_duration;
 #[path = "Dispatching/dynamic_dispatch.rs"] pub mod dynamic_dispatch;
 #[path = "Loops/loops.rs"] pub mod loops;
+#[path = "Logger/main_logger.rs"] pub mod logger;
 #[path = "Ownership/ownership.rs"] pub mod ownership;
 #[path = "Conditions/conditions.rs"] pub mod conditions;
 #[path = "Lambdas/lambdas.rs"] pub mod lambdas;
@@ -100,7 +101,10 @@ fn main()
     // operators_overload::test_all();
 
     // NOTE: Time - Duration:
-    time_and_duration::test_all();
+    // time_and_duration::test_all();
+    
+    // NOTE: Logger
+    // logger::test_all();
 
     // tuples::test_all();
     // types::test_all();
@@ -115,7 +119,7 @@ fn main()
     // collections::test_all();
 
     // NOTE: Networking
-    // networking::test_all();
+    networking::test_all();
     // web_framework::test_all();
 
     // NOTE: Tokio
