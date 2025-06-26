@@ -19,7 +19,7 @@ log = "0.4.27"
 rwf = "0.2.1"
 http = "1.3.1"
 reqwest = { version = "0.12.20",  features = ["blocking", "rustls-tls"] , default-features=false}
-tokio-tungstenite = "0.27.0"
+tokio-tungstenite = {version = "0.27", features = ["native-tls-vendored"]}
 tokio = { version = "1.45.1", features = ["rt", "net", "rt-multi-thread", "macros", "sync"] }
 websocket = "0.27.1"
 clap = "4.5.39"
@@ -29,4 +29,5 @@ threadpool = "1.8.1"
 num_cpus = "1.17.0"
 rustdns = "0.4.0"
 chrono = "0.4.41"
-simple_logger = "5.0.0"  # Уточни актуальную версию на crates.io
+simple_logger = "5.0.0"
+futures = "0.3.31"  # Уточни актуальную версию на crates.io

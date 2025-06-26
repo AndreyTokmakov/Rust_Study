@@ -19,6 +19,18 @@ struct Address
     city: String,
 }
 
+#[derive(Serialize, Deserialize, Debug)]
+struct Model
+{
+    #[serde(rename = "n")]
+    pub name: String,
+    #[serde(rename = "v")]
+    pub value: i32,
+    #[serde(rename = "d")]
+    pub description: String,
+}
+
+
 fn person_from_string() -> Result<()>
 {
     // Some JSON input data as a &str. Maybe this comes from the user.
@@ -90,11 +102,31 @@ fn parse_json_string_2()
     println!("{}", john);
 }
 
+
+fn parse_json_rename_fields()-> Result<()>
+{
+    let json_str = r#"{"n": "John Doe", "v": 43, "d": "Something"}"#;
+    
+    let model: Model = serde_json::from_str(json_str)?;
+    println!("{:?}", model);
+
+    let json_str_2: String = serde_json::to_string(&model)?;
+    println!("{:?}", json_str_2);
+    
+    Ok(())
+    
+    // Model { name: "John Doe", value: 43, description: "Something" }
+    // "{\"n\":\"John Doe\",\"v\":43,\"d\":\"Something\"}"
+}
+
+
 pub fn test_all()
 {
     // parse_json_string();
     // parse_json_string_2();
 
-    person_from_string().expect("Can't print Person");
-    print_an_address().expect("Can't print Address");
+    parse_json_rename_fields().expect("TODO: panic message");
+    
+    // person_from_string().expect("Can't print Person");
+    // print_an_address().expect("Can't print Address");
 }

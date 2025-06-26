@@ -80,7 +80,6 @@ fn main()
     // errors_handling::test_all();
     // files_folders_directories::test_all();
     // folders_directories::test_all();
-    // Json::test_all();
     // directories::test_all();
     // display::test_all();
     // enums::test_all();
@@ -90,6 +89,9 @@ fn main()
     // strings::test_all();
     // scoping_rules::test_all();
     // unsafe_features::test_all();
+
+    // NOTE: Json
+    Json::test_all();
     
     // NOTE: Documentation
     // documentation::test_all();
@@ -119,7 +121,7 @@ fn main()
     // collections::test_all();
 
     // NOTE: Networking
-    networking::test_all();
+    // networking::test_all();
     // web_framework::test_all();
 
     // NOTE: Tokio
