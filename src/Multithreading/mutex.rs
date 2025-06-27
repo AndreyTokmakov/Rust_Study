@@ -76,9 +76,54 @@ fn lock_multiple_threads()
 }
 
 
+mod consumer_producer_demo
+{
+    use std::sync::{Arc, Mutex};
+    use std::thread;
+    use std::time::Duration;
+
+    pub fn example()
+    {
+        let queue: Arc<Mutex<Vec<i32>>> = Arc::new(Mutex::new(Vec::new()));
+
+        // Producer
+        let q1: Arc<Mutex<Vec<i32>>> = Arc::clone(&queue);
+        let producer = thread::spawn(move || {
+            for i in 0..5 {
+
+                let mut queue = q1.lock().unwrap();
+                queue.push(i);
+                
+                println!("Added: {}", i);
+                thread::sleep(Duration::from_millis(50));
+            }
+        });
+
+        // Consumer
+        let q2: Arc<Mutex<Vec<i32>>>  = Arc::clone(&queue);
+        let consumer = thread::spawn(move || {
+            for _ in 0..5 {
+                thread::sleep(Duration::from_millis(100));
+                let mut queue = q2.lock().unwrap();
+                if let Some(val) = queue.pop() {
+                    println!("Consumed: {}", val);
+                }
+            }
+        });
+
+        producer.join().unwrap();
+        consumer.join().unwrap();
+    }
+}
+
+
+
+
 pub fn test_all()
 {
     // simple_example();
     // demo();
-    lock_multiple_threads();
+    // lock_multiple_threads();
+
+    consumer_producer_demo::example();
 }

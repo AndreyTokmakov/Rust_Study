@@ -2,6 +2,7 @@
 mod basic
 {
     use std::cell::RefCell;
+    
     pub fn example()
     {
         let ptr: RefCell<i32> = RefCell::new(5);
@@ -11,6 +12,39 @@ mod basic
     }
 }
 
+mod ref_cell_as_class_member
+{
+    use std::cell::RefCell;
+
+    struct Logger {
+        messages: RefCell<Vec<String>>,
+    }
+
+    impl Logger {
+        fn log(&self, msg: &str) {
+            self.messages.borrow_mut().push(msg.to_string());
+        }
+        
+        fn print(&self) {
+            println!("{:?}", self.messages.borrow());
+        }
+    }
+
+    pub fn example() 
+    {
+        let logger: Logger = Logger {
+            messages: RefCell::new(vec![]),
+        };
+
+        logger.log("Start");
+        logger.log("Progress...");
+        logger.log("End");
+
+        logger.print();
+    }
+}
+
+
 
 /**
     RefCell<T> — мутация при immut borrow
@@ -19,6 +53,7 @@ mod basic
 **/
 pub fn test_all()
 {
-    basic::example();
+    // basic::example();
+    ref_cell_as_class_member::example();
 
 }

@@ -53,6 +53,7 @@ non_snake_case
 #[path = "Test_Experiments/tests_and_experiments.rs"] pub mod tests_and_experiments;
 #[path = "Display/main.rs"] pub mod display;
 #[path = "Documentation/main.rs"] pub mod documentation;
+#[path = "DesignPatterns/main.rs"] pub mod design_patterns;
 
 
 
@@ -101,7 +102,7 @@ fn main()
     // documentation::test_all();
 
     // NOTE: Smart pointers
-    smart_pointers::test_all();
+    // smart_pointers::test_all();
 
     // operators::test_all();
     // operators_overload::test_all();
@@ -129,8 +130,11 @@ fn main()
     // tokio::test_all();
 
     // NOTE:  Multithreading
-    // multithreading::test_all();
+    multithreading::test_all();
 
     // NOTE:  Databases
     // databases::test_all();
+    
+    // NOTE: DesignPatterns:
+    // design_patterns::test_all()
 }
