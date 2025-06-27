@@ -7,7 +7,7 @@
 pub fn test_all()
 {
     // collections_arrays::test_all();
-    vector::test_all();
-    // collections_hash_map::test_all();
+    // vector::test_all();
+    collections_hash_map::test_all();
     // LinkedList::test_all();
 }

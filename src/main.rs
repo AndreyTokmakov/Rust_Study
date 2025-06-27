@@ -90,14 +90,18 @@ fn main()
     // scoping_rules::test_all();
     // unsafe_features::test_all();
 
+    // NOTE: Collections
+    // slices::test_all();
+    // collections::test_all();
+    
     // NOTE: Json
-    Json::test_all();
+    // Json::test_all();
     
     // NOTE: Documentation
     // documentation::test_all();
 
     // NOTE: Smart pointers
-    // smart_pointers::test_all();
+    smart_pointers::test_all();
 
     // operators::test_all();
     // operators_overload::test_all();
@@ -116,9 +120,6 @@ fn main()
 
     // structs::test_all();
     // traits::test_all();
-
-    // slices::test_all();
-    // collections::test_all();
 
     // NOTE: Networking
     // networking::test_all();

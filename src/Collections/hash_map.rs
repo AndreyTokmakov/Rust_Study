@@ -35,15 +35,26 @@ fn iterate()
     }
 }
 
-fn update_value()
+fn add_or_insert()
 {
-    let mut scores = HashMap::new();
+    let mut scores: HashMap<String, i32> = HashMap::new();
     scores.insert(String::from("Blue"), 10);
 
     println!("{:?}", scores);
 
-    scores.entry(String::from("Yellow")).or_insert(50);
-    scores.entry(String::from("Blue")).or_insert(50);
+    scores.entry(String::from("Yellow")).or_insert(20);
+    scores.entry(String::from("Blue")).or_insert(30);
+
+    println!("{:?}", scores);
+}
+
+fn update_values()
+{
+    let mut scores: HashMap<String, i32> = HashMap::new();
+    
+    scores.insert(String::from("Blue"), 10);
+    scores.entry(String::from("Yellow")).or_insert(20);
+    scores.entry(String::from("Blue")).insert_entry(30);
 
     println!("{:?}", scores);
 }
@@ -66,6 +77,7 @@ pub fn test_all()
     // create();
     // find();
     // iterate();
-    // update_value();
+    // add_or_insert();
+    // update_values();
     count_words_in_the_text();
 }

@@ -1,37 +1,42 @@
 
-trait Animal
-{
-    fn make_noise(&self);
-}
 
-struct Dog {}
-struct Cat {}
-
-impl Animal for Dog
+mod example_simple
 {
-    fn make_noise(&self)
+    struct Dog {}
+    struct Cat {}
+
+    trait Animal {
+        fn make_noise(&self);
+    }
+    
+    impl Animal for Dog {
+        fn make_noise(&self)
+        {
+            println!("Woof!!")
+        }
+    }
+
+    impl Animal for Cat {
+        fn make_noise(&self)
+        {
+            println!("Meow!!")
+        }
+    }
+
+    pub fn demo()
     {
-        println!("Woof!!")
+        let animals: Vec<Box<dyn Animal>> = vec![
+            Box::new(Dog{}),
+            Box::new(Cat{})
+        ];
+        for item in &animals {
+            item.make_noise();
+        }
     }
 }
 
-impl Animal for Cat
-{
-    fn make_noise(&self)
-    {
-        println!("Meow!!")
-    }
-}
-
-fn test()
-{
-    let vect: Vec<Box<dyn Animal>> = vec![Box::new(Dog{}), Box::new(Cat{})];
-    for item in &vect {
-        item.make_noise();
-    }
-}
 
 pub fn test_all()
 {
-    test();
+    example_simple::demo();
 }

@@ -29,13 +29,26 @@ fn pointer_to_vector_modify()
     println!("values: {:?}", values);
     Rc::make_mut(&mut values).push(4);
     println!("values: {:?}", values);
-}                      
+}
 
+fn simple_example()
+{
+    let a = Rc::new(String::from("heyyy"));
+    let b = Rc::clone(&a); // increases the reference counter
+    let c = Rc::clone(&a);
 
-// https://doc.rust-lang.org/book/ch15-04-rc.html
-// Single-threaded reference-counting pointers. ‘Rc’ stands for ‘Reference Counted’.
+    println!("a: {}, b: {}, c: {}", a, b, c);
+    println!("Счётчик: {}", Rc::strong_count(&a));
+}
+
+/**
+        Rc<T> — разделяемое владение (однопоточное)
+        Single-threaded reference-counting pointers. ‘Rc’ stands for ‘Reference Counted’.
+        https://doc.rust-lang.org/book/ch15-04-rc.html
+**/
 pub fn test_all()
 {
-    pointer_to_vector_clone();
+    simple_example();
+    // pointer_to_vector_clone();
     // pointer_to_vector_modify();
 }
