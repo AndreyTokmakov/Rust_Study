@@ -110,5 +110,5 @@ async fn client_main() -> Result<()>
 
 pub fn test_all()
 {
-    server_main();
+    let result = server_main();
 }

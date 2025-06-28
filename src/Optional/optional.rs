@@ -221,7 +221,7 @@ fn insert()
 
 fn get_or_insert()
 {
-    /// Inserts value into the option *** IF IT'S == None *** then returns a mutable reference to the contained value.
+    // INFO : Inserts value into the option *** IF IT'S == None *** then returns a mutable reference to the contained value.
     let mut optStr: Option<&str> = Some("qwerty");
     println!("Original value: {:}", optStr.unwrap());
 

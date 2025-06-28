@@ -1,14 +1,16 @@
 
-fn devide(a: i32, b: i32) -> i32 {
+
+
+fn divide(a: i32, b: i32) -> i32 {
     if 0 == b {
-        panic!("PANIC: 0 devide!");
+        panic!("PANIC: 0 divide!");
     }
     a / b
 }
 
 #[test]
 fn check_equals() {
-    let result = devide(8, 2);
+    let result = divide(8, 2);
     assert_eq!(result, 4);
 }
 
@@ -29,9 +31,9 @@ fn should_fail() {
 }
 
 #[test]
-#[should_panic(expected = "PANIC: 0 devide!")]
+#[should_panic(expected = "PANIC: 0 divide!")]
 fn should_panic_test() {
-    let result = devide(8, 0);
+    let result = divide(8, 0);
     assert_eq!(result, 4);
 }
 

@@ -9,7 +9,9 @@ fn simple_lambda_return()
 
 fn simple_lambda_with_return()
 {
-    fn function(i: i32) -> i32 { i + 1 };
+    fn function(i: i32) -> i32 {
+        i + 1
+    }
     let result: i32 = function(100);
 
     println!("{}", result);

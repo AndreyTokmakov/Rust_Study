@@ -43,6 +43,6 @@ async fn start_udp_server_asynch() -> io::Result<()>
 // https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html
 pub fn test_all()
 {
-    start_udp_server_synch();
-    // start_udp_server_asynch();
+    let result = start_udp_server_synch();
+    // let result = start_udp_server_asynch();
 }

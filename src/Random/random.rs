@@ -10,22 +10,22 @@ struct Point {
 
 fn test1()
 {
-    let secret_number = rand::thread_rng().gen_range(1..101);
+    let secret_number = rand::rng().random_range(1..101);
     println!("Random numer {}", secret_number);
 }
 
 
 fn test2()
 {
-    let mut rng = rand::thread_rng();
+    let mut rng = rand::rng();
 
-    let n1: u8 = rng.gen();
-    let n2: u16 = rng.gen();
+    let n1: u8 = rng.random();
+    let n2: u16 = rng.random();
     println!("Random u8: {}", n1);
     println!("Random u16: {}", n2);
-    println!("Random u32: {}", rng.gen::<u32>());
-    println!("Random i32: {}", rng.gen::<i32>());
-    println!("Random float: {}", rng.gen::<f64>());
+    println!("Random u32: {}", rng.random::<u32>());
+    println!("Random i32: {}", rng.random::<i32>());
+    println!("Random float: {}", rng.random::<f64>());
 }
 
 fn random_numbers_within_range()
@@ -50,8 +50,8 @@ impl Distribution<Point> for Standard {
 pub fn test_all()
 {
     // test1();
-    // test2();
-    random_numbers_within_range();
+    test2();
+    // random_numbers_within_range();
 }
 
 // INFO: https://rust-lang-nursery.github.io/rust-cookbook/algorithms/randomness.html

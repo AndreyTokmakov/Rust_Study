@@ -19,5 +19,5 @@ fn listen_port_TCP() -> Result<(), Error> {
 
 pub fn test_all()
 {
-    listen_port_TCP();
+    listen_port_TCP().expect("Failed to listen port");
 }

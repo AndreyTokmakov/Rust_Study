@@ -74,5 +74,5 @@ fn temp_test() -> std::io::Result<()>
 pub fn test_all()
 {
     // simple_test();
-    temp_test();
+    temp_test().expect("Something went wrong");
 }

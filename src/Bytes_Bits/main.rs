@@ -2,10 +2,10 @@
 
 fn print_as_binary()
 {
-    let а: u16 = 50115;
+    let a: u16 = 10115;
     let b: i16 = -15421;
 
-    println! ("а: {:016b} {}", а, а);
+    println! ("a: {:016b} {}", a, a);
     println! ("b: {:016b} {}", b, b);
     
     // а: 1100001111000011 50115

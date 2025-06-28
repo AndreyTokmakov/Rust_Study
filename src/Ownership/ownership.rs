@@ -40,7 +40,7 @@ fn test1()
     // s's value moves into the function... and so is no longer valid here
     takes_ownership(s);
 
-    /** value borrowed here after move **/
+    // INFO: value borrowed here after mov
     // println!("{}", s);   /// ----> ERROR
 
     // x comes into scope
@@ -54,8 +54,8 @@ fn test1()
 fn immutable_borrowing()
 {
     let s: String = String::from("Hello, Rust!");
-    let str_ref_1: &String = &s;  /// Immutable borrow
-    let str_ref_2: &String = &s;  /// Another immutable borrow
+    let str_ref_1: &String = &s;  // INFO: Immutable borrow
+    let str_ref_2: &String = &s;  // INFO: Another immutable borrow
 
     println!("{} and {}", str_ref_1, str_ref_2); // Works fine
 }
@@ -65,7 +65,7 @@ fn mutable_borrowing()
     let mut str_orig: String = String::from("Hello");
     let str_ref: &mut String = &mut str_orig;
 
-    /** Will not compile | second mutable borrow occurs here **/
+    // INFO: ill not compile | second mutable borrow occurs here
     // let str_ref2: &mut String = &mut str_orig;
 
     str_ref.push_str(" world");
