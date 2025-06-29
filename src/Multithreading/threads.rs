@@ -4,7 +4,7 @@ use std::fmt::format;
 use std::thread::{sleep, ThreadId};
 use std::time::Duration;
 use std::sync::{Arc, Mutex, MutexGuard};
-
+use tokio::task::JoinHandle;
 
 #[derive(Debug)]
 struct User {
@@ -128,12 +128,30 @@ fn create_parallel_thread()
 
 
 
+fn store_threads_in_vector()
+{
+    let mut workers = Vec::new();
+
+    for i in 0..5 {
+        let handle = thread::spawn(move || {
+            println!("Hello from thread {}", i);
+        });
+        workers.push(handle);
+    }
+
+    for handle in workers {
+        handle.join().unwrap();
+    }
+    println!("Done");
+}
+
 fn create_thead_builder()
 {
     let thread = thread::Builder::new().name("thread1".to_string()).spawn(move || {
         println!("Hello, world!");
     });
-    
+
+
 }
 
 
@@ -142,9 +160,11 @@ pub fn test_all()
 {
     // get_parallelism();
 
+    store_threads_in_vector();
+
     // pass_object_to_thread();
     // pass_object_to_multiple_threads();
-    pass_object_to_multiple_threads_modify();
+    // pass_object_to_multiple_threads_modify();
 
     // create_thread_detached();
     // create_parallel_thread();

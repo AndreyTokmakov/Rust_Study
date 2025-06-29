@@ -128,10 +128,10 @@ fn main()
     // web_framework::test_all();
 
     // NOTE: Tokio
-    // tokio::test_all();
+    tokio::test_all();
 
     // NOTE:  Multithreading
-    multithreading::test_all();
+    // multithreading::test_all();
 
     // NOTE:  Databases
     // databases::test_all();

@@ -15,9 +15,9 @@ mod condition_variables;
 
 pub fn test_all()
 {
-    // threads::test_all();
+    threads::test_all();
     // atomics::test_all();
-    condition_variables::test_all();
+    // condition_variables::test_all();
     // mutex::test_all();
     // arc::test_all();
     // locking::test_all();
