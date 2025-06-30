@@ -48,6 +48,7 @@ non_snake_case
 #[path = "Test_Experiments/tests_and_experiments.rs"] pub mod tests_and_experiments;
 #[path = "Display/main.rs"] pub mod display;
 #[path = "Documentation/main.rs"] pub mod documentation;
+#[path = "Pattern_Matching/main.rs"] pub mod pattern_matching;
 
 
 fn main()
@@ -83,8 +84,10 @@ fn main()
     // scoping_rules::test_all();
     // unsafe_features::test_all();
 
+    pattern_matching::test_all();
+
     // NOTE: Json
-    Json::test_all();
+    // Json::test_all();
     
     // NOTE: Documentation
     // documentation::test_all();
