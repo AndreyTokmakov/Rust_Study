@@ -49,11 +49,14 @@ non_snake_case
 #[path = "Display/main.rs"] pub mod display;
 #[path = "Documentation/main.rs"] pub mod documentation;
 #[path = "Pattern_Matching/main.rs"] pub mod pattern_matching;
+#[path = "Lifetime_Borrowing/main.rs"] pub mod lifetime_borrowing;
 
 
 fn main()
 {
     // tests_and_experiments::test_all();
+    // loops::test_all();
+    lifetime_borrowing::test_all();
     
     // attributes::test_all();
     // autotests::test_all();
@@ -68,7 +71,6 @@ fn main()
     // read_from_input::test_all();
     // random::test_all();
     // ownership::test_all();
-    // loops::test_all();
     // pointers_and_reference::test_all();
     // console_io::test_all();
     // errors_handling::test_all();
@@ -93,7 +95,7 @@ fn main()
     // documentation::test_all();
 
     // NOTE: Smart pointers
-    smart_pointers::test_all();
+    // smart_pointers::test_all();
 
     // operators::test_all();
     // operators_overload::test_all();

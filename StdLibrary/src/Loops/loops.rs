@@ -1,17 +1,75 @@
 use std::collections::HashMap;
 
-fn range_loop()
+
+mod for_loops
 {
-    for i in 0..10 {
-        print!("{} ", i)
+    pub fn range_loop()
+    {
+        for i in 0..10 {
+            print!("{} ", i)
+        }
+
+        for i in (0..10) {
+            print!("{} ", i)
+        }
+
+        for i in (0..=10) {
+            print!("{} ", i)
+        }
+
+        // 0 1 2 3 4 5 6 7 8 9 
+        // 0 1 2 3 4 5 6 7 8 9
+        // 0 1 2 3 4 5 6 7 8 9 10 
     }
 
-    for i in (0..10) {
-        print!("{} ", i)
+    pub fn iter_loop()
+    {
+        let fruits = ["apple", "banana", "cherry"];
+        for fruit in fruits.iter() {
+            println!("{}", fruit);
+        }
     }
     
-    // 0 1 2 3 4 5 6 7 8 9 
-    // 0 1 2 3 4 5 6 7 8 9 
+    pub fn enumerate_loop()
+    {
+        let items = ["one", "two", "three"];
+        for (index, item) in items.iter().enumerate() {
+            println!("Item {} is {}", index, item);
+        }
+        
+        // Item 0 is one
+        // Item 1 is two
+        // Item 2 is three
+    }
+}
+
+
+mod while_loops
+{
+    pub fn basic()
+    {
+        let mut number = 3;
+        while (number != 0) {
+            print!("{} ", number);
+            number -= 1;
+        }
+
+        println!("Done");
+        // 3 2 1 Done
+    }
+    
+    
+    pub fn while_let()
+    {
+        let mut stack = vec![1, 2, 3];
+
+        // while let example (idiomatic for popping collections)
+        while let Some(top) = stack.pop() {
+            println!("Popped: {}", top);
+        }
+        
+        println!("Stack size is {}", stack.len());
+    }
 }
 
 fn infinite_loop()
@@ -41,18 +99,6 @@ fn return_value_from_loop()
     println!(" The result is {}", result);
     
     // 1 2 3 4 5 6 7 8 9 10  The result is 1010
-}
-
-fn while_loop()
-{
-    let mut number = 3;
-    while number != 0 {
-        print!("{} ", number);
-        number -= 1;
-    }
-
-    println!("Done");
-    // 3 2 1 Done
 }
 
 fn collection_iterate_array()
@@ -120,16 +166,26 @@ fn loop_labels()
 }
 
 
+
+//      loop	    loop { ... break; }
+//      while	    while condition { ... }
+//      for in	    for x in 0..10 { ... }
+//      while let	while let Some(x) = opt { ... }
+
 pub fn test_all()
 {
-    // range_loop();
+    // for_loops::range_loop();
+    // for_loops::iter_loop();
+    // for_loops::enumerate_loop();
+
+    while_loops::basic();
+    while_loops::while_let();
 
     // infinite_loop();
     // return_value_from_loop();
-    // while_loop();
     // loop_labels();
-    //  iterate_reversed();
+    // iterate_reversed();
 
-    collection_iterate_array();
+    // collection_iterate_array();
     // collection_iterate_map();
 }
