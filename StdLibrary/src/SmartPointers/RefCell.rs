@@ -45,6 +45,18 @@ mod ref_cell_as_class_member
 }
 
 
+mod RefCell_holding_Vec
+{
+    use std::cell::RefCell;
+    
+    pub fn example()
+    {
+        let vecRefCell: RefCell<Vec<i32>> = RefCell::new(vec![1, 2, 3]);
+        vecRefCell.borrow_mut().push(4);
+        println!("Vector = {:?}", vecRefCell.borrow());
+    }
+}
+
 
 /**
     RefCell<T> — мутация при immut borrow
@@ -54,6 +66,7 @@ mod ref_cell_as_class_member
 pub fn test_all()
 {
     // basic::example();
-    ref_cell_as_class_member::example();
+    // ref_cell_as_class_member::example();
+    RefCell_holding_Vec::example();
 
 }

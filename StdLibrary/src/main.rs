@@ -84,7 +84,7 @@ fn main()
     // scoping_rules::test_all();
     // unsafe_features::test_all();
 
-    pattern_matching::test_all();
+    // pattern_matching::test_all();
 
     // NOTE: Json
     // Json::test_all();
@@ -93,7 +93,7 @@ fn main()
     // documentation::test_all();
 
     // NOTE: Smart pointers
-    // smart_pointers::test_all();
+    smart_pointers::test_all();
 
     // operators::test_all();
     // operators_overload::test_all();
@@ -112,11 +112,5 @@ fn main()
 
     // structs::test_all();
     // traits::test_all();
-
-    // NOTE: Networking
-    // web_framework::test_all();
-
-
-    // NOTE:  Databases
-    // databases::test_all();
+    
 }

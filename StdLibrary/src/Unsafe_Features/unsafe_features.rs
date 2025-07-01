@@ -13,14 +13,16 @@ fn dereferencing_raw_pointer()
 }
 
 unsafe fn dereferencing_raw_pointer_unsafe()
-{
-    let mut num: i32 = 5;
-
-    let r1: *const i32 = &raw const num;
-    let r2: *mut i32 = &raw mut num;
-
-    println!("r1 is: {}", *r1);
-    println!("r2 is: {}", *r2);
+{ 
+    unsafe {
+        let mut num: i32 = 5;
+    
+        let r1: *const i32 = &raw const num;
+        let r2: *mut i32 = &raw mut num;
+    
+        println!("r1 is: {}", *r1);
+        println!("r2 is: {}", *r2);
+    }
 }
 
 

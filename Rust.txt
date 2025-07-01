@@ -1,34 +1,116 @@
-
-1 - Книга
-2 - Interview Questions 
-
-
-• Ownership & Borrowing
-• Traits & Generics
-• Error Handling
-• Multithreading
-
-
-
-
 ================================================================================================================================
-                                            Cargo base commands:
+                                            Cargo | Вопросы по инструментам и экосистеме
 ================================================================================================================================
 
-• Version:
-   >  cargo --version
+::• Configuration" in the 'Cargo.toml' file
+::• Проверка версии
 
-• Create a new project
-   >  cargo new hello_cargo
-   >  cd hello_cargo
+   cargo --version
 
-• Configuration
-    in the 'Cargo.toml' file
+::• Create a new project
 
-• Build and RUn
-   >  cargo build
-   >  cargo build --release
-   >  cargo run
+   cargo new hello_ca
+   rgo
+   cd hello_cargo
+
+
+::• Что такое workspace в Cargo?
+::  Позволяет управлять несколькими пакетами из одного репозитория.
+::  Общий Cargo.lock, общие зависимости.
+
+   [workspace]
+   members = ["core", "cli", "utils"]
+
+
+::• Check compilation without running:
+
+   cargo check
+
+
+::• Как посмотреть все зависимости проекта в виде дерева?
+
+   cargo tree
+
+
+::• Build and Run
+
+   cargo build                  // debug сборка (не оптимизирована, включает debug symbols).
+   cargo build --release        // оптимизированная сборка (по умолчанию -C opt-level=3).
+   cargo run
+
+
+::• Как собрать бинарник для другой платформы (cross-compilation)?
+
+   rustup target add x86_64-unknown-linux-musl
+   cargo build --target x86_64-unknown-linux-musl
+
+
+::• Как запустить тесты?
+
+   cargo test
+
+
+::• Как запустить только один тест?
+
+   cargo test test_addition
+
+
+::• Как сгенерировать документацию?
+
+   cargo doc --open
+
+
+::• Что содержится в Cargo.toml
+
+   [package]          - метаданные (имя, версия, автор).
+   [dependencies]     - зависимости с их версиями.
+   [dev-dependencies] - зависимости только для тестов.
+   [features]         - включаемые функциональности.
+   [profile]          - настройки оптимизации для debug/release.
+
+
+::• Отличие Cargo.lock отличается от Cargo.toml:
+
+   Cargo.toml - определяет, какие зависимости нужны (версии или диапазон).
+
+   Cargo.lock - фиксирует точные версии зависимостей, которые были установлены для reproducible builds.
+                Для библиотек Cargo.lock обычно не коммитят.
+
+
+::• Профили сборки существуют в Cargo
+
+   [profile.dev]     - для cargo build, без оптимизаций.
+
+   [profile.release] - для cargo build --release, с оптимизациями.
+                       ожно переопределять в Cargo.toml.
+
+
+::• Добавить зависимость из Git или локальной папки
+
+   [dependencies]
+      mycrate = { git = "https://github.com/user/repo" }
+      othercrate = { path = "../local/path" }
+
+
+ ::• Как работать с feature flags в Cargo?
+
+   1. Определить в Cargo.toml:
+
+      [features]
+      default = ["foo"]
+      foo = []
+      bar = []
+
+   2. включать их:
+
+      cargo build --features bar
+
+   3. Или отключать default:
+
+      cargo build --no-default-features --features bar
+
+
+
 
 ================================================================================================================================
                         Smart Pointers: # https://doc.rust-lang.org/book/ch15-00-smart-pointers.html
@@ -61,8 +143,20 @@
 • Arc
 • Barrier
 • Condvar
-• mpmc   (std::sync::mpmc::channel)
-• mpsc   (std::sync::mpsc::channel)
+
+
+пример с асинхронным tokio::sync::mpsc
+
+
+
+Для MPMC (multiple producer, multiple consumer) обычно используют внешние библиотеки, самые популярные — это:
+
+    crossbeam::channel — быстрый, без блокировки (внутри lock-free структуры).
+    flume — удобный и богатый API.
+    [tokio::sync::mpsc] — для async кода.
+
+
+
 
 ================================================================================================================================
                         Networking
@@ -329,3 +423,30 @@ https://github.com/Dmdv/dpdk_port
       unwrap an Ok   or return an Err      |     unwrap a Some   or return a None
 
    // Because the question mark operator potentially returns values, the function signature must have either Result or Option set as the return type.   
+
+
+
+================================================================================================================================
+                             Маленькие каверзные задачи (для собеса)
+================================================================================================================================
+
+            fn main() {
+                let mut s = String::from("hello");
+                let r1 = &s;
+                let r2 = &mut s;
+                println!("{}, {}", r1, r2);
+            }
+
+
+✅ Ответ:  Выведет hello, hello. Можно брать несколько immutable ссылок одновременно.
+
+
+            fn main() {
+                let mut s = String::from("hello");
+                let r1 = &s;
+                let r2 = &mut s;
+                println!("{}, {}", r1, r2);
+            }
+
+
+✅ Ответ: Не скомпилируется. Нельзя иметь immutable и mutable ссылку одновременно.
