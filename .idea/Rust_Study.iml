@@ -9,6 +9,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Networking/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/StdLibrary/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Web_Framework/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Protobuf/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

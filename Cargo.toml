@@ -1,3 +1,12 @@
 [workspace]
 resolver = "3"
-members = [ "Collections", "Databases", "DesignPatterns","Multithreading", "Networking", "StdLibrary", "Web_Framework"]
+members = [
+    "Collections",
+    "Databases",
+    "DesignPatterns",
+    "Multithreading",
+    "Networking",
+    "Protobuf",
+    "StdLibrary",
+    "Web_Framework"
+]

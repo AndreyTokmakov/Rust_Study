@@ -242,12 +242,12 @@ fn filter()
 }
 
 pub fn test_all()
-{
-    // create_optional();
+{ 
+    create_optional();
     // create_and_test();
     // take();
     // take_if();
-    question_mark_operator();
+    // question_mark_operator();
     // pattern_matching();
 
     // unwrap();
