@@ -2,8 +2,11 @@
 pub fn test_all()
 {
     // create();
-    append_to_string();
+    // append_to_string();
     // append_with_string();
+    // concatenate_1();
+    concatenate_2();
+
 
     // format_string();
 
@@ -27,33 +30,49 @@ fn create()
 
 fn append_to_string() 
 {
-    let mut s = String::from("foo ");
+    let mut s: String = String::from("foo ");
     println!("{}", s);
 
     s.push_str("bar");
     println!("{}", s);
 }
 
-fn append_with_string() {
-    let mut s1 = String::from("foo");
-    let mut s2 = String::from("bar");
+fn append_with_string()
+{
+    let mut s1: String = String::from("foo");
+    let mut s2: String = String::from("bar");
     s1.push_str(&s2);
 
-    println!("s1 is {}", s1);
-    println!("s2 is {}", s2);
+    println!("s1 is {}\ns2 is {}", s1, s2);
 
     s2.push_str("_bar");
 
-    println!("s1 is {}", s1);
-    println!("s2 is {}", s2);
+    println!("s1 is {}\ns2 is {}", s1, s2);
 }
 
-fn format_string() {
-    let s1 = String::from("tic");
-    let s2 = String::from("tac");
-    let s3 = String::from("toe");
+fn concatenate_1()
+{
+    let s1: String = String::from("Hello");
+    let s2: &str = " world!";
 
-    let s = format!("{}-{}-{}", s1, s2, s3);
+    let concatenated: String = s1 + s2; // s1 is moved here
+    println!("{}", concatenated);
+}
+
+fn concatenate_2()
+{
+    let name: &str  = "Alice";
+    let message: String  = format!("Hello, {}!", name);
+    println!("{}", message);
+}
+
+fn format_string()
+{
+    let s1: String = String::from("tic");
+    let s2: String = String::from("tac");
+    let s3: String = String::from("toe");
+
+    let s: String = format!("{}-{}-{}", s1, s2, s3);
 
     println!("{}", s);
 }
