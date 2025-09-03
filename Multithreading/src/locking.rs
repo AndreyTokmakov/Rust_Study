@@ -1,6 +1,5 @@
 
 
-
 mod write_guard_tests
 {
     use std::sync::{Arc, RwLock, RwLockReadGuard, RwLockWriteGuard};
@@ -44,9 +43,46 @@ mod write_guard_tests
     // Other thread have acquired write lock after waiting 3.000096511s seconds.
 }
 
+mod multiple_reader_one_writer
+{
+    use std::sync::{Arc, RwLock, RwLockReadGuard, RwLockWriteGuard};
+    use std::thread;
+    use std::time::{Duration, Instant};
+
+    pub fn demo()
+    {
+        let data: Arc<RwLock<i32>> = Arc::new(RwLock::new(0));
+        let mut reader_collection: Vec<thread::JoinHandle<()>> = Vec::new();
+
+        for reader in 1..3 {
+            let data: Arc<RwLock<i32>> = Arc::clone(&data);
+            let handle: thread::JoinHandle<()> = thread::spawn(move || {
+                // read() Locks this RwLock with shared read access
+                let val: std::sync::RwLockReadGuard<'_, i32> = data.read().unwrap();
+                println!("Reader {}:  Value = {}", reader, *val);
+            });
+            reader_collection.push(handle);
+        }
+
+        let writer: thread::JoinHandle<()> = {
+            let data: Arc<RwLock<i32>> = Arc::clone(&data);
+            thread::spawn(move || {
+                // write() Locks this RwLock with exclusive write access
+                let mut val: std::sync::RwLockWriteGuard<'_, i32> = data.write().unwrap();
+                *val += 1;
+                print!("Writer: Value = {}", *val);
+            })
+        };
+
+        for handle in reader_collection {
+            handle.join().unwrap();
+        }
+        writer.join().unwrap();
+    }
+}
 
 pub fn test_all()
 {
-    write_guard_tests::read_write_guard_bug();
-
+    // write_guard_tests::read_write_guard_bug();
+    multiple_reader_one_writer::demo();
 }
