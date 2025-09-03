@@ -22,8 +22,8 @@ mod condition_variables;
 
 pub fn main()
 {
-    threads::test_all();
-    // atomics::test_all();
+    // threads::test_all();
+    atomics::test_all();
     // condition_variables::test_all();
     // mutex::test_all();
     // arc::test_all();
@@ -31,7 +31,7 @@ pub fn main()
 
     // sender_receiver::test_all();
     // mpsc_channel::test_all(); 
-    // mpsc_channel_tokio::test_all(); 
+    // mpsc_channel_tokio::test_all();
     // mpmc_channel::test_all();
     // crossbeam_channel::test_all();
     // flume_channel::test_all();

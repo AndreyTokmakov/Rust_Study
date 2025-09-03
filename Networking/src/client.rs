@@ -71,10 +71,10 @@ fn send_request_TCP_Stream() -> std::io::Result<()>
 
 pub fn test_all()
 {
-    send_request();
+    // send_request();
     // send_request_1();
     // send_request_get_response_text();
     // send_request_2();
 
-    // send_request_TCP_Stream().expect("TODO: panic message");
+    send_request_TCP_Stream().expect("TODO: panic message");
 }

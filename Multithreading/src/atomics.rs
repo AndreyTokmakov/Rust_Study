@@ -5,7 +5,7 @@ mod basic
     use std::sync::atomic::{AtomicU32, AtomicUsize, Ordering};
     use std::thread;
 
-    fn fetch_add()
+    pub fn fetch_add()
     {
         // define the counter variable
         let counter: Arc<AtomicU32> = Arc::new(AtomicU32::new(100));
@@ -17,7 +17,7 @@ mod basic
         println!("{}", counter.fetch_add(1, Ordering::SeqCst));
     }
 
-    fn fetch_sub_thread()
+    pub fn fetch_sub_thread()
     {
         let counter: Arc<AtomicUsize>  = Arc::new(AtomicUsize::new(5));
         for _ in 0..10 {
@@ -31,6 +31,34 @@ mod basic
     } 
 }
 
+mod Atomic_Bool
+{
+    use std::sync::Arc;
+    use std::sync::atomic::{AtomicBool, Ordering};
+    use std::thread;
+    use std::time::Duration;
+
+    pub fn busy_waiting()
+    {
+        let ready: Arc<AtomicBool> = Arc::new(AtomicBool::new(false));
+        // let ready_clone: Arc<AtomicBool> = ready.clone();
+        let ready_clone: Arc<AtomicBool> = Arc::clone(&ready);
+
+        let worker: thread::JoinHandle<()> = thread::spawn(move || {
+            println!("Worker start");
+            thread::sleep(Duration::from_secs(1));
+            ready_clone.store(true, Ordering::Release);
+            println!("Work is done");
+        });
+
+        while !ready.load(Ordering::Acquire) {
+            // busy wait
+        }
+
+        println!("Worker end");
+        let _ = worker.join();
+    }
+}
 
 mod SpinLock
 {
@@ -65,6 +93,6 @@ pub fn test_all()
 {
     // basic::fetch_add();
     // basic::fetch_sub_thread();
-
-    SpinLock::demo();
+    // SpinLock::demo();
+    Atomic_Bool::busy_waiting();
 }

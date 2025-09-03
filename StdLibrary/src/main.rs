@@ -78,7 +78,7 @@ fn main()
     // folders_directories::test_all();
     // directories::test_all();
     // display::test_all();
-    // enums::test_all();
+    enums::test_all();
     // optional::test_all();
     // lambdas::test_all();
     // dynamic_dispatch::test_all();
