@@ -1,7 +1,7 @@
 
 use std::{io, thread};
 use std::fmt::format;
-use std::thread::{sleep, ThreadId};
+use std::thread::{sleep, Thread, ThreadId};
 use std::time::Duration;
 use std::sync::{Arc, Mutex, MutexGuard};
 use tokio::task::JoinHandle;
@@ -9,6 +9,14 @@ use tokio::task::JoinHandle;
 #[derive(Debug)]
 struct User {
     name: String
+}
+
+fn get_thread_id()
+{
+    let current: Thread = thread::current();
+    let id: ThreadId = current.id();
+
+    println!("Current thread ID: {:?}", id);
 }
 
 fn get_available_parallelism() -> io::Result<()>
@@ -112,21 +120,46 @@ fn create_thead_join()
 fn create_parallel_thread()
 {
     let handle = thread::spawn(|| {
-        for i in 1..10 {
-            println!("hi number {i} from the spawned thread!");
+        for i in 1..5 {
+            println!("Parallel thread: Thead id: {:?}", thread::current().id());
             thread::sleep(Duration::from_millis(100));
         }
     });
 
     for i in 1..5 {
-        println!("hi number {i} from the main thread!");
+        println!("Main: Thead id: {:?}", thread::current().id());
         thread::sleep(Duration::from_millis(100));
     }
 
     handle.join().unwrap();
 }
 
+fn create_scoped_thread()
+{
+    let data = vec![1, 2, 3, 4, 5];
 
+    thread::scope(|s| {
+        // This thread can safely borrow `data`
+        s.spawn(|| {
+            println!("Thead id: {:?}: Data: {:?}", thread::current().id(), data);
+        });
+
+        s.spawn(|| {
+            println!("Thead id: {:?}: Data: {:?}", thread::current().id(), data);
+        });
+
+        s.spawn(|| {
+            println!("Thead id: {:?}: Data: {:?}", thread::current().id(), data);
+        });
+    });
+
+    println!("Main thread: Thead id: {:?}: Data: {:?}", thread::current().id(), data);
+
+    // Thead id: ThreadId(2): Data: [1, 2, 3, 4, 5]
+    // Thead id: ThreadId(3): Data: [1, 2, 3, 4, 5]
+    // Thead id: ThreadId(4): Data: [1, 2, 3, 4, 5]
+    // Main thread: Thead id: ThreadId(1): Data: [1, 2, 3, 4, 5]
+}
 
 fn store_threads_in_vector()
 {
@@ -158,16 +191,20 @@ fn create_thead_builder()
 
 pub fn test_all()
 {
+    // get_thread_id();
     // get_parallelism();
 
-    store_threads_in_vector();
+    // create_thread_detached();
+    // create_parallel_thread();
+    create_scoped_thread();
+    // create_thead_join();
+    // create_thead_builder();
+
+    // store_threads_in_vector();
 
     // pass_object_to_thread();
     // pass_object_to_multiple_threads();
     // pass_object_to_multiple_threads_modify();
 
-    // create_thread_detached();
-    // create_parallel_thread();
-    // create_thead_join();
-    // create_thead_builder();
+
 }

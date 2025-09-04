@@ -28,7 +28,6 @@ pub fn main()
     // mutex::test_all();
     // arc::test_all();
     locking::test_all();
-
     // sender_receiver::test_all();
     // mpsc_channel::test_all(); 
     // mpsc_channel_tokio::test_all();
