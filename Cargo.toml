@@ -4,6 +4,7 @@ members = [
     "Collections",
     "Databases",
     "DesignPatterns",
+    "Logging",
     "Multithreading",
     "Networking",
     "Protobuf",
