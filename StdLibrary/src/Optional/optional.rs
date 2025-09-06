@@ -112,6 +112,27 @@ fn pattern_matching()
     check_message(msg);
 }
 
+fn divide(a: i32, b: i32) -> Option<i32> {
+    if b == 0 {
+        None
+    } else {
+        Some(a / b)
+    }
+}
+
+fn check_if_value_exists()
+{
+    match divide(10, 2) {
+        Some(result) => println!("Result: {}", result),
+        None => println!("Cannot divide by zero"),
+    }
+
+    match divide(10, 0) {
+        Some(result) => println!("Result: {}", result),
+        None => println!("Cannot divide by zero"),
+    }
+}
+
 fn is_none()
 {
     let a: Option<u32> = Some(2);
@@ -243,12 +264,14 @@ fn filter()
 
 pub fn test_all()
 { 
-    create_optional();
+    // create_optional();
     // create_and_test();
     // take();
     // take_if();
     // question_mark_operator();
+
     // pattern_matching();
+    check_if_value_exists();
 
     // unwrap();
     // unwrap_or();

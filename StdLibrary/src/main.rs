@@ -49,6 +49,7 @@ non_snake_case
 #[path = "Documentation/main.rs"] pub mod documentation;
 #[path = "Pattern_Matching/main.rs"] pub mod pattern_matching;
 #[path = "Lifetime_Borrowing/main.rs"] pub mod lifetime_borrowing;
+#[path = "Result/result.rs"] pub mod result;
 
 
 fn main()
@@ -77,8 +78,9 @@ fn main()
     // folders_directories::test_all();
     // directories::test_all();
     // display::test_all();
-    enums::test_all();
+    // enums::test_all();
     // optional::test_all();
+    result::test_all();
     // lambdas::test_all();
     // dynamic_dispatch::test_all();
     // strings::test_all();
