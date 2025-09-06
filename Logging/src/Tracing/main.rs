@@ -162,7 +162,7 @@ mod write_to_file
 
     pub fn append_to_file()
     {
-        let file_appender: RollingFileAppender = tracing_appender::rolling::daily("logs", "app.log");
+        let file_appender: RollingFileAppender = tracing_appender::rolling::daily("Logging/data/logs", "app.log");
         let (non_blocking, _guard) = tracing_appender::non_blocking(file_appender);
 
         tracing_subscriber::fmt()
@@ -173,6 +173,41 @@ mod write_to_file
         info!("Service started");
         warn!("Something suspicious happened");
     }
+}
+
+mod diff_levels_for_diff_modules
+{
+    use tracing::info;
+    use tracing_subscriber::EnvFilter;
+
+    mod db
+    {
+        use tracing::debug;
+        pub fn connect() {
+            debug!("Connecting to DB...");
+        }
+    }
+
+    mod api
+    {
+        use tracing::info;
+        pub fn start() {
+            info!("API server started");
+        }
+    }
+
+    pub fn demo()
+    {
+        let filter: EnvFilter = EnvFilter::new("db=debug,api=info");
+        tracing_subscriber::fmt()
+            // .with_env_filter(filter)
+            .init();
+
+        db::connect();
+        api::start();
+        info!("Main app logic running");
+    }
+
 }
 
 pub fn test_all()
@@ -188,7 +223,9 @@ pub fn test_all()
 
     // instrument_tracing::instrumental_logs();
     // instrument_tracing::instrumental_logs_2();
-    instrument_tracing::instrumental_skip_params();
+    // instrument_tracing::instrumental_skip_params();
 
     // write_to_file::append_to_file();
+
+    diff_levels_for_diff_modules::demo()
 }
