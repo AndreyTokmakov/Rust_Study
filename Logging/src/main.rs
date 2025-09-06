@@ -6,36 +6,13 @@
     non_snake_case
 )]
 
-
-use log::{info, warn, error, debug, LevelFilter};
-use simple_logger::SimpleLogger;
-
-fn write_logs()
-{
-    // Уровень логирования можно указать явно:
-    SimpleLogger::new().init().unwrap();
-
-    info!("Это информационное сообщение.");
-    warn!("Это предупреждение.");
-    error!("Это ошибка.");
-    debug!("Это отладочное сообщение.");
-}
-
-
-fn write_logs_with_level()
-{
-    SimpleLogger::new().with_level(LevelFilter::Warn).init().unwrap();
-
-    info!("Это информационное сообщение.");
-    warn!("Это предупреждение.");
-    error!("Это ошибка.");
-    debug!("Это отладочное сообщение.");
-}
+#[path = "Logging/main.rs"] pub mod logging;
+#[path = "Tracing/main.rs"] pub mod tracing;
 
 
 
 fn main()
 {
-    // write_logs();
-    write_logs_with_level();
+    // logging::test_all();
+    tracing::test_all();
 }
