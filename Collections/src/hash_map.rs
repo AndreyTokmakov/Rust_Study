@@ -10,6 +10,18 @@ pub fn create()
     println!("{:?}", scores);
 }
 
+pub fn create_with_value()
+{
+    let table: HashMap<&str, f64> = HashMap::from([
+        ("Mercury", 0.4),
+        ("Venus", 0.7),
+        ("Earth", 1.0),
+        ("Mars", 1.5),
+    ]);
+
+    println!("{:?}", table);
+}
+
 pub fn find()
 {
     let mut scores = HashMap::new();
@@ -47,6 +59,21 @@ fn add_or_insert()
     scores.entry(String::from("Blue")).or_insert(30);
 
     println!("{:?}", scores);
+}
+
+fn insert_with_function()
+{
+    fn random_stat_buff() -> i32 {
+        println!("random stat buff");
+        2
+    }
+
+    let mut table: HashMap<String, i32> = HashMap::new();
+
+    table.entry(String::from("One")).or_insert(1);
+    table.entry(String::from("Two")).or_insert_with(random_stat_buff);
+
+    println!("{:?}", table);
 }
 
 fn update_values()
@@ -137,17 +164,48 @@ fn delete_key()
     }
 }
 
+#[derive(Hash, Eq, PartialEq, Debug)]
+struct Value {
+    name: String,
+    descr: String,
+}
+
+impl Value {
+    fn new(name: &str, descr: &str) -> Value {
+        Value { name: name.to_string(), descr: descr.to_string() }
+    }
+}
+
+fn custom_type_as_key()
+{
+    let table: HashMap<Value, i32> = HashMap::from([
+        (Value::new("Name1", "Desc1"), 1),
+        (Value::new("Name2", "Desc2"), 2),
+        (Value::new("Name3", "Desc3"), 3),
+    ]);
+
+    for (viking, health) in &table {
+        println!("{viking:?} has {health} hp");
+    }
+}
+
 pub fn test_all()
 {
     // create();
+    // create_with_value();
+
     // find();
     // iterate();
     // add_or_insert();
+    // insert_with_function();
+
     // update_values();
     // count_words_in_the_text();
 
     // check_contains_key();
-    check_contains_key_list();
+    // check_contains_key_list();
 
     // delete_key();
+
+    custom_type_as_key();
 }
