@@ -165,29 +165,32 @@ fn delete_key()
 }
 
 #[derive(Hash, Eq, PartialEq, Debug)]
-struct Value {
+struct CustomKey {
     name: String,
     descr: String,
 }
 
-impl Value {
-    fn new(name: &str, descr: &str) -> Value {
-        Value { name: name.to_string(), descr: descr.to_string() }
+impl CustomKey {
+    fn new(name: &str, descr: &str) -> CustomKey {
+        CustomKey { name: name.to_string(), descr: descr.to_string() }
     }
 }
 
 fn custom_type_as_key()
 {
-    let table: HashMap<Value, i32> = HashMap::from([
-        (Value::new("Name1", "Desc1"), 1),
-        (Value::new("Name2", "Desc2"), 2),
-        (Value::new("Name3", "Desc3"), 3),
+    let table: HashMap<CustomKey, i32> = HashMap::from([
+        (CustomKey::new("Name1", "Desc1"), 1),
+        (CustomKey::new("Name2", "Desc2"), 2),
+        (CustomKey::new("Name3", "Desc3"), 3),
     ]);
 
-    for (viking, health) in &table {
-        println!("{viking:?} has {health} hp");
+    for (key, value) in &table {
+        println!("{key:?} = {value}");
     }
 }
+
+
+// https://doc.rust-lang.org/std/collections/struct.HashMap.html
 
 pub fn test_all()
 {
