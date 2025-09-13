@@ -1,0 +1,16 @@
+[package]
+name = "my_app"
+version = "0.1.0"
+edition = "2021"
+authors = ["AndTokm <you@example.com>"]
+description = "A simple example Rust application"
+license = "MIT"
+repository = "https://github.com/yourname/my_app"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+reqwest = { version = "0.11", features = ["json"] }
+tokio = { version = "1", features = ["full"] }
+
+[dev-dependencies]
+tokio-test = "0.4"

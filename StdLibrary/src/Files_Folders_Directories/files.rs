@@ -12,6 +12,15 @@ fn open_file()
     println!("{:?}", greeting_file_result);
 }
 
+fn read_file_0()
+{
+    let file_path = env::current_dir().unwrap().join("resources/Cargo.toml");
+    let mut file: File = File::open(file_path).unwrap(); // if error → return Err
+    let mut contents: String = String::new();
+    file.read_to_string(&mut contents).expect("TODO: panic message");
+    println!("File contents:\n{}", contents);
+}
+
 fn read_file_1()
 {
     let file_path: PathBuf = env::current_dir().unwrap().join("resources/input.txt");
@@ -71,9 +80,10 @@ fn write_file()
 pub fn test_all()
 {
     // open_file();
+    // read_file_0();
     // read_file_1();
     // read_file__buffer_reader();
-    read_file__buffer_reader_2();
+    // read_file__buffer_reader_2();
 
     // write_file();
 }

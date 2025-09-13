@@ -79,13 +79,15 @@ fn main()
     // directories::test_all();
     // display::test_all();
     // enums::test_all();
-    // optional::test_all();
-    result::test_all();
     // lambdas::test_all();
     // dynamic_dispatch::test_all();
     // strings::test_all();
     // scoping_rules::test_all();
     // unsafe_features::test_all();
+
+    // optional::test_all();
+    result::test_all();
+
 
     // pattern_matching::test_all();
 

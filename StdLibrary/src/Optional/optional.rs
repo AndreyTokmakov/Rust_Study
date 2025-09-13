@@ -38,6 +38,32 @@ fn take() // Takes the value out of the option, leaving a None in its place.
     println!("{:?}", res);
 }
 
+fn map() // Преобразует значение, если оно есть.
+{
+    let x = Some(5);
+    let y: Option<i32> = x.map(|v| v * 2);
+    println!("{:?}", y); // Some(10)
+}
+
+fn half(x: i32) -> Option<i32> {
+    if x % 2 == 0 {
+        Some(x / 2)
+    } else {
+        None
+    }
+}
+
+
+fn and_then() // Преобразует значение, если оно есть.
+{
+    let result = Some(8).and_then(half).and_then(half);
+    println!("{:?}", result); // Some(2)
+
+    let fail = Some(7).and_then(half);
+    println!("{:?}", fail); // None
+}
+
+
 fn take_if()
 {
     println!("{}", "-".repeat(120).as_str());
@@ -91,6 +117,7 @@ fn question_mark_operator()
     }
 }
 
+//noinspection ALL
 fn pattern_matching()
 {
     let check_message = |opt_str: Option<&str>|
@@ -267,11 +294,13 @@ pub fn test_all()
     // create_optional();
     // create_and_test();
     // take();
+    // map();
+    and_then();
     // take_if();
     // question_mark_operator();
 
-    // pattern_matching();
-    check_if_value_exists();
+    // pattern_matching();  // if let
+    // check_if_value_exists();
 
     // unwrap();
     // unwrap_or();
