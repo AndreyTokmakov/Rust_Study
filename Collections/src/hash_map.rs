@@ -34,6 +34,23 @@ pub fn find()
 
     println!("{:?}", score);
 }
+pub fn get_non_existing_element()
+{
+    let table: HashMap<&str, i32> = HashMap::from([
+        ("One", 1), ("Two", 2), ("Three", 3)
+    ]);
+
+    println!("{:?}", table);
+
+    for key in vec!["Two", "Five"] {
+        if let Some(value) = table.get(key) {
+            println!("{} = {}",key,  value);
+        } else {
+            println!("Key '{}' not found", key);
+        }
+    }
+}
+
 
 fn iterate()
 {
@@ -202,6 +219,8 @@ pub fn test_all()
     // add_or_insert();
     // insert_with_function();
 
+    get_non_existing_element();
+
     // update_values();
     // count_words_in_the_text();
 
@@ -210,5 +229,5 @@ pub fn test_all()
 
     // delete_key();
 
-    custom_type_as_key();
+    // custom_type_as_key();
 }

@@ -71,6 +71,28 @@ fn access_element()
     println!("The second element of collection {:?} is {}", &numbers, second);
 }
 
+fn access_element_non_found()
+{
+    let values: Vec<i32> = Vec::from([10, 20, 30]);
+
+    let idx: usize = 1;
+    if let Some(x) = values.get(idx) {
+        println!("Values[{}] = {}", idx, x);
+    }
+    else {
+        println!("Element at {} doesn't exist", idx);
+    }
+
+
+    let idx: usize = 23;
+    if let Some(x) = values.get(idx) {
+        println!("Values[{}] = {}", idx, x);
+    }
+    else {
+        println!("Element at {} doesn't exist", idx);
+    }
+}
+
 fn size_and_capacity()
 {
     let mut numbers: Vec<i32> = Vec::with_capacity(10);
@@ -159,8 +181,10 @@ fn experiments()
 
 pub fn test_all()
 {
-    create_test();
+    // create_test();
+
     // access_element();
+    access_element_non_found();
 
     // size_and_capacity();
 
