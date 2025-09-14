@@ -67,7 +67,7 @@ fn main()
     // conditions::test_all();
     // cryptography::test_all();
     // functions::test_all();
-    // memory::test_all();
+    memory::test_all();
     // read_from_input::test_all();
     // random::test_all();
     // ownership::test_all();
@@ -86,7 +86,7 @@ fn main()
     // unsafe_features::test_all();
 
     // optional::test_all();
-    result::test_all();
+    // result::test_all();
 
 
     // pattern_matching::test_all();
