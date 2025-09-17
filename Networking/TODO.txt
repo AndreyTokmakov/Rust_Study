@@ -1,0 +1,3 @@
+Implementing Servers and Clients in Rust: Building Robust Network Applications
+
+https://softwarepatternslexicon.com/patterns-rust/12/3/
