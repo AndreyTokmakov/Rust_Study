@@ -13,15 +13,19 @@ mod dns;
 mod ProxyServer;
 mod web_sockets;
 mod listen_port;
-
+mod tokio_asynch_tcp_client;
+mod tokio_asynch_tcp_server;
 
 pub fn main()
 {
-    client::test_all();
+    // client::test_all();
     // dns::test_all();
     // listen_port::test_all();
     // tcp_servers::test_all();
     // udp_servers::test_all();
     // web_sockets::test_all();
     // ProxyServer::test_all();
+
+    tokio_asynch_tcp_client::test_all();
+    // tokio_asynch_tcp_server::test_all();
 }
