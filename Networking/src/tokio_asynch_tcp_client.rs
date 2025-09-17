@@ -18,6 +18,8 @@ async fn send_request() -> io::Result<()> {
     Ok(())
 }
 
+
+// https://softwarepatternslexicon.com/patterns-rust/12/1/
 pub fn test_all()
 {
     let _ = send_request();

@@ -34,6 +34,8 @@ fn run_server_echo(host: &str, port: u16) -> std::io::Result<()>
 }
 
 // https://jan.newmarch.name/NetworkProgramming/UDP/wrapper.html?rust
+
+// https://softwarepatternslexicon.com/patterns-rust/12/2/
 pub fn test_all()
 {
     run_server("0.0.0.0", 52525).expect("TODO: panic message");
