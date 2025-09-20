@@ -21,7 +21,7 @@ fn test_1()
 
 fn send_request()
 {
-    let response = reqwest::blocking::get("https://www.rust-lang.org");
+    let response= reqwest::blocking::get("https://www.rust-lang.org");
     println!("{:#?}", response);
 }
 

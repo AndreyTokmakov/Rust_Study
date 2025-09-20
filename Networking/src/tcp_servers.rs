@@ -13,10 +13,9 @@ mod example_1
         println!("New connection from {}", stream.peer_addr().unwrap());
     }
     
-    pub fn start_server_1(host: &str, port: u16) -> std::io::Result<()>
+    pub fn start(host: &str, port: u16) -> std::io::Result<()>
     {
         let listener: TcpListener = TcpListener::bind(format!("{}:{}", host, port))?;
-        // accept connections and process them serially
         for stream in listener.incoming() {
             handle_client_1(stream?);
         }
@@ -25,7 +24,7 @@ mod example_1
 }
 
 
-mod example_2
+mod echo_server
 {
     use std::io::{BufRead, BufReader, Read, Write};
     use std::net::{Shutdown, TcpListener, TcpStream};
@@ -50,7 +49,7 @@ mod example_2
         }
     }
     
-    pub fn start_echo_server_simple(host: &str, port: u16) -> std::io::Result<()>
+    pub fn start(host: &str, port: u16) -> std::io::Result<()>
     {
         let listener: TcpListener = TcpListener::bind(format!("{}:{}", host, port))?;
         for stream in listener.incoming() {
@@ -63,7 +62,7 @@ mod example_2
 }
 
 
-mod example_3
+mod multithreaded_echo_server
 {
     use std::io::{Read, Write};
     use std::net::{Shutdown, TcpListener, TcpStream};
@@ -86,7 +85,7 @@ mod example_3
         } {}
     }
 
-    pub fn start_echo_server_multithreaded(host: &str, port: u16)
+    pub fn start(host: &str, port: u16)
     {
         let listener: TcpListener = TcpListener::bind(format!("{}:{}", host, port)).expect("Could not bind");
         for stream in listener.incoming()
@@ -105,16 +104,124 @@ mod example_3
     }
 }
 
+mod non_blocking_echo_server
+{
+    use std::io::{Read, Write};
+    use std::net::{TcpListener, TcpStream};
+    use std::time::Duration;
+    use std::thread;
+
+    pub fn start(host: &str, port: u16) -> std::io::Result<()>
+    {
+        let listener: TcpListener = TcpListener::bind(format!("{}:{}", host, port)).expect("Could not bind");
+        listener.set_nonblocking(true)?;
+
+        let mut clients: Vec<TcpStream> = Vec::new();
+        loop {
+            match listener.accept() {
+                Ok((stream, addr)) => {
+                    println!("New client: {}", addr);
+                    stream.set_nonblocking(true)?;
+                    clients.push(stream);
+                }
+                Err(ref e) if e.kind() == std::io::ErrorKind::WouldBlock => {
+                    // no new client right now
+                }
+                Err(e) => return Err(e),
+            }
+
+            clients.retain_mut(|stream| {
+                let mut buf = [0; 512];
+                match stream.read(&mut buf) {
+                    Ok(0) => false, // client disconnected
+                    Ok(n) => {
+                        let _ = stream.write_all(&buf[..n]);
+                        true
+                    }
+                    Err(ref e) if e.kind() == std::io::ErrorKind::WouldBlock => true,
+                    Err(_) => false,
+                }
+            });
+
+            thread::sleep(Duration::from_millis(100));
+        }
+    }
+}
+
+mod non_blocking_mio_server
+{
+    use std::collections::HashMap;
+    use mio::net::{TcpListener, TcpStream};
+    use mio::{Events, Interest, Poll, Token};
+    use std::io::{Read, Write};
+    use std::net::SocketAddr;
+    use std::time::Duration;
+
+    const SERVER: Token = Token(0);
+
+    pub fn start(host: &str, port: u16) -> std::io::Result<()>
+    {
+        let mut poll: Poll = Poll::new()?;
+        let mut events: Events = Events::with_capacity(128);
+        let addr: SocketAddr = format!("{host}:{port}").parse().unwrap();
+        let mut server = TcpListener::bind(addr)?;
+
+        poll.registry().register(&mut server, SERVER, Interest::READABLE)?;
+        let mut unique_token: usize = 1;
+        let mut connTable: HashMap<Token, TcpStream> = std::collections::HashMap::new();
+
+        loop {
+            poll.poll(&mut events, Some(Duration::from_millis(100)))?;
+
+            for event in &events {
+                match event.token() {
+                    SERVER => {
+                        let (mut stream, addr) = server.accept()?;
+                        println!("New client: {}", addr);
+                        let token = Token(unique_token);
+                        unique_token += 1;
+
+                        poll.registry()
+                            .register(&mut stream, token, Interest::READABLE | Interest::WRITABLE)?;
+
+                        connTable.insert(token, stream);
+                    }
+                    token => {
+                        if let Some(stream) = connTable.get_mut(&token) {
+                            let mut buf = [0; 512];
+                            match stream.read(&mut buf) {
+                                Ok(0) => {
+                                    println!("Client disconnected");
+                                    connTable.remove(&token);
+                                }
+                                Ok(n) => {
+                                    let msg = String::from_utf8_lossy(&buf[..n]);
+                                    println!("Received: {}", msg);
+                                    let _ = stream.write_all(b"Echo from mio\n");
+                                }
+                                Err(ref e) if e.kind() == std::io::ErrorKind::WouldBlock => {}
+                                Err(_) => {
+                                    connTable.remove(&token);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 // https://doc.rust-lang.org/std/net/struct.TcpListener.html
 pub fn test_all()
 {
     let host: String = env::args().nth(1).unwrap_or_else(|| "0.0.0.0".to_string());
     let port: u16 = env::args().nth(2).unwrap_or_else(|| "52525".to_string()).parse().unwrap_or(52525);
-
     println!("Running on: {}:{}", host, port);
 
-    // example_1::start_server_1(&host, port).expect("TODO: panic message");
-    example_2:: start_echo_server_simple(&host, port).expect("TODO: panic message");
-    // example_3:: start_echo_server_multithreaded(&host, port);
+    // example_1::start(&host, port).expect("TODO: panic message");
+    // echo_server:: start(&host, port).expect("TODO: panic message");
+    // multithreaded_echo_server::start(&host, port);
+    non_blocking_echo_server::start(&host, port).expect("TODO: panic message");
 }
