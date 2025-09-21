@@ -1,4 +1,4 @@
-
+use std::env;
 use std::path::PathBuf;
 use clap::{Arg, Command, builder::PathBufValueParser, ArgMatches};
 
@@ -36,8 +36,17 @@ fn parse_arguments()
     }
 }
 
+
+fn parse_host_and_port()
+{
+    let host: String = env::args().nth(1).unwrap_or_else(|| "0.0.0.0".to_string());
+    let port: u16 = env::args().nth(2).and_then(|s| s.parse().ok()).unwrap_or(52525);
+    println!("Running on: {}:{}", host, port);
+}
+
 // INFO: https://rust-lang-nursery.github.io/rust-cookbook/cli/arguments.html
 pub fn test_all()
 {
-    parse_arguments();
+    // parse_arguments();
+    parse_host_and_port();
 }

@@ -63,11 +63,11 @@ fn main()
     // bytes_bits::test_all();
     // environment::test_all();
     // compare::test_all();
-    // command_line::test_all();
+    command_line::test_all();
     // conditions::test_all();
     // cryptography::test_all();
     // functions::test_all();
-    memory::test_all();
+    // memory::test_all();
     // read_from_input::test_all();
     // random::test_all();
     // ownership::test_all();

@@ -212,16 +212,100 @@ mod non_blocking_mio_server
     }
 }
 
+mod mio_heartbeat_check_non_blocking
+{
+    use mio::net::{TcpListener, TcpStream};
+    use mio::{Events, Interest, Poll, Token};
+    use std::collections::HashMap;
+    use std::io::{Read, Write};
+    use std::net::SocketAddr;
+    use std::time::{Duration, Instant};
 
-// https://doc.rust-lang.org/std/net/struct.TcpListener.html
+    const SERVER: Token = Token(0);
+
+    struct Client {
+        stream: TcpStream,
+        last_seen: Instant,
+    }
+
+    pub fn start(host: &str, port: u16) -> std::io::Result<()>
+    {
+        let mut poll: Poll = Poll::new()?;
+        let mut events: Events = Events::with_capacity(128);
+        let addr: SocketAddr = format!("{host}:{port}").parse().unwrap();
+        let mut server = TcpListener::bind(addr)?;
+
+        poll.registry().register(&mut server, SERVER, Interest::READABLE)?;
+
+        let mut unique_token = 1;
+        let mut clients: HashMap<Token, Client> = HashMap::new();
+
+        loop {
+            poll.poll(&mut events, Some(Duration::from_secs(1)))?;
+
+            for event in &events {
+                match event.token() {
+                    SERVER => {
+                        let (mut stream, addr) = server.accept()?;
+                        println!("New client: {}", addr);
+
+                        let token = Token(unique_token);
+                        unique_token += 1;
+
+                        poll.registry().register(&mut stream, token, Interest::READABLE)?;
+
+                        clients.insert(token, Client {
+                            stream, last_seen: Instant::now() }
+                        );
+                    }
+                    token => {
+                        if let Some(client) = clients.get_mut(&token) {
+                            let mut buf = [0; 512];
+                            match client.stream.read(&mut buf) {
+                                Ok(0) => {
+                                    println!("Client disconnected");
+                                    clients.remove(&token);
+                                }
+                                Ok(n) => {
+                                    client.last_seen = Instant::now();
+                                    println!("Received: {}", String::from_utf8_lossy(&buf[..n]));
+                                }
+                                Err(ref e) if e.kind() == std::io::ErrorKind::WouldBlock => {}
+                                Err(_) => {
+                                    clients.remove(&token);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Heartbeat check
+            let now = Instant::now();
+            clients.retain(|token, client| {
+                if now.duration_since(client.last_seen) > Duration::from_secs(30) {
+                    println!("Client {:?} timed out", token);
+                    false
+                } else {
+                    true
+                }
+            });
+        }
+    }
+}
+
+
+// https://docmio.rust-lang.org/std/net/struct.TcpListener.html
 pub fn test_all()
 {
     let host: String = env::args().nth(1).unwrap_or_else(|| "0.0.0.0".to_string());
-    let port: u16 = env::args().nth(2).unwrap_or_else(|| "52525".to_string()).parse().unwrap_or(52525);
+    let port: u16 = env::args().nth(2).and_then(|s| s.parse().ok()).unwrap_or(52525);
     println!("Running on: {}:{}", host, port);
 
     // example_1::start(&host, port).expect("TODO: panic message");
     // echo_server:: start(&host, port).expect("TODO: panic message");
     // multithreaded_echo_server::start(&host, port);
-    non_blocking_echo_server::start(&host, port).expect("TODO: panic message");
+
+    // non_blocking_echo_server::start(&host, port).expect("TODO: panic message");
+    // mio_heartbeat_check_non_blocking::start(&host, port).expect("TODO: panic message");
 }
