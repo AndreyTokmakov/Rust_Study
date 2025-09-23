@@ -4,6 +4,8 @@ mod tuple_structs;
 mod Long;
 mod static_variables_and_methods;
 mod inline_methods;
+mod constructors;
+
 
 struct User {
     active: bool,
@@ -150,6 +152,7 @@ fn create_one_instance_from_another() {
 pub fn test_all()
 {
     // class_methods::tests();
+    constructors::test_all();
     // inline_methods::test_all();
     // static_variables_and_methods::test_all();
     

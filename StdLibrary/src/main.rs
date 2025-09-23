@@ -24,7 +24,7 @@ non_snake_case
 #[path = "Lambdas/lambdas.rs"] pub mod lambdas;
 #[path = "Types/types_tests.rs"] pub mod types;
 #[path = "Memory/memory.rs"] pub mod memory;
-#[path = "OOP_Structures/structs.rs"] pub mod structs;
+#[path = "OOP_Structures/main.rs"] pub mod structs;
 #[path = "OOP_Traits/traits.rs"] pub mod traits;
 #[path = "Enums/enums.rs"] pub mod enums;
 #[path = "Optional/optional.rs"] pub mod optional;
@@ -81,13 +81,12 @@ fn main()
     // enums::test_all();
     // lambdas::test_all();
     // dynamic_dispatch::test_all();
-    strings::test_all();
+    // strings::test_all();
     // scoping_rules::test_all();
     // unsafe_features::test_all();
 
     // optional::test_all();
     // result::test_all();
-
 
     // pattern_matching::test_all();
 
@@ -112,7 +111,7 @@ fn main()
     // NOTE: Generics - Templates
     // generics::test_all();
 
-    // structs::test_all();
+    structs::test_all();
     // traits::test_all();
     
 }
