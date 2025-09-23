@@ -5,7 +5,8 @@ pub fn test_all()
     // append_to_string();
     // append_with_string();
     // concatenate_1();
-    concatenate_2();
+    // concatenate_2();
+    concatenate_3();
 
 
     // format_string();
@@ -64,6 +65,17 @@ fn concatenate_2()
     let name: &str  = "Alice";
     let message: String  = format!("Hello, {}!", name);
     println!("{}", message);
+}
+
+fn concat(a: &str, b: &str) -> String
+{
+    format!("{}{}", a, b)
+}
+
+fn concatenate_3()
+{
+    let result: String  = concat("Hello ", "World");
+    println!("{}", result);
 }
 
 fn format_string()

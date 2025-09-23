@@ -63,7 +63,7 @@ fn main()
     // bytes_bits::test_all();
     // environment::test_all();
     // compare::test_all();
-    command_line::test_all();
+    // command_line::test_all();
     // conditions::test_all();
     // cryptography::test_all();
     // functions::test_all();
@@ -81,7 +81,7 @@ fn main()
     // enums::test_all();
     // lambdas::test_all();
     // dynamic_dispatch::test_all();
-    // strings::test_all();
+    strings::test_all();
     // scoping_rules::test_all();
     // unsafe_features::test_all();
 
