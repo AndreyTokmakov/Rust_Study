@@ -52,6 +52,8 @@ impl Schema
             .collect()
     }
 }
+
+// https://rust-unofficial.github.io/patterns/patterns/behavioural/command.html
 pub fn test_all()
 {
     let mut schema: Schema = Schema::new();
