@@ -6,11 +6,15 @@
     non_snake_case
 )]
 
+#[path = "command/command_1.rs"] pub mod command_1;
+
 mod State;
 mod TaskPool;
 
 fn main()
 {
     // State::test_all();
-    TaskPool::test_all();
+    // TaskPool::test_all();
+
+    command_1::test_all();
 }
