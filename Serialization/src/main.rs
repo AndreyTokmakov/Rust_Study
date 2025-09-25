@@ -10,24 +10,27 @@ use bincode;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
-struct Point {
-    x: i32,
-    y: i32,
+struct Person
+{
+    name: String,
+    age: u8,
+    email: String,
 }
+
 
 fn serialize_struct()
 {
-    let p = Point { x: 10, y: -5 };
+    let person = Person {
+        name: String::from("Murat"),
+        age: 25,
+        email: String::from("murat@example.com"),
+    };
 
-    // Serialize to Vec<u8>
-    let encoded: Vec<u8> = bincode::serialize(&p).unwrap();
+    let serialized: Vec<u8> = bincode::serialize(&person).unwrap();
+    println!("Serialized: {:?}", serialized);
 
-    // Deserialize back
-    let decoded: Point = bincode::deserialize(&encoded).unwrap();
-
-    println!("Original: {:?}", p);
-    println!("Encoded : {:?}", encoded);
-    println!("Decoded : {:?}", decoded);
+    let deserialized: Person = bincode::deserialize(&serialized).unwrap();
+    println!("Deserialized: {:?}", deserialized);
 }
 
 fn main()
