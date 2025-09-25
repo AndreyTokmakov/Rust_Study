@@ -46,5 +46,5 @@ pub fn test_all()
     }
     */
 
-    signing::sign_and_verify();
+    // signing::sign_and_verify();
 }

@@ -1,6 +1,16 @@
+#![allow(
+    dead_code,
+    unused_imports,
+    unused_parens,
+    unused_variables,
+    non_snake_case
+)]
+
 mod openssl;
+mod base64;
 
 fn main()
 {
-    openssl::test_all();
+    // openssl::test_all();
+    base64::test_all();
 }
