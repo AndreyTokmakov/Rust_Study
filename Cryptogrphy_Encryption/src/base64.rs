@@ -33,21 +33,40 @@ mod base64_tests
     {
         let text: String = String::from("Hello, Rust!");
 
-        // Encode to base64
-        let encoded = base64::encode(text);
+        let encoded: String = base64::encode(text);
         println!("Encoded: {}", encoded);
 
-        // Decode back
-        let decoded_bytes = base64::decode(&encoded).unwrap();
-        let decoded = String::from_utf8(decoded_bytes).unwrap();
+        let decoded_bytes: Vec<u8> = base64::decode(&encoded).unwrap();
+        let decoded: String = String::from_utf8(decoded_bytes).unwrap();
         println!("Decoded: {}", decoded);
     }
+
+    pub fn encode_decode_old_style_2()
+    {
+        let encoded: String = String::from("SGVsbG8sIFJ1c3CE");
+        let decoded: Vec<u8> = base64::decode(encoded).expect("Failed to decode");
+        let output: String = String::from_utf8(decoded).expect("Invalid UTF-8");
+        println!("Decoded: {}", output);
+    }
+
+    pub fn encoding_bytes()
+    {
+        let data: &[u8] = b"Binary data: \x01\x02\x03\x04";
+        let encoded = base64::encode(data);
+        println!("Encoded Binary Data: {}", encoded);
+        // Encoded Binary Data: QmluYXJ5IGRhdGE6IAECAwQ=
+    }
+    
 }
+
+
 
 pub fn test_all()
 {
     // openssl_base64::encode();
     // openssl_base64::decode();
 
-    base64_tests::encode_decode_old_style();
+    // base64_tests::encode_decode_old_style();
+    // base64_tests::encode_decode_old_style_2();
+    base64_tests::encoding_bytes();
 }

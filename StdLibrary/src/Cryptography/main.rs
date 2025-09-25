@@ -7,7 +7,6 @@ use std::path::Path;
 use threadpool::ThreadPool;
 use std::sync::mpsc::channel;
 use ring::digest::{Context, Digest, SHA256};
-use serde::__private::de::Content;
 
 fn compute_digest<P: AsRef<Path>>(filepath: P) -> Result<(Digest, P), Error> {
     let mut buf_reader: BufReader<File> = BufReader::new(File::open(&filepath)?);

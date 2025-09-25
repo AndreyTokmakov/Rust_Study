@@ -9,6 +9,7 @@ members = [
     "Multithreading",
     "Networking",
     "Protobuf",
+    "Serialization",
     "StdLibrary",
     "Web_Framework"
 ]
