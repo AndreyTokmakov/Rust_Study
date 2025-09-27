@@ -7,6 +7,7 @@
 )]
 
 mod serialise_deserialize_objects;
+mod read_write_from_file;
 
 use serde::{Deserialize, Serialize};
 use serde_json::json;
@@ -53,6 +54,6 @@ pub fn main()
     // parse_json_string();
     // parse_json_string_2();
 
-    serialise_deserialize_objects::test_all();
-
+    // serialise_deserialize_objects::test_all();
+    read_write_from_file::test_all();
 }
