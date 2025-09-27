@@ -13,7 +13,7 @@ mod sha;
 
 fn main()
 {
-    openssl::test_all();
-    // base64::test_all();
+    // openssl::test_all();
+     base64::test_all();
     // sha::test_all();
 }

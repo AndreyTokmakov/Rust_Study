@@ -1,3 +1,10 @@
+#![allow(
+    dead_code,
+    unused_imports,
+    unused_parens,
+    unused_variables,
+    non_snake_case
+)]
 
 use serde::{Deserialize, Serialize};
 use serde_json::json;
@@ -106,27 +113,28 @@ fn parse_json_string_2()
 fn parse_json_rename_fields()-> Result<()>
 {
     let json_str = r#"{"n": "John Doe", "v": 43, "d": "Something"}"#;
-    
+
     let model: Model = serde_json::from_str(json_str)?;
     println!("{:?}", model);
 
     let json_str_2: String = serde_json::to_string(&model)?;
     println!("{:?}", json_str_2);
-    
+
     Ok(())
-    
+
     // Model { name: "John Doe", value: 43, description: "Something" }
     // "{\"n\":\"John Doe\",\"v\":43,\"d\":\"Something\"}"
 }
 
 
-pub fn test_all()
+
+pub fn main()
 {
     // parse_json_string();
     // parse_json_string_2();
 
     parse_json_rename_fields().expect("TODO: panic message");
-    
+
     // person_from_string().expect("Can't print Person");
     // print_an_address().expect("Can't print Address");
 }

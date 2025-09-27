@@ -39,7 +39,6 @@ non_snake_case
 #[path = "Tuples/tuples.rs"] pub mod tuples;
 #[path = "Console_IO/console_io.rs"] pub mod console_io;
 #[path = "Pointers_and_References/pointers_and_reference.rs"] pub mod pointers_and_reference;
-#[path = "Json/Json.rs"] pub mod Json;
 #[path = "ScopingRules_LifeTIme_RAII/scoping_rules.rs"] pub mod scoping_rules;
 #[path = "Operators_Overload/main.rs"] pub mod operators_overload;
 #[path = "Unsafe_Features/unsafe_features.rs"] pub mod unsafe_features;
@@ -89,9 +88,6 @@ fn main()
     // result::test_all();
 
     // pattern_matching::test_all();
-
-    // NOTE: Json
-    // Json::test_all();
     
     // NOTE: Documentation
     // documentation::test_all();

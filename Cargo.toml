@@ -5,6 +5,7 @@ members = [
     "Cryptogrphy_Encryption",
     "Databases",
     "DesignPatterns",
+    "Json",
     "Logging",
     "Multithreading",
     "Networking",

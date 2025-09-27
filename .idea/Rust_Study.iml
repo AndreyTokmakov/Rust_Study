@@ -13,6 +13,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Logging/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Cryptogrphy_Encryption/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Serialization/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Json/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
