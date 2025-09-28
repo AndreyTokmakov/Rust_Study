@@ -13,7 +13,7 @@ mod nested_structures;
 
 use serde::{Deserialize, Serialize};
 use serde_json::json;
-use serde_json::{Result, Value};
+use serde_json::{Result, Value, Map};
 
 fn parse_json_string()
 {
@@ -87,6 +87,43 @@ fn modify_json_in_place()
     println!("{}", serde_json::to_string_pretty(&v).unwrap());
 }
 
+fn json_to_hashMap()
+{
+    let data: Value =  json!({ "a": 1, "b": 2, "c": 3 });
+
+    // JSON → Map
+    let obj: &Map<String, Value> = data.as_object().unwrap();
+
+    for (k, v) in obj {
+        println!("{} = {}", k, v);
+    }
+
+    // Map → JSON
+    let mut map: Map<String, Value> = Map::new();
+    map.insert("x".to_string(), Value::from(100));
+    map.insert("y".to_string(), Value::from(200));
+
+    let new_json = Value::Object(map);
+    println!("New JSON: {}", new_json);
+}
+
+fn parse_int_bool_str()
+{
+    let data: &str = r#"{
+        "id": 123456789,
+        "name": "Bob",
+        "active": true
+    }"#;
+
+    let v: Value = serde_json::from_str(data).unwrap();
+
+    let id: i64 = v["id"].as_i64().unwrap();
+    let name: &str = v["name"].as_str().unwrap();
+    let active: bool = v["active"].as_bool().unwrap();
+
+    println!("id = {}, name = {}, active = {}", id, name, active);
+}
+
 
 pub fn main()
 {
@@ -94,9 +131,11 @@ pub fn main()
     // parse_json_string_2();
     // parse_array();
     // modify_json_in_place();
+    // json_to_hashMap();
+    // parse_int_bool_str();
 
     // serialise_deserialize_objects::test_all();
-    // read_write_from_file::test_all();
+    read_write_from_file::test_all();
     // handle_errors::test_all();
-    nested_structures::test_all();
+    // nested_structures::test_all();
 }
