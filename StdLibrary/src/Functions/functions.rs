@@ -1,4 +1,5 @@
 use std::ops::Add;
+mod function_ptr;
 
 fn another_function(x: i32) {
     println!("The value of x is: {}", x);
@@ -71,12 +72,16 @@ fn update_value_in_function()
 }
 
 
+
+
 pub fn test_all()
 {
+    function_ptr::test_all();
+
     // another_function(5);
     // print_labeled_measurement(5, 'h');
     // func_with_macro();
     // init_variable_with_func();
-    get_tuple();
+    // get_tuple();
     // update_value_in_function();
 }

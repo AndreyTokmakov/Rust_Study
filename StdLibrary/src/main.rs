@@ -65,7 +65,7 @@ fn main()
     // command_line::test_all();
     // conditions::test_all();
     // cryptography::test_all();
-    // functions::test_all();
+    functions::test_all();
     // memory::test_all();
     // read_from_input::test_all();
     // random::test_all();
@@ -107,7 +107,7 @@ fn main()
     // NOTE: Generics - Templates
     // generics::test_all();
 
-    structs::test_all();
+    // structs::test_all();
     // traits::test_all();
     
 }
