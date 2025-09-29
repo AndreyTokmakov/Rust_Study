@@ -37,6 +37,7 @@ fn remove_field() -> &'static str {
     "remove field"
 }
 
+
 pub fn test_all()
 {
     let mut schema: Schema = Schema::new();
