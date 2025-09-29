@@ -7,7 +7,7 @@ pub trait Migration
 
 pub struct CreateTable;
 pub struct AddField;
-pub(crate) struct Schema {
+struct Schema {
     commands: Vec<Box<dyn Migration>>,
 }
 
