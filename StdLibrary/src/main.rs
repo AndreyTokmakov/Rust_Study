@@ -49,6 +49,7 @@ non_snake_case
 #[path = "Pattern_Matching/main.rs"] pub mod pattern_matching;
 #[path = "Lifetime_Borrowing/main.rs"] pub mod lifetime_borrowing;
 #[path = "Result/result.rs"] pub mod result;
+#[path = "Printing/print.rs"] pub mod print;
 
 
 fn main()
@@ -56,6 +57,8 @@ fn main()
     // tests_and_experiments::test_all();
     // loops::test_all();
     // lifetime_borrowing::test_all();
+
+    print::test_all();
     
     // attributes::test_all();
     // autotests::test_all();
@@ -65,7 +68,7 @@ fn main()
     // command_line::test_all();
     // conditions::test_all();
     // cryptography::test_all();
-    functions::test_all();
+    // functions::test_all();
     // memory::test_all();
     // read_from_input::test_all();
     // random::test_all();
