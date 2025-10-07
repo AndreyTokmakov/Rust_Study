@@ -51,12 +51,13 @@ struct User
 
 fn lock_multiple_threads()
 {
-    let user_original = Arc::new(Mutex::new(
-        User { name: String::from("sam"), email: "andtokm@yandex.ru".to_string() }));
+    let user_original: Arc<Mutex<User>> = Arc::new(Mutex::new(
+        User { name: String::from("sam"), email: "andtokm@yandex.ru".to_string() })
+    );
 
     let user: Arc<Mutex<User>> = user_original.clone();
     let t1 = thread::spawn(move || {
-        let mut locked_user = user.lock().unwrap();
+        let mut locked_user: MutexGuard<User> = user.lock().unwrap();
         locked_user.name = String::from("sam");
         // После того как «locked_user» выйдет из области видимости, мьютекс снова разблокируется.
         // Чтобы разблокировать его явно, применяется «drop(locked_user)».
