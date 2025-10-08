@@ -121,8 +121,55 @@ mod pub_sub
     // Sent: topic1 Message 9
 }
 
+mod push_pull
+{
+    use std::thread;
+    use std::thread::sleep;
+    use zmq::{Context, Socket};
+    use std::time::Duration;
+
+    static PORT: i32 = 5557;
+
+    // PUSH
+    fn producer()
+    {
+        let context: Context = zmq::Context::new();
+        let producer: Socket = context.socket(zmq::PUSH).unwrap();
+        producer.bind(format!("tcp://*:{PORT}").as_str()).unwrap();
+
+        println!("Producer ready on tcp://*:{}", PORT);
+
+        for i in 0..10 {
+            let task: String = format!("Task #{}", i);
+            println!("Sending {}", task);
+            producer.send(&task, 0).unwrap();
+            thread::sleep(Duration::from_millis(300));
+        }
+    }
+
+    // PULL
+    fn worker()
+    {
+        let context: Context = zmq::Context::new();
+        let worker: Socket = context.socket(zmq::PULL).unwrap();
+        worker.connect(format!("tcp://localhost:{PORT}").as_str()).unwrap();
+
+        loop {
+            let msg: String = worker.recv_string(0).unwrap().unwrap();
+            println!("Worker received: {}", msg);
+        }
+    }
+
+    pub fn run()
+    {
+        thread::spawn(|| { producer(); }).join().unwrap();
+        thread::spawn(|| { worker(); }).join().unwrap();
+    }
+}
+
 pub fn test_all()
 {
     // rep_req::run();
-    pub_sub::run();
+    // pub_sub::run();
+    push_pull::run();
 }
