@@ -167,9 +167,37 @@ mod push_pull
     }
 }
 
+mod multipart
+{
+    use std::thread;
+    use zmq::{Context, Socket};
+
+    pub fn run()
+    {
+        let context: Context = zmq::Context::new();
+        let sender: Socket = context.socket(zmq::PUSH).unwrap();
+        let receiver: Socket = context.socket(zmq::PULL).unwrap();
+
+        sender.bind("inproc://test").unwrap();
+        receiver.connect("inproc://test").unwrap();
+
+        // Send multipart message
+        sender.send("Header", zmq::SNDMORE).unwrap();
+        sender.send("Body", 0).unwrap();
+
+        // Receive multipart
+        let header: String = receiver.recv_string(0).unwrap().unwrap();
+        let body: String = receiver.recv_string(0).unwrap().unwrap();
+        println!("Multipart received: [{}] [{}]", header, body);
+    }
+
+    // Multipart received: [Header] [Body]
+}
+
 pub fn test_all()
 {
     // rep_req::run();
     // pub_sub::run();
-    push_pull::run();
+    // push_pull::run();
+    multipart::run();
 }
