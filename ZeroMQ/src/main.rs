@@ -11,6 +11,6 @@ mod experiments;
 
 fn main()
 {
-    // clients::test_all();
-    experiments::test_all();
+    clients::test_all();
+    // experiments::test_all();
 }
