@@ -58,7 +58,7 @@ fn main()
     // loops::test_all();
     // lifetime_borrowing::test_all();
 
-    print::test_all();
+    // print::test_all();
     
     // attributes::test_all();
     // autotests::test_all();
@@ -82,7 +82,7 @@ fn main()
     // display::test_all();
     // enums::test_all();
     // lambdas::test_all();
-    // dynamic_dispatch::test_all();
+    dynamic_dispatch::test_all();
     // strings::test_all();
     // scoping_rules::test_all();
     // unsafe_features::test_all();
