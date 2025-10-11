@@ -104,8 +104,14 @@ mod pub_sub
 
     pub fn run()
     {
-        thread::spawn(|| { publisher(); }).join().unwrap();
-        thread::spawn(|| { subscriber(); }).join().unwrap();
+        let tasks = vec![
+            thread::spawn(|| { publisher(); }),
+            thread::spawn(|| { subscriber(); })
+        ];
+
+        for task in tasks {
+            task.join().unwrap();
+        }
     }
 
     // Publisher on tcp://*:5556
@@ -162,8 +168,15 @@ mod push_pull
 
     pub fn run()
     {
-        thread::spawn(|| { producer(); }).join().unwrap();
-        thread::spawn(|| { worker(); }).join().unwrap();
+        let tasks = vec![
+            thread::spawn(|| { producer(); }),
+            thread::spawn(|| { worker(); })
+        ];
+
+        // Wait for all threads to finish
+        for task in tasks {
+            task.join().unwrap();
+        }
     }
 }
 
@@ -194,10 +207,206 @@ mod multipart
     // Multipart received: [Header] [Body]
 }
 
+mod router_dealer_1
+{
+    use zmq::{Context, Socket};
+    use std::{thread, time::Duration};
+    use chrono::{DateTime, Local};
+    use chrono::format::{DelayedFormat, StrftimeItems};
+
+    fn log(level: &str, msg: &str)
+    {
+        let now: DateTime<Local> = Local::now();
+        let timestamp: DelayedFormat <StrftimeItems> = now.format("%Y-%m-%d %H:%M:%S.%3f");
+        println!("[{:<5}] [{}] {}", level, timestamp, msg);
+    }
+
+    macro_rules! info {
+        ($($arg:tt)*) => {
+                log("INFO", &format!($($arg)*));
+            };
+    }
+
+    fn broker()
+    {
+        let ctx: Context = zmq::Context::new();
+        let frontend: Socket = ctx.socket(zmq::ROUTER).unwrap();
+        frontend.bind("tcp://*:5559").unwrap();
+
+        let backend: Socket = ctx.socket(zmq::DEALER).unwrap();
+        backend.bind("tcp://*:5560").unwrap();
+
+        info!("[Broker] Async-like broker ROUTER<->DEALER started");
+        thread::spawn(move || {
+            let mut items = [
+                frontend.as_poll_item(zmq::POLLIN),
+                backend.as_poll_item(zmq::POLLIN),
+            ];
+
+            loop {
+                zmq::poll(&mut items, 100).unwrap();
+                // info!("Got message");
+
+                if items[0].is_readable() {
+                    let msg = frontend.recv_multipart(0).unwrap();
+                    backend.send_multipart(msg, 0).unwrap();
+                }
+
+                if items[1].is_readable() {
+                    let msg = backend.recv_multipart(0).unwrap();
+                    frontend.send_multipart(msg, 0).unwrap();
+                }
+            }
+        });
+
+        loop {
+            // Broker runs forever (or add shutdown logic)
+            std::thread::sleep(std::time::Duration::from_secs(1));
+        }
+    }
+
+    fn client()
+    {
+        info!("[Client] is starting....");
+
+        let ctx: Context = zmq::Context::new();
+        let client: Socket = ctx.socket(zmq::REQ).unwrap();
+        client.connect("tcp://localhost:5559").unwrap();
+
+        info!("[Client] connected to: {}", "tcp://localhost:5559");
+        for i in 0..5 {
+            let msg: String = format!("[Client] msg {}", i);
+            client.send(msg.as_bytes(), 0).unwrap();
+
+
+            let reply: String = client.recv_string(0).unwrap().unwrap();
+            info!("[Client] Got reply: {}", reply);
+            std::thread::sleep(Duration::from_millis(300));
+        }
+    }
+
+    fn worker()
+    {
+        info!("[Worker] is starting....");
+
+        let ctx: Context = zmq::Context::new();
+        let worker: Socket = ctx.socket(zmq::REP).unwrap();
+        worker.connect("tcp://localhost:5560").unwrap();
+
+        info!("[Worker] connected to: {}", "tcp://localhost:5560");
+        loop {
+            let msg = worker.recv_string(0).unwrap().unwrap();
+            info!("[Worker] Received: {}", msg);
+            let reply: String = format!("Processed by worker: {}", msg);
+            worker.send(reply.as_str(), 0).unwrap();
+        }
+    }
+    pub fn run()
+    {
+        let tasks = vec![
+            thread::spawn(|| { broker(); }),
+            thread::spawn(|| { worker(); }),
+            thread::spawn(|| { client(); })
+        ];
+
+        // Wait for all threads to finish
+        for task in tasks {
+            task.join().unwrap();
+        }
+    }
+}
+
+mod router_dealer_2
+{
+    use zmq::{Context, Socket};
+    use std::{thread, time::Duration};
+    use chrono::{DateTime, Local};
+    use chrono::format::{DelayedFormat, StrftimeItems};
+
+    fn log(level: &str, msg: &str)
+    {
+        let now: DateTime<Local> = Local::now();
+        let timestamp: DelayedFormat <StrftimeItems> = now.format("%Y-%m-%d %H:%M:%S.%3f");
+        println!("[{:<5}] [{}] {}", level, timestamp, msg);
+    }
+
+    macro_rules! info {
+        ($($arg:tt)*) => {
+                log("INFO", &format!($($arg)*));
+            };
+    }
+
+    fn broker()
+    {
+        let context: Context = zmq::Context::new();
+
+        // ROUTER accepts client connections
+        let frontend: Socket = context.socket(zmq::ROUTER).unwrap();
+        frontend.bind("tcp://*:5559").unwrap();
+
+        // DEALER connects to workers
+        let backend: Socket = context.socket(zmq::DEALER).unwrap();
+        backend.bind("tcp://*:5560").unwrap();
+
+        info!("Broker started on 5559(front) <-> 5560(back)");
+
+        // Use zmq::proxy to forward between sockets
+        zmq::proxy(&frontend, &backend).unwrap();
+    }
+
+    fn client()
+    {
+        let context: Context = zmq::Context::new();
+        let socket: Socket = context.socket(zmq::REQ).unwrap();
+        socket.connect("tcp://localhost:5559").unwrap();
+
+        for i in 0..5 {
+            let msg: String = format!("Hello from client {}", i);
+            socket.send(&msg, 0).unwrap();
+
+            let reply: String = socket.recv_string(0).unwrap().unwrap();
+            info!("Client got reply: {}", reply);
+
+            thread::sleep(Duration::from_millis(500));
+        }
+    }
+
+    fn worker()
+    {
+        let context: Context = zmq::Context::new();
+        let worker: Socket = context.socket(zmq::REP).unwrap();
+        worker.connect("tcp://localhost:5560").unwrap();
+
+        loop {
+            let msg: String = worker.recv_string(0).unwrap().unwrap();
+            info!("Worker received: {}", msg);
+            worker.send(format!("Processed: {}", msg).as_str(), 0).unwrap();
+        }
+    }
+
+    pub fn run()
+    {
+        let tasks = vec![
+            thread::spawn(|| { broker(); }),
+            thread::spawn(|| { worker(); }),
+            thread::spawn(|| { client(); })
+        ];
+
+        // Wait for all threads to finish
+        for task in tasks {
+            task.join().unwrap();
+        }
+    }
+}
+
+
 pub fn test_all()
 {
     // rep_req::run();
-    // pub_sub::run();
+    pub_sub::run();
     // push_pull::run();
-    multipart::run();
+    // multipart::run();
+
+    // router_dealer_1::run();
+    // router_dealer_2::run();
 }

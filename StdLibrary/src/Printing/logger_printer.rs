@@ -32,7 +32,7 @@ mod demo_two
     fn log(level: &str, msg: &str)
     {
         let now: DateTime<Local> = Local::now();
-        let timestamp: DelayedFormat <StrftimeItems> = now.format("%Y-%m-%d %H:%M:%S");
+        let timestamp: DelayedFormat <StrftimeItems> = now.format("%Y-%m-%d %H:%M:%S.%3");
         println!("[{:<5}] [{}] {}", level, timestamp, msg);
     }
 
@@ -52,7 +52,7 @@ mod logger_with_macro
     fn log(level: &str, msg: &str)
     {
         let now: DateTime<Local> = Local::now();
-        let timestamp: DelayedFormat <StrftimeItems> = now.format("%Y-%m-%d %H:%M:%S");
+        let timestamp: DelayedFormat <StrftimeItems> = now.format("%Y-%m-%d %H:%M:%S.%3");
         println!("[{:<5}] [{}] {}", level, timestamp, msg);
     }
 
