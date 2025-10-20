@@ -12,7 +12,7 @@ mod clients
         let socket: Socket =  context.socket(zmq::REQ).unwrap();
         socket.connect("tcp://localhost:5556").unwrap();
 
-        for i in 0..3 {
+        for i in 0..10 {
             let request = format!("Hello {}", i);
             println!("Sending: {}", request);
             socket.send(&request, 0).unwrap();

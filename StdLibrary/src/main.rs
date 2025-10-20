@@ -76,13 +76,13 @@ fn main()
     // pointers_and_reference::test_all();
     // console_io::test_all();
     // errors_handling::test_all();
-    // files_folders_directories::test_all();
+    files_folders_directories::test_all();
     // folders_directories::test_all();
     // directories::test_all();
     // display::test_all();
     // enums::test_all();
     // lambdas::test_all();
-    dynamic_dispatch::test_all();
+    // dynamic_dispatch::test_all();
     // strings::test_all();
     // scoping_rules::test_all();
     // unsafe_features::test_all();

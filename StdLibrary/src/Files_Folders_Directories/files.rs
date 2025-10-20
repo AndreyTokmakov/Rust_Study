@@ -6,15 +6,15 @@ use std::path::{Path, PathBuf};
 
 fn open_file()
 {
-    // let greeting_file_result = File::open("hello.txt");
-    let greeting_file_result = File::open("/home/andtokm/DiskS/Temp/Folder_For_Testing/TestFile.log");
+    let file_path: PathBuf = env::current_dir().unwrap().join("resources/input.txt");
+    let greeting_file_result = File::open(file_path);
 
     println!("{:?}", greeting_file_result);
 }
 
 fn read_file_0()
 {
-    let file_path = env::current_dir().unwrap().join("resources/Cargo.toml");
+    let file_path: PathBuf = env::current_dir().unwrap().join("resources/Cargo.toml");
     let mut file: File = File::open(file_path).unwrap(); // if error → return Err
     let mut contents: String = String::new();
     file.read_to_string(&mut contents).expect("TODO: panic message");
@@ -80,7 +80,7 @@ fn write_file()
 pub fn test_all()
 {
     // open_file();
-    // read_file_0();
+    read_file_0();
     // read_file_1();
     // read_file__buffer_reader();
     // read_file__buffer_reader_2();
