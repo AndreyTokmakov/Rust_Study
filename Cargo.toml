@@ -12,6 +12,7 @@ members = [
     "Protobuf",
     "Serialization",
     "StdLibrary",
+    "Testing",
     "Web_Framework",
     "ZeroMQ"
 ]

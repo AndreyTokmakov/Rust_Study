@@ -1,3 +1,4 @@
+
 #![allow(
     dead_code,
     unused_imports,
@@ -6,11 +7,10 @@
     non_snake_case
 )]
 
-mod clients;
-mod experiments;
+#[path = "autotests.rs"] pub mod autotests;
 
-fn main()
+
+pub fn main()
 {
-    // clients::test_all();
-    experiments::test_all();
+    autotests::test_all();
 }

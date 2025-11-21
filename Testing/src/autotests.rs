@@ -1,6 +1,4 @@
 
-
-
 fn divide(a: i32, b: i32) -> i32 {
     if 0 == b {
         panic!("PANIC: 0 divide!");

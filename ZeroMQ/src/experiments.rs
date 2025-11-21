@@ -403,10 +403,10 @@ mod router_dealer__broker_proxy
 pub fn test_all()
 {
     // rep_req::run();
-    // pub_sub::run();
+    pub_sub::run();
     // push_pull::run();
     // multipart::run();
 
     // router_dealer_1::run();
-    router_dealer__broker_proxy::run();
+    // router_dealer__broker_proxy::run();
 }

@@ -10,7 +10,6 @@ non_snake_case
 #[path = "Attributes/attributes.rs"] pub mod attributes;
 #[path = "Bytes_Bits/main.rs"] pub mod bytes_bits;
 #[path = "Environment/environment.rs"] pub mod environment;
-#[path = "Autotests/autotests.rs"] pub mod autotests;
 #[path = "Cryptography/main.rs"] pub mod cryptography;
 #[path = "Functions/functions.rs"] pub mod functions;
 #[path = "Command_Line_Arguments/main_command_line.rs"] pub mod command_line;
@@ -61,7 +60,6 @@ fn main()
     // print::test_all();
     
     // attributes::test_all();
-    // autotests::test_all();
     // bytes_bits::test_all();
     // environment::test_all();
     // compare::test_all();
