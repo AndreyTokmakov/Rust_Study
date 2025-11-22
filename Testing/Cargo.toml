@@ -3,4 +3,5 @@ name = "Testing"
 version = "0.1.0"
 edition = "2024"
 
-[dependencies]
+[dev-dependencies]
+mockall = "0.13.1"

@@ -8,7 +8,8 @@
 )]
 
 #[path = "autotests.rs"] pub mod autotests;
-
+mod fixtures;
+mod mocking;
 
 pub fn main()
 {
