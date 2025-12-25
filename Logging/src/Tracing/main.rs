@@ -212,7 +212,7 @@ mod diff_levels_for_diff_modules
 
 pub fn test_all()
 {
-    // tracing_basic::simple_logs();
+    tracing_basic::simple_logs();
     // tracing_basic::simple_logs_2();
     // tracing_basic::simple_logs_3();
 
@@ -227,5 +227,5 @@ pub fn test_all()
 
     // write_to_file::append_to_file();
 
-    diff_levels_for_diff_modules::demo()
+    // diff_levels_for_diff_modules::demo()
 }

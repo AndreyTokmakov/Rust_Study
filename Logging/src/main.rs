@@ -13,6 +13,6 @@
 
 fn main()
 {
-    // logging::test_all();
-    tracing::test_all();
+    logging::test_all();
+    // tracing::test_all();
 }
