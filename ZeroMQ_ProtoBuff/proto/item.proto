@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package store;
+
+message Item
+{
+  string name = 1;
+  int32 id = 2;
+  string description = 3;
+  string description2 = 4;
+}

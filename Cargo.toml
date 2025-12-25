@@ -14,5 +14,6 @@ members = [
     "StdLibrary",
     "Testing",
     "Web_Framework",
-    "ZeroMQ"
+    "ZeroMQ",
+    "ZeroMQ_ProtoBuff"
 ]
