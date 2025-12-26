@@ -6,7 +6,11 @@
     non_snake_case
 )]
 
+mod server_1;
+mod multiple_handlers;
+
 use tracing::Level;
+
 
 mod person_demo
 {
@@ -56,7 +60,9 @@ pub mod zmq_tests
     use zmq::Context;
     use tracing::{info, instrument};
 
-    fn init_tracing()
+    static PORT: i32 = 52525;
+
+    pub fn init_tracing()
     {
         let subscriber = FmtSubscriber::builder()
             .with_max_level(Level::INFO)
@@ -72,7 +78,7 @@ pub mod zmq_tests
         let ctx = Context::new();
         let socket = ctx.socket(zmq::REP).unwrap();
 
-        socket.bind("tcp://127.0.0.1:5555").unwrap();
+        socket.bind(format!("tcp://127.0.0.1:{}", PORT).as_str()).unwrap();
         info!("Server started");
 
         loop {
@@ -83,24 +89,6 @@ pub mod zmq_tests
             info!("Response sent");
         }
     }
-
-    #[instrument(name = "req_client", fields(client_id = id))]
-    pub fn run_client(id: u64)
-    {
-        let ctx = Context::new();
-        let socket = ctx.socket(zmq::REQ).unwrap();
-
-        socket.connect("tcp://127.0.0.1:5555").unwrap();
-
-        let payload = format!("hello from {}", id);
-        info!(payload = %payload, "Sending request");
-
-        socket.send(&payload, 0).unwrap();
-
-        let reply = socket.recv_string(0).unwrap().unwrap();
-        info!(reply = %reply, "Received reply");
-    }
-
 }
 
 pub fn main()
@@ -109,9 +97,13 @@ pub fn main()
     // person_demo::test_message();
 
     // Initialize a global subscriber for logging
-    tracing_subscriber::fmt()
+    /*tracing_subscriber::fmt()
         .with_max_level(Level::INFO) // set log level
-        .init();
+        .init();*/
 
-    zmq_tests::run_server();
+    // zmq_tests::init_tracing();
+    // zmq_tests::run_server();
+
+    // server_1::run_server();
+    multiple_handlers::run_server();
 }
