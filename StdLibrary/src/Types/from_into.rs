@@ -16,20 +16,20 @@ impl From<i32> for Number
 
 fn From()
 {
-    let value = 5;
-    let num = Number::from(value);
+    let value: i32 = 5;
+    let num: Number = Number::from(value);
     println!("My number: {:?}", num);
 }
 
 fn Into()
 {
-    let value = 5;
+    let value: i32 = 5;
     let num: Number = value.into();
     println!("My number: {:?}", num);
 }
 
 pub fn test_all()
 {
-    // From();
+    From();
     Into();
 }

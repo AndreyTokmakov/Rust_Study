@@ -44,5 +44,5 @@ mod async_file_monitor
 
 pub fn test_all()
 {
-    async_file_monitor::run();
+    let _ = async_file_monitor::run();
 }

@@ -1,9 +1,9 @@
 
 mod aliases;
-mod From_Into;
-mod Try_From;
-mod Try_Into;
-mod From_To_String;
+mod from_into;
+mod try_from;
+mod try_into;
+mod from_to_string;
 mod newtype_idiom;
 mod global_variables;
 
@@ -82,7 +82,7 @@ fn literals()
 
 pub fn test_all()
 {
-    global_variables::test_all();
+    // global_variables::test_all();
 
     // variable_scope();
 
@@ -93,12 +93,9 @@ pub fn test_all()
     // literals();
 
     // aliases::type_aliases_tests();
-
-    // From_Into::test_all();
-
+    from_into::test_all();
     // Try_From::test_all();
     // Try_Into::test_all();
     // newtype_idiom::test_all();
-
     // From_To_String::test_all();
 }

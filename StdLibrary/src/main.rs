@@ -1,9 +1,9 @@
 #![allow(
-dead_code,
-unused_imports,
-unused_parens,
-unused_variables,
-non_snake_case
+    dead_code,
+    unused_imports,
+    unused_parens,
+    unused_variables,
+    non_snake_case
 )]
 
 
@@ -56,9 +56,7 @@ fn main()
     // tests_and_experiments::test_all();
     // loops::test_all();
     // lifetime_borrowing::test_all();
-
     // print::test_all();
-    
     // attributes::test_all();
     // bytes_bits::test_all();
     // environment::test_all();
@@ -74,7 +72,7 @@ fn main()
     // pointers_and_reference::test_all();
     // console_io::test_all();
     // errors_handling::test_all();
-    files_folders_directories::test_all();
+    // files_folders_directories::test_all();
     // folders_directories::test_all();
     // directories::test_all();
     // display::test_all();
@@ -84,31 +82,18 @@ fn main()
     // strings::test_all();
     // scoping_rules::test_all();
     // unsafe_features::test_all();
-
-    // optional::test_all();
-    // result::test_all();
-
-    // pattern_matching::test_all();
-    
-    // NOTE: Documentation
-    // documentation::test_all();
-
-    // NOTE: Smart pointers
-    // smart_pointers::test_all();
-
-    // operators::test_all();
-    // operators_overload::test_all();
-
-    // NOTE: Time - Duration:
-    // time_and_duration::test_all();
-    
     // tuples::test_all();
     // types::test_all();
-
-    // NOTE: Generics - Templates
+    // optional::test_all();
+    // result::test_all();
+    // pattern_matching::test_all();
+    // documentation::test_all();
+    // smart_pointers::test_all();
+    // operators::test_all();
+    // operators_overload::test_all();
+    // time_and_duration::test_all();
     // generics::test_all();
-
     // structs::test_all();
     // traits::test_all();
-    
+    slices::test_all();
 }

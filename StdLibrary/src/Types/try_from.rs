@@ -1,5 +1,6 @@
 
-pub fn test_all() {
+pub fn test_all() 
+{
     test_greater_than_zero();
     // test_even_number_cast();
 }
