@@ -66,7 +66,6 @@ fn mutable_tuple_with_pointer()
         let (_, ref mut last) = mutable_tuple;
         *last = 2u32;
     }
-
     println!("tuple is {:?}", mutable_tuple);
 }
 
