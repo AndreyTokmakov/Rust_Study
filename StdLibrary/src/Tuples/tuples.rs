@@ -69,7 +69,34 @@ fn mutable_tuple_with_pointer()
     println!("tuple is {:?}", mutable_tuple);
 }
 
+fn divide(a: i32, b: i32) -> (i32, i32) {
+    (a / b, a % b)
+}
 
+fn match_tuple()
+{
+    let person: (&str, i32) = ("Alice", 30);
+
+    match person {
+        ("Max", 18) => println!("Max is 18 years old"),
+        ("Jack", age) => println!("Jack is {} years old", age),
+        ("Alice", age) => println!("Alice is {} years old", age),
+        (name, age) => println!("{} is {} years old", name, age),
+    }
+
+    // Alice is 30 years old
+}
+
+fn pattern_matching ()
+{
+    let result: (i32, i32) = divide(10, 3);
+    match result {
+        (0, _) => println!("Division resulted in zero"),
+        (_, 0) => println!("No remainder"),
+        _ => println!("Quotient: {}, Remainder: {}", result.0, result.1),
+    }
+    // Quotient: 3, Remainder: 1
+}
 
 pub fn test_all()
 {
@@ -80,5 +107,8 @@ pub fn test_all()
 
     // structure_binding();
     // structure_binding_1();
-    structure_binding_2();
+    // structure_binding_2();
+
+    match_tuple();
+    pattern_matching();
 }
