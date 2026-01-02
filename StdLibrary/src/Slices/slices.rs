@@ -73,18 +73,21 @@ fn create_splice()
     let empty5: &[i32] = &array[3..];    // same as &x[3..3]
 
     let full1: &[i32] = &array[..];
-    let full2: &[i32] = &array[0 .. array.len()];
+    let full2: &[i32] = &array[0..array.len()];
+    let full3: &[i32] = &array[0..];
     assert_eq!(full1, full2);
+    assert_eq!(full1, full3);
+
+    let part1: &[i32] = &array[..5];
+    println!("part1: {:?}", part1);
 }
 
 pub fn test_all()
 {
     create_splice();
-
     // take_all_full_slice();
     // mutable_slice();
     // array_to_splice_inplace();
-
     // string_slice();
     // array_slices();
 }

@@ -82,7 +82,6 @@ fn main()
     // strings::test_all();
     // scoping_rules::test_all();
     // unsafe_features::test_all();
-    // tuples::test_all();
     // types::test_all();
     // optional::test_all();
     // result::test_all();
@@ -95,5 +94,7 @@ fn main()
     // generics::test_all();
     // structs::test_all();
     // traits::test_all();
-    slices::test_all();
+    // slices::test_all();
+    tuples::test_all();
+
 }
