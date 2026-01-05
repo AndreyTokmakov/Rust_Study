@@ -83,19 +83,15 @@ fn literals()
 pub fn test_all()
 {
     // global_variables::test_all();
-
     // variable_scope();
-
     // shadowing();
-
     // type_casting();
-
     // literals();
 
     // aliases::type_aliases_tests();
-    from_into::test_all();
-    // Try_From::test_all();
-    // Try_Into::test_all();
-    // newtype_idiom::test_all();
-    // From_To_String::test_all();
+    // from_into::test_all();
+    // try_from::test_all();
+    // try_into::test_all();
+    newtype_idiom::test_all();
+    // from_to_string::test_all();
 }
