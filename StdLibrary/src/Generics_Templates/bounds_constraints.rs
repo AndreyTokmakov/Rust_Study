@@ -151,8 +151,6 @@ fn using_where_clause()
     vec.print_in_option();
 }
 
-
-
 pub fn test_all()
 {
     // function_constraints::demo();
