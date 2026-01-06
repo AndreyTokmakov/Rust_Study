@@ -1,3 +1,4 @@
+use std::path::Iter;
 
 fn print_vector(vect: &Vec<i32>)
 {
@@ -12,6 +13,16 @@ fn iterate()
     let numbers: Vec<i32> = vec![1,2,3,4,5];
     for i in &numbers {
         print!("{} ", i);
+    }
+}
+
+fn iterate_wit_iterator()
+{
+    let numbers: Vec<i32> = vec![1,2,3,4,5];
+    let it= numbers.iter();
+
+    for val in it {
+        println!("Got: {}", val);
     }
 }
 
@@ -35,6 +46,18 @@ fn iterate_and_modify()
     print_vector(&numbers);
 }
 
+fn iterate_and_modify__iter_mut()
+{
+    let mut numbers: Vec<i32> = vec![1, 2, 3, 4, 5];
+    let numbers_copy: Vec<i32> = numbers.clone();
+
+    for num in numbers.iter_mut() {
+        *num += 1; // Mutates each element by adding 1
+    }
+
+    println!("{:?} ==> {:?}", numbers_copy, numbers);
+    // [1, 2, 3, 4, 5] ==> [2, 3, 4, 5, 6]
+}
 
 fn create_test()
 {
@@ -115,7 +138,6 @@ fn modify_vector_element()
 
 fn vector_of_enums()
 {
-
     #[derive(Debug)]
     enum SpreadsheetCell {
         Int(i32),
@@ -153,52 +175,62 @@ fn  mutable_borrow_error() {
 }
 
 
+fn map__transforming_elements()
+{
+    let numbers: Vec<i32> = vec![1,2,3,4,5];
+    let squares: Vec<i32> = numbers.iter().map(|&x| x * x).collect();
+
+    println!("Map - Squares: {:?}", squares); // Outputs: [1, 4, 9, 16, 25]
+}
+
+fn filter__filtering_elements()
+{
+    let numbers: Vec<i32> = vec![1,2,3,4,5];
+    let evens: Vec<&i32> = numbers.iter().filter(|&x| x % 2 == 0).collect();
+
+    println!("Filter - Evens: {:?}", evens);
+    // Outputs: [2, 4]
+}
+
+
+fn fold__reduce_or_accumulate()
+{
+    let numbers: Vec<i32> = vec![1,2,3,4,5];
+    let sum: i32 = numbers.iter().fold(0, |acc, &x| acc + x);
+
+    println!("Fold - Sum: {}", sum); // Outputs: 15
+}
+
 fn experiments()
 {
-    let mut v = vec![1, 2, 3, 4, 5];
+    let numbers: Vec<i32> = vec![1,2,3,4,5];
+    let it= numbers.iter();
 
-    /*
-    let mut third = &mut v[2];
-    println!("The third element is {}", third);
-
-    third = 65;
-
-    println!("The third element is {}", third);*/
-
-    v[2] = 123;
-
-
-    println!("{:?}", v);
-
-    /*
-    let third: Option<&i32> = v.get(2);
-    match third {
-        Some(third) => println!("The third element is {}", third),
-        None => println!("There is no third element."),
-    }*/
+    for val in it {
+        println!("Got: {}", val);
+    }
 }
 
 
 pub fn test_all()
 {
     // create_test();
-
     // access_element();
-    access_element_non_found();
-
+    // access_element_non_found();
     // size_and_capacity();
-
     // iterate();
+    // iterate_wit_iterator();
     // iterate_pop();
     // iterate_and_modify();
-
+    // iterate_and_modify__iter_mut();
     // modify_vector_element();
-
     // vector_of_enums();
-
     // out_of_borders();
-
     // mutable_borrow_error();
+
+    // map__transforming_elements();
+    // filter__filtering_elements();
+    fold__reduce_or_accumulate();
 
     // experiments();
 }

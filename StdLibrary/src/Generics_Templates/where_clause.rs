@@ -114,8 +114,118 @@ mod complex_relationships_between_types
     }
 }
 
+mod generic_data_processor
+{
+    use std::fmt::{Debug, Display};
+    use std::str::FromStr;
+    use std::error::Error;
+
+    // A generic data processor that can convert between different types
+    struct DataProcessor<T, U>
+        where T: Debug + Clone,
+              U: Display + FromStr,
+              <U as FromStr>::Err: Error,
+    {
+        source_data: Vec<T>,
+        phantom: std::marker::PhantomData<U>,
+    }
+
+    impl<T, U> DataProcessor<T, U>
+        where T: Debug + Clone + Display,
+              U: Display + FromStr,
+              <U as FromStr>::Err: Error,
+    {
+        fn new(source_data: Vec<T>) -> Self {
+            DataProcessor {
+                source_data,
+                phantom: std::marker::PhantomData,
+            }
+        }
+
+        fn process(&self) -> Vec<Result<U, Box<dyn Error>>> where <U as FromStr>::Err: 'static {
+            self.source_data.iter().map(|item| {
+                    // Convert T to string
+                    let item_str: String = item.to_string();
+                    // Try to parse the string to U
+                    let result = U::from_str(&item_str)
+                        .map_err(|e| Box::new(e) as Box<dyn Error>);
+
+                    result
+                }).collect()
+        }
+
+        fn display_all(&self) {
+            println!("Source data:");
+            for item in &self.source_data {
+                println!("  {:?}", item);
+            }
+        }
+    }
+
+    pub fn demo()
+    {
+        // Process integers to floats
+        let int_processor: DataProcessor<i32, f64> = DataProcessor::<i32, f64>::new(vec![1, 2, 3, 4, 5]);
+        int_processor.display_all();
+
+        let results = int_processor.process();
+        println!("Processed results:");
+        for result in results {
+            match result {
+                Ok(val) => println!("  Success: {}", val),
+                Err(e) => println!("  Error: {}", e),
+            }
+        }
+
+        // Process strings to integers with potential errors
+        let string_processor: DataProcessor<String, i32>  = DataProcessor::<String, i32>::new(
+            vec![
+                "123".to_string(),
+                "456".to_string(),
+                "not_a_number".to_string(),
+                "789".to_string(),
+            ]
+        );
+        string_processor.display_all();
+
+        let results = string_processor.process();
+        println!("Processed results:");
+        for result in results {
+            match result {
+                Ok(val) => println!("  Success: {}", val),
+                Err(e) => println!("  Error: {}", e),
+            }
+        }
+    }
+
+    // Source data:
+    //   1
+    //   2
+    //   3
+    //   4
+    //   5
+    // Processed results:
+    //   Success: 1
+    //   Success: 2
+    //   Success: 3
+    //   Success: 4
+    //   Success: 5
+    
+    // Source data:
+    //   "123"
+    //   "456"
+    //   "not_a_number"
+    //   "789"
+    // Processed results:
+    //   Success: 123
+    //   Success: 456
+    //   Error: invalid digit found in string
+    //   Success: 789
+}
+
 pub fn test_all()
 {
     // basic_example::demo();
-    complex_relationships_between_types::demo();
+    // complex_relationships_between_types::demo();
+    generic_data_processor::demo();
 }

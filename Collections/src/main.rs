@@ -16,9 +16,9 @@
 fn main()
 {
     // collections_arrays::test_all();
-    // vector::test_all();
+    vector::test_all();
     // hash_map::test_all();
-    btree_map::test_all();
+    // btree_map::test_all();
     // hash_set::test_all();
     // LinkedList::test_all();
 }

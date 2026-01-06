@@ -4,6 +4,7 @@ mod structs;
 mod template_specialisation;
 mod bounds_constraints;
 mod where_clause;
+mod phantom_data;
 
 fn largest<T: std::cmp::PartialOrd>(list: &[T]) -> &T
 {
@@ -40,7 +41,8 @@ pub fn test_all()
     // structs::test_all();
     // template_specialisation::test_all();
     // bounds_constraints::test_all();
-    where_clause::test_all();
+    // where_clause::test_all();
+    phantom_data::test_all();
 
     // find_largest_element();
     // template_specialization();
