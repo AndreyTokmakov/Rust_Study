@@ -1,5 +1,11 @@
 use std::path::Iter;
 
+/**
+# Rust Vectors
+# https://www.compilenrun.com/docs/language/rust/rust-collections/rust-vectors
+
+**/
+
 fn print_vector(vect: &Vec<i32>)
 {
     for i in vect {
