@@ -1,6 +1,7 @@
 [workspace]
 resolver = "3"
 members = [
+    "Async_Programming",
     "Collections",
     "Cryptogrphy_Encryption",
     "Databases",

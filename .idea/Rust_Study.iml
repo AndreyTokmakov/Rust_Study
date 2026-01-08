@@ -17,6 +17,7 @@
       <sourceFolder url="file://$MODULE_DIR$/ZeroMQ/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Testing/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ZeroMQ_ProtoBuff/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Async_Programming/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
