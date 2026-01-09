@@ -7,11 +7,10 @@
 )]
 
 mod Tokio;
-
-
-
+mod Futures;
 
 fn main()
 {
-    Tokio::tokio_tests();
+    // Tokio::tokio_tests();
+    Futures::future_tests();
 }

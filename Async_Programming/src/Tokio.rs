@@ -44,8 +44,6 @@ mod tokio_examples
     }
 }
 
-
-
 mod basic_examples
 {
     use futures::future::join_all;
@@ -215,13 +213,73 @@ mod practical_examples_2
     }
 }
 
+mod common_patterns_1
+{
+    use tokio::time::{sleep, Duration};
+
+    #[tokio::main]
+    async fn select_racing_futures()
+    {
+        tokio::select! {
+            _ = sleep(Duration::from_secs(1)) => {
+                println!("Task 1 completed first");
+            }
+            _ = sleep(Duration::from_millis(500)) => {
+                println!("Task 2 completed first");
+            }
+            _ = sleep(Duration::from_secs(2)) => {
+                println!("Task 3 completed first");
+            }
+        }
+    }
+
+    pub fn wait_first_of_futures()
+    {
+        let _ = select_racing_futures();
+        // Task 2 completed first
+    }
+}
+
+mod common_patterns_2
+{
+    use tokio::time::{timeout, sleep, Duration};
+
+    async fn long_running_task(delay_sec: u64)
+    {
+        sleep(Duration::from_secs(delay_sec)).await;
+        println!("Long task completed");
+    }
+
+    #[tokio::main]
+    async fn run_longest_task(timeout_sec: u64, delay_sec: u64)
+    {
+        match timeout(Duration::from_secs(timeout_sec), long_running_task(delay_sec)).await {
+            Ok(_) => println!("Task completed within the timeout"),
+            Err(_) => println!("Task timed out!"),
+        }
+    }
+
+    pub fn add_timeouts_to_async_operation()
+    {
+        let _ = run_longest_task(2, 3);
+        // Task timed out!
+
+        let _ = run_longest_task(3, 2);
+        // Long task completed
+        // Task completed within the timeout
+    }
+}
+
 pub fn tokio_tests()
 {
     // basic_examples::test_bad();
     // basic_examples::test_good();
 
-    // tokio_examples
+    // tokio_examples::run();
 
     // practical_examples_1::concurrent_downloads();
-    practical_examples_2::concurrent_read_write_file_async();
+    // practical_examples_2::concurrent_read_write_file_async();
+
+    // common_patterns_1::wait_first_of_futures();
+    common_patterns_2::add_timeouts_to_async_operation();
 }
