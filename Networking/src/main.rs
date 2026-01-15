@@ -15,6 +15,7 @@ mod web_sockets;
 mod listen_port;
 mod tokio_asynch_tcp_client;
 mod tokio_asynch_tcp_server;
+mod client_server_examples;
 
 pub fn main()
 {
@@ -26,6 +27,8 @@ pub fn main()
     // web_sockets::test_all();
     // ProxyServer::test_all();
 
-    tokio_asynch_tcp_client::test_all();
+    client_server_examples::test_all();
+
+    // tokio_asynch_tcp_client::test_all();
     // tokio_asynch_tcp_server::test_all();
 }
