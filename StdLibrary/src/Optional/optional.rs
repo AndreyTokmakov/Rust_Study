@@ -363,3 +363,19 @@ pub fn test_all()
     // parsing_strings_to_numbers::test_all();
     simple_cache::test_all();
 }
+
+// Method	            Description	                                                Example
+
+// is_some()	        Returns true if the option is a Some value	                Some(42).is_some() → true
+// is_none()	        Returns true if the option is a None value	                None::<i32>.is_none() → true
+// unwrap()	            Returns the contained value or panics if None	            Some("hi").unwrap() → "hi"
+// expect(msg)	        Like unwrap() but with a custom panic message	            Some(4).expect("Failed") → 4
+// unwrap_or(default)	Returns the contained value or a default	                None.unwrap_or(10) → 10
+// unwrap_or_else(f)	Returns the contained value or computes it from a closure	None.unwrap_or_else(
+// map(f)	            Applies a function to the contained value (if any)	                    Some(2).map(
+// map_or(default, f)	Applies a function to the contained value or returns a default	        None.map_or(42,
+// ok_or(err)	        Transforms Option<T> into Result<T, E>	                                Some(v).ok_or(err) → Ok(v)
+// and(optb)	        Returns None if self is None, otherwise returns optb	                Some(2).and(Some("hi")) → Some("hi")
+// or(optb)	            Returns self if it is Some, otherwise returns optb	                    None.or(Some(100)) → Some(100)
+// and_then(f)	        Returns None if self is None, otherwise calls f and returns the result	Chain operations that might fail
+// filter(predicate)	Returns None if self is None or the predicate returns false	            Keep only values matching a condition

@@ -1,11 +1,10 @@
 
 mod class_methods;
-mod tuple_structs;
 mod Long;
 mod static_variables_and_methods;
 mod inline_methods;
 mod constructors;
-
+#[path = "examples/network_packet_headers.rs"] pub mod network_packet_headers;
 
 struct User {
     active: bool,
@@ -125,7 +124,8 @@ fn printUser(user: &User) {
              user.email, user.username, user.active, user.sign_in_count)
 }
 
-fn create_one_instance_from_another() {
+fn create_one_instance_from_another()
+{
     let user1: User = build_user(String::from("someone@example.com"),
                                   String::from("someusername123"));
 
@@ -146,13 +146,70 @@ fn create_one_instance_from_another() {
     };
 
     printUser(&user3);
+}
 
+
+mod tuple_like_structs
+{
+    struct Color(i32, i32, i32);
+    struct Point(i32, i32, i32);
+
+
+    // Rust also supports "tuple structs," which are structs without named fields.
+    // They're a hybrid between a tuple and a struct:
+    pub fn demo()
+    {
+        let black: Color = Color(0, 0, 0);
+        let origin: Point = Point(0, 0, 0);
+
+        println!("First value of color: {}", black.0);
+        println!("Second value of point: {}", origin.1);
+    }
+}
+
+mod unit_like_structs
+{
+    struct AlwaysEqual;
+
+    fn process_item(_item: AlwaysEqual) {
+        println!("Processing an AlwaysEqual item");
+    }
+
+    // Rust allows structs without any fields at all, called unit-like structs
+    pub fn demo()
+    {
+        let subject = AlwaysEqual;
+
+        // We can use this struct as a marker
+        process_item(subject);
+    }
+}
+
+mod tuple_structs_vs_regular_structs_vs_tuples
+{
+    struct Point {
+        x: i32,
+        y: i32,
+    }
+
+    struct TuplePoint(i32, i32);
+
+    pub fn demo()
+    {
+        let p1 = Point { x: 10, y: 20 };
+        let p2 = TuplePoint(10, 20);
+        let p3: (i32, i32) = (10, 20);
+
+        println!("Regular struct: p1.x = {}, p1.y = {}", p1.x, p1.y);
+        println!("Tuple struct: p2.0 = {}, p2.1 = {}", p2.0, p2.1);
+        println!("Tuple: p3.0 = {}, p3.1 = {}", p3.0, p3.1);
+    }
 }
 
 pub fn test_all()
 {
     // class_methods::tests();
-    constructors::test_all();
+    // constructors::test_all();
     // inline_methods::test_all();
     // static_variables_and_methods::test_all();
     
@@ -163,7 +220,11 @@ pub fn test_all()
 
     // test_Point();
 
-    // tuple_structs::tests_all();
+    // tuple_like_structs::demo();
+    // unit_like_structs::demo();
+    // tuple_structs_vs_regular_structs_vs_tuples::demo();
 
     // Long::tests();
+
+    network_packet_headers::test_all();
 }

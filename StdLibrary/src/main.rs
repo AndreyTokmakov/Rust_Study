@@ -54,7 +54,7 @@
 fn main()
 {
     // attributes::test_all();
-    // bytes_bits::test_all();
+    bytes_bits::test_all();
     // environment::test_all();
     // compare::test_all();
     // console_io::test_all();
@@ -79,7 +79,7 @@ fn main()
     // operators::test_all();
     // operators_overload::test_all();
     // ownership::test_all();
-    optional::test_all();
+    // optional::test_all();
     // print::test_all();
     // pointers_and_reference::test_all();
     // pattern_matching::test_all();
