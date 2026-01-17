@@ -5,6 +5,12 @@ mod cpp_style_enums;
 mod underlying_type;
 mod control_flow_matching;
 
+#[path = "examples/examples_state_machine.rs"] pub mod examples_state_machine;
+#[path = "examples/examples_typed_configuration.rs"] pub mod examples_typed_configuration;
+#[path = "examples/examples_read_file_demo.rs"] pub mod examples_read_file_demo;
+#[path = "examples/examples_json_representation.rs"] pub mod examples_json_representation;
+
+
 #[derive(Debug)]
 enum ProtocolVersion
 {
@@ -82,7 +88,12 @@ pub fn test_all()
     // diff_types_enum_demo();
     // underlying_type::tests();
     // enums_methods::tests();
-    enums_match::tests();
+    // enums_match::tests();
     // control_flow_matching::test_all();
     // cpp_style_enums::tests();
+    
+    // examples_state_machine::test_all();
+    // examples_typed_configuration::test_all();
+    // examples_read_file_demo::test_all();
+    // examples_json_representation::test_all();
 }

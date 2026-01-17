@@ -69,7 +69,7 @@ fn main()
     // functions::test_all();
     // files_folders_directories::test_all();
     // folders_directories::test_all();
-    generics::test_all();
+    // generics::test_all();
     // lambdas::test_all();
     // loops::test_all();
     // lifetime_borrowing::test_all();
@@ -79,7 +79,7 @@ fn main()
     // operators::test_all();
     // operators_overload::test_all();
     // ownership::test_all();
-    // optional::test_all();
+    optional::test_all();
     // print::test_all();
     // pointers_and_reference::test_all();
     // pattern_matching::test_all();

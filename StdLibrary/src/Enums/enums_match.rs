@@ -106,54 +106,98 @@ fn switch_enums_with_state()
 }
 
 
-fn get_result(number: i32) -> i32
+mod example_4
 {
-    match number {
-        1 => action1(),
-        2 => action2(),
-        other => actionOther(number),
+    enum Message {
+        Quit,                       // No data
+        Move { x: i32, y: i32 },    // Named fields (struct-like)
+        Write(String),              // Single value (tuple-like)
+        ChangeColor(i32, i32, i32), // Multiple values (tuple-like)
+    }
+
+    fn process_message(msg: Message) {
+        match msg {
+            Message::Quit => println!("Quitting the application"),
+            Message::Move { x, y } => println!("Moving to position: ({}, {})", x, y),
+            Message::Write(text) => println!("Text message: {}", text),
+            Message::ChangeColor(r, g, b) => println!("Changing color to RGB: ({}, {}, {})", r, g, b),
+        }
+    }
+
+    pub fn process_collection()
+    {
+        let messages = [
+            Message::Quit,
+            Message::Move { x: 10, y: 5 },
+            Message::Write(String::from("Hello, Rust!")),
+            Message::ChangeColor(255, 0, 255),
+        ];
+
+        for msg in messages {
+            process_message(msg);
+        }
+
+        // Quitting the application
+        // Moving to position: (10, 5)
+        // Text message: Hello, Rust!
+        // Changing color to RGB: (255, 0, 255)
     }
 }
 
-fn get_result_2(number: i32) -> i32
+
+mod example_5
 {
-    match number {
-        1 => action1(),
-        2 => action2(),
-        _ => actionOther(number),
+    enum Weather
+    {
+        Sunny,
+        Cloudy,
+        Rainy(f32), // Amount of rainfall in inches
+        Snowy(f32), // Amount of snowfall in inches
+    }
+
+    fn get_activity(weather: Weather) -> String
+    {
+        match weather {
+            Weather::Sunny => "Sunny : Go for a hike!".to_string(),
+            Weather::Cloudy => String::from("Cloudy: Perhaps read a book outside."),
+            Weather::Rainy(amount) if amount < 1.0 => String::from("Rainy : A light walk with an umbrella."),
+            Weather::Rainy(_) => String::from("Rainy : Stay inside and watch a movie."),
+            Weather::Snowy(amount) if amount < 2.0 => String::from("Snowy : Build a small snowman."),
+            Weather::Snowy(_) => String::from("Snowy : Best to stay warm indoors."),
+        }
+    }
+
+    pub fn match_with_if()
+    {
+        let forecasts: [Weather; 6] = [
+            Weather::Sunny,
+            Weather::Cloudy,
+            Weather::Rainy(0.5),
+            Weather::Rainy(2.3),
+            Weather::Snowy(1.0),
+            Weather::Snowy(5.0),
+        ];
+
+        for forecast in forecasts {
+            let activity = get_activity(forecast);
+            println!("{}", activity);
+        }
+
+        // Sunny : Go for a hike!
+        // Cloudy: Perhaps read a book outside.
+        // Rainy : A light walk with an umbrella.
+        // Rainy : Stay inside and watch a movie.
+        // Snowy : Build a small snowman.
+        // Snowy : Best to stay warm indoors.
     }
 }
-
-fn action1() -> i32 {
-    1
-}
-
-fn action2() -> i32 {
-    2
-}
-
-fn actionOther(number: i32) -> i32 {
-    println!("Handling unexpected value {}", number);
-    number
-}
-
-fn handle_Other_Values__DEFAULT() 
-{
-    println!("Result: {}", get_result(1));
-    println!("Result: {}", get_result(2));
-    println!("Result: {}", get_result(3));
-
-    println!("\nResult: {}", get_result_2(1));
-    println!("Result: {}", get_result_2(2));
-    println!("Result: {}", get_result_2(3));
-}
-
-
 
 pub fn tests()
 {
     // switch_enums();
     // switch_enums_print();
     // switch_enums_with_state();
-    handle_Other_Values__DEFAULT();
+
+    // example_4::process_collection();
+    example_5::match_with_if();
 }

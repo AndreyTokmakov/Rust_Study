@@ -1,5 +1,10 @@
 
-mod examples;
+
+#[path = "examples/examples.rs"] pub mod examples;
+#[path = "examples/finding_element_in_collection.rs"] pub mod finding_element_in_collection;
+#[path = "examples/parsing_strings_to_numbers.rs"] pub mod parsing_strings_to_numbers;
+#[path = "examples/simple_cache.rs"] pub mod simple_cache;
+
 
 fn create_optional()
 {
@@ -188,14 +193,36 @@ fn unwrap()
     println!("{:?}", optStr.unwrap());
 }
 
+fn unwrap_or()
+{
+    let some_value: Option<&str> = Some("Something");
+    let none_value: Option<&str> = None;
+
+    println!("{}", some_value.unwrap_or("Default")); // Output: Something
+    println!("{}", none_value.unwrap_or("Default")); // Output: Default
+}
+
 fn unwrap_or_else()
 {
     // Returns the contained Some value or computes it from a closure.
     let optStr: Option<&str> = Some("qwerty");
-    println!("{:?}", optStr.unwrap_or_else(|| "Default_Value")); // "qwerty"
+    println!("{:?}", optStr.unwrap_or_else(|| "Default_Value"));
 
     let optStr: Option<&str> = None;
-    println!("{:?}", optStr.unwrap_or_else(|| "Default_Value")); // "Default_Value"
+    println!("{:?}", optStr.unwrap_or_else(|| "Default_Value"));
+
+    let default = || {
+        println!("Computing default value...");
+        "Computed default"
+    };
+
+    let none_value: Option<&str> = None;
+    println!("{}", none_value.unwrap_or_else(default));
+
+    // "qwerty"
+    // "Default_Value"
+    // Computing default value...
+    // Computed default
 }
 
 fn unwrap_unchecked()
@@ -252,6 +279,17 @@ fn ok_or_else()
     //         Err(123)
 }
 
+
+fn expect()
+{
+    let some_value: Option<&str>  = Some("Hello, world!");
+    println!("{}", some_value.expect("This won't panic")); // Output: Hello, world!
+
+    // The line below would panic with our custom message
+    let none_value: Option<&str> = None;
+    println!("{}", none_value.expect("We expected a string but got None!"));
+}
+
 fn insert()
 {
     // Inserts value into the option, then returns a mutable reference to it.
@@ -289,13 +327,15 @@ fn filter()
     println!("{:?}", Some(4).filter(is_even));
 }
 
+
+// https://www.compilenrun.com/docs/language/rust/rust-enums/rust-option-enum
 pub fn test_all()
 { 
     // create_optional();
     // create_and_test();
     // take();
     // map();
-    and_then();
+    // and_then();
     // take_if();
     // question_mark_operator();
 
@@ -309,6 +349,7 @@ pub fn test_all()
     // or();
     // ok_or();
     // ok_or_else();
+    // expect();
 
     // is_none();
     // is_some();
@@ -318,4 +359,7 @@ pub fn test_all()
     // filter();
 
     // examples::test_all();
+    // finding_element_in_collection::test_all();
+    // parsing_strings_to_numbers::test_all();
+    simple_cache::test_all();
 }
