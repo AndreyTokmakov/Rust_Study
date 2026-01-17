@@ -54,11 +54,68 @@ mod reading_byte_slice
     }
 }
 
+mod binary_protocol_parser
+{
+    struct Header
+    {
+        msg_type: u8,
+        length: u16,
+    }
+
+    fn parse_header(buf: &[u8]) -> Header
+    {
+        let msg_type: u8 = buf[0];
+        let length: u16 = u16::from_be_bytes([buf[1], buf[2]]);
+        return Header { msg_type, length }
+    }
+
+    pub fn parse()
+    {
+        let raw = [0x01, 0x00, 0x10];
+        let header = parse_header(&raw);
+        println!("type={}, length={}", header.msg_type, header.length);
+    }
+}
+
+mod parse_u64_data_manually
+{
+    fn parse_u64(buf: &[u8]) -> u64
+    {
+        return u64::from_be_bytes([
+            buf[0], buf[1], buf[2], buf[3],
+            buf[4], buf[5], buf[6], buf[7],
+        ])
+    }
+
+    pub fn parse()
+    {
+        let data: [u8; 8] = [0, 0, 0, 0, 0, 0, 0, 42];
+        println!("{}", parse_u64(&data));
+        // 42
+    }
+}
+
+fn big_vs_little_endian_parser()
+{
+    let bytes: [u8; 2] = [0x01, 0x00];
+
+    let be: u16 = u16::from_be_bytes(bytes);
+    let le: u16 = u16::from_le_bytes(bytes);
+
+    println!("BE = {}", be); // 256
+    println!("LE = {}", le); // 1
+}
+
+
 pub fn test_all()
 {
     // print_as_binary();
     // byte_array_to_integer();
 
+    big_vs_little_endian_parser();
+
     // network_data_tests::parse_port();
-    reading_byte_slice::read_u32_data();
+    // reading_byte_slice::read_u32_data();
+    // binary_protocol_parser::parse();
+    // parse_u64_data_manually::parse();
 }
