@@ -12,6 +12,7 @@ trait Base
     fn new(id: u32, name: String) -> Self;
 
     fn getId(&self) -> u32;
+
     fn getName(&self) -> String;
 
     fn printInfo(&self) {

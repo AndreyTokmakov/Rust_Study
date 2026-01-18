@@ -3,8 +3,11 @@ mod class_methods;
 mod Long;
 mod static_variables_and_methods;
 mod inline_methods;
+mod memory_layout;
 mod constructors;
+
 #[path = "examples/network_packet_headers.rs"] pub mod network_packet_headers;
+#[path = "examples/builder.rs"] pub mod builder;
 
 struct User {
     active: bool,
@@ -218,6 +221,8 @@ pub fn test_all()
     // test_rectangle();
     // test_rectangle_print();
 
+    memory_layout::test_all();
+
     // test_Point();
 
     // tuple_like_structs::demo();
@@ -226,5 +231,8 @@ pub fn test_all()
 
     // Long::tests();
 
-    network_packet_headers::test_all();
+    // Examples
+
+    // network_packet_headers::test_all();
+    // builder::test_all();
 }

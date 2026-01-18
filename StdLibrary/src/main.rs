@@ -54,7 +54,7 @@
 fn main()
 {
     // attributes::test_all();
-    bytes_bits::test_all();
+    // bytes_bits::test_all();
     // environment::test_all();
     // compare::test_all();
     // console_io::test_all();
@@ -86,7 +86,7 @@ fn main()
     // result::test_all();
     // read_from_input::test_all();
     // random::test_all();
-    // structs::test_all();
+    structs::test_all();
     // slices::test_all();
     // strings::test_all();
     // smart_pointers::test_all();

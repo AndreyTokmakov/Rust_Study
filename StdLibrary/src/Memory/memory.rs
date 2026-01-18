@@ -91,6 +91,6 @@ pub fn test_all()
 
     // replace::simple_test();
     // replace::simple_test_optional();
-    replace::exchange_part_of_structure();
+    // replace::exchange_part_of_structure();
 }
 

@@ -50,6 +50,19 @@ fn get_rectangle_area()
     println!("Are same: {}", square.equals(&rect2));
 }
 
+/**
+The &self Parameter
+
+    The first parameter of a method is always self in some form,
+    which represents the instance of the struct the method is being called on:
+
+    &self     - borrows the instance immutably (most common)
+    &mut self - borrows the instance mutably
+    self      - takes ownership of the instance (rare)
+
+Using &self means we're borrowing the struct instance immutably - we can read its data but not modify it.
+**/
+
 pub fn tests()
 {
     get_rectangle_area();
