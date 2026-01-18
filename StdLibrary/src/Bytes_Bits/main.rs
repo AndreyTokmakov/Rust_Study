@@ -1,4 +1,6 @@
 
+mod binary_parser;
+
 
 fn print_as_binary()
 {
@@ -112,10 +114,12 @@ pub fn test_all()
     // print_as_binary();
     // byte_array_to_integer();
 
-    big_vs_little_endian_parser();
+    // big_vs_little_endian_parser();
 
     // network_data_tests::parse_port();
     // reading_byte_slice::read_u32_data();
     // binary_protocol_parser::parse();
     // parse_u64_data_manually::parse();
+
+    binary_parser::test_all();
 }
