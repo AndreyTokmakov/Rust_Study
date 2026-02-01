@@ -86,13 +86,13 @@ fn main()
     // result::test_all();
     // read_from_input::test_all();
     // random::test_all();
-    structs::test_all();
+    // structs::test_all();
     // slices::test_all();
     // strings::test_all();
     // smart_pointers::test_all();
     // scoping_rules::test_all();
     // tuples::test_all();
-    // traits::test_all();
+    traits::test_all();
     // types::test_all();
     // time_and_duration::test_all();
     // tests_and_experiments::test_all();
