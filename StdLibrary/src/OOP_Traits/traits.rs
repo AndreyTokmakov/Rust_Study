@@ -16,9 +16,9 @@ pub fn test_all()
     // derive::test_all();
     // dynamic_dispatch::test_all();
     // static_dispatch_enum::test_all();
-    // operator_overloading::test_all();
+    operator_overloading::test_all();
     // drop_trait::test_all();
     // Clone::test_all();
     // Supertraits::test_all();
-    return_trait_from_function::test_all();
+    // return_trait_from_function::test_all();
 }
