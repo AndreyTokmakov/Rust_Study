@@ -33,8 +33,8 @@ pub fn test_all()
     // Box::test_all();
     // drop::test_all();
     // Rc::test_all();
-    // Arc::test_all();
-    Cell::test_all();
+    Arc::test_all();
+    // Cell::test_all();
     // RefCell::test_all();
     // Mutex::test_all();
 }

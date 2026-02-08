@@ -54,6 +54,23 @@ mod consumer_producer
     }
 }
 
+mod reference_count
+{
+    use std::sync::Arc;
+
+    pub fn demo()
+    {
+        let v: Arc<i32> = Arc::new(42);
+
+        println!("count = {}", Arc::strong_count(&v)); // 1
+
+        let v2: Arc<i32> = Arc::clone(&v);
+        println!("count = {}", Arc::strong_count(&v)); // 2
+
+        drop(v2);
+        println!("count = {}", Arc::strong_count(&v)); // 1
+    }
+}
 
 
 /**
@@ -63,7 +80,6 @@ mod consumer_producer
 pub fn test_all()
 {
     // basic::example();
-    consumer_producer::example();
-
-
+    // consumer_producer::example();
+    reference_count::demo();
 }

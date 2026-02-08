@@ -41,14 +41,55 @@ fn simple_example()
     println!("Счётчик: {}", Rc::strong_count(&a));
 }
 
+fn simple_example_1()
+{
+    let data = Rc::new(String::from("hello"));
+
+    let a = Rc::clone(&data);
+    let b = Rc::clone(&data);
+
+    println!("{}", a);
+    println!("{}", b);
+}
+
+fn reference_count_example()
+{
+    let v: Rc<i32> = Rc::new(42);
+    println!("count = {}", Rc::strong_count(&v));     // 1
+
+    let v2: Rc<i32> = Rc::clone(&v);
+    println!("count = {}", Rc::strong_count(&v));     // 2
+
+    {
+        let v3: Rc<i32> = Rc::clone(&v);
+        println!("count = {}", Rc::strong_count(&v)); // 3
+    }
+    println!("count = {}", Rc::strong_count(&v));     // 2
+}
+
+
 /**
-        Rc<T> — разделяемое владение (однопоточное)
-        Single-threaded reference-counting pointers. ‘Rc’ stands for ‘Reference Counted’.
-        https://doc.rust-lang.org/book/ch15-04-rc.html
+    Rc<T> — разделяемое владение (однопоточное)
+    Single-threaded reference-counting pointers. ‘Rc’ stands for ‘Reference Counted’.
+    https://doc.rust-lang.org/book/ch15-04-rc.html
+
+    - хранит значение на heap
+    - считает, сколько владельцев
+    - освобождает память, когда счётчик = 0
+    - НЕ потокобезопасен
+
+    Rc нужен Когда:
+    - один объект нужен нескольким владельцам
+    - нельзя выбрать «главного» owner-а
+    - всё происходит в одном потоке
 **/
 pub fn test_all()
 {
-    simple_example();
+    // simple_example();
+    // simple_example_1();
+
+    reference_count_example();
+
     // pointer_to_vector_clone();
     // pointer_to_vector_modify();
 }
