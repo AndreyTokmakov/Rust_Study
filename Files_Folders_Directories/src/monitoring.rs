@@ -32,7 +32,7 @@ mod notify_example
     use notify::recommended_watcher;
     use std::sync::mpsc::channel;
 
-    fn main() -> Result<()>
+    pub fn run() -> Result<()>
     {
         let path: &Path = Path::new("/home/andtokm/DiskS/Temp/monitoring");
         let (tx, rx) = channel();
@@ -50,7 +50,39 @@ mod notify_example
     }
 }
 
+mod tokio_example
+{
+    use std::error::Error;
+    use std::path::Path;
+    use std::time::SystemTime;
+    use notify::{Watcher, RecursiveMode, Result};
+    use notify::recommended_watcher;
+    use tokio::sync::mpsc;
+
+
+    #[tokio::main]
+    pub async fn run() -> Result<()>
+    {
+        let path: &Path = Path::new("/home/andtokm/DiskS/Temp/monitoring");
+        let (tx, mut rx) = mpsc::channel(32);
+        let mut watcher = recommended_watcher(
+            move |res|  {
+                let _ = tx.blocking_send(res);
+            }
+        )?;
+
+        watcher.watch(path, RecursiveMode::Recursive)?;
+        while let Some(event) = rx.recv().await {
+            println!("[{:?}] Event: {:?}", SystemTime::now(), event );
+        }
+
+        Ok(())
+    }
+}
+
 pub fn test_all()
 {
-    inotify_example::run().expect("TODO: panic message");
+    // inotify_example::run().expect("TODO: panic message");
+    // notify_example::run().expect("TODO: panic message");
+    tokio_example::run().expect("TODO: panic message");
 }
