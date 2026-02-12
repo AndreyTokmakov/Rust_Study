@@ -80,7 +80,7 @@ fn write_file()
 pub fn test_all()
 {
     // open_file();
-    read_file_0();
+    // read_file_0();
     // read_file_1();
     // read_file__buffer_reader();
     // read_file__buffer_reader_2();

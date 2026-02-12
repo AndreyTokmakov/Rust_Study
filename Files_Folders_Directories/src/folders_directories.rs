@@ -48,6 +48,27 @@ fn list_files_only_recursive(path: &str)
     }
 }
 
+fn check_is_path_exist()
+{
+    let path: String = String::from("/home/andtokm/DiskS/Temp");
+    if Path::new(path.as_str()).exists()
+    {
+        println!("Dir {} exists", &path);
+    }
+    else {
+        println!("Dir {} not found", &path);
+    }
+
+    let path: String = String::from("/home/andtokm/DiskS/Temp1");
+    if Path::new(path.as_str()).exists()
+    {
+        println!("Dir {} exists", &path);
+    }
+    else {
+        println!("Dir {} not found", &path);
+    }
+}
+
 
 pub fn test_all()
 {
@@ -57,5 +78,7 @@ pub fn test_all()
     // is_path_exist("/home/andtokm/DiskS/Temp");
     // is_path_exist("/home/andtokm/DiskS/Temp11");
 
-    list_files_only_recursive("/home/andtokm/DiskS/Temp");
+    // list_files_only_recursive("/home/andtokm/DiskS/Temp");
+
+    check_is_path_exist();
 }
