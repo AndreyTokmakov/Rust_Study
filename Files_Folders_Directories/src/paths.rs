@@ -30,8 +30,8 @@ fn make_path()
 
 fn path_attributes_tests()
 {
-    inspect(&env::current_dir().unwrap().join("resources/input.txt"));
-    inspect(&env::current_dir().unwrap().join("resources"));
+    inspect(&env::current_dir().unwrap().join("../resources/input.txt"));
+    inspect(&env::current_dir().unwrap().join("../resources"));
 }
 
 

@@ -6,7 +6,7 @@ use std::path::{Path, PathBuf};
 
 fn open_file()
 {
-    let file_path: PathBuf = env::current_dir().unwrap().join("resources/input.txt");
+    let file_path: PathBuf = env::current_dir().unwrap().join("../resources/input.txt");
     let greeting_file_result = File::open(file_path);
 
     println!("{:?}", greeting_file_result);
@@ -14,7 +14,7 @@ fn open_file()
 
 fn read_file_0()
 {
-    let file_path: PathBuf = env::current_dir().unwrap().join("resources/Cargo.toml");
+    let file_path: PathBuf = env::current_dir().unwrap().join("../resources/Cargo.toml");
     let mut file: File = File::open(file_path).unwrap(); // if error → return Err
     let mut contents: String = String::new();
     file.read_to_string(&mut contents).expect("TODO: panic message");
@@ -23,7 +23,7 @@ fn read_file_0()
 
 fn read_file_1()
 {
-    let file_path: PathBuf = env::current_dir().unwrap().join("resources/input.txt");
+    let file_path: PathBuf = env::current_dir().unwrap().join("../resources/input.txt");
     let file: File  = File::open(file_path).unwrap();
     let mut reader: BufReader<File> = BufReader::new(file);
     let mut line: String = String::new();
@@ -41,7 +41,7 @@ fn read_file_1()
 
 fn read_file__buffer_reader()
 {
-    let file_path: PathBuf = env::current_dir().unwrap().join("resources/input.txt");
+    let file_path: PathBuf = env::current_dir().unwrap().join("../resources/input.txt");
     let file: File  = File::open(file_path).unwrap();
     let reader: BufReader<File> = BufReader::new(file);
     
@@ -53,7 +53,7 @@ fn read_file__buffer_reader()
 
 fn read_file__buffer_reader_2()
 {
-    let file_path: PathBuf = env::current_dir().unwrap().join("resources/test_files/in_out.txt");
+    let file_path: PathBuf = env::current_dir().unwrap().join("../resources/test_files/in_out.txt");
     let file: File = File::open(file_path).unwrap();
     let mut reader: BufReader<File> = BufReader::new(file);
     
@@ -65,7 +65,7 @@ fn read_file__buffer_reader_2()
 
 fn write_file()
 {
-    let file_path: PathBuf = env::current_dir().unwrap().join("resources/test_files/in_out.txt");
+    let file_path: PathBuf = env::current_dir().unwrap().join("../resources/test_files/in_out.txt");
     let data: &str = "Some data!\n";
     
     let mut file: File = OpenOptions::new()

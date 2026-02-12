@@ -24,7 +24,7 @@ fn list_files_in_directory(path: &Path)
 
 fn list_files_in_current_directory()
 {
-    list_files_in_directory(Path::new("."));
+    list_files_in_directory(Path::new(".."));
 }
 
 

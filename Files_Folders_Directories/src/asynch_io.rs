@@ -29,7 +29,7 @@ mod async_file_monitor
             Config::default(),
         )?;
 
-        let path: PathBuf = env::current_dir()?.join("resources/test_files/in_out.txt");
+        let path: PathBuf = env::current_dir()?.join("../resources/test_files/in_out.txt");
         watcher.watch(&path, RecursiveMode::NonRecursive)?;
 
         println!("Watching {:?} for changes...", path);

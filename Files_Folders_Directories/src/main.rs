@@ -4,7 +4,7 @@ mod paths;
 mod folders_directories;
 mod asynch_io;
 
-pub fn test_all()
+pub fn main()
 {
     asynch_io::test_all();
     // files::test_all();

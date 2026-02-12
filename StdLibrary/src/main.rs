@@ -32,7 +32,6 @@
 #[path = "Slices/slices.rs"] pub mod slices;
 #[path = "SmartPointers/main.rs"] pub mod smart_pointers;
 #[path = "ErrorsHandling/main.rs"] pub mod errors_handling;
-#[path = "Files_Folders_Directories/main.rs"] pub mod files_folders_directories;
 #[path = "Generics_Templates/generics.rs"] pub mod generics;
 #[path = "Directories/directories.rs"] pub mod directories;
 #[path = "Tuples/tuples.rs"] pub mod tuples;
@@ -67,7 +66,6 @@ fn main()
     // enums::test_all();
     // errors_handling::test_all();
     // functions::test_all();
-    // files_folders_directories::test_all();
     // folders_directories::test_all();
     // generics::test_all();
     // lambdas::test_all();
@@ -89,6 +87,7 @@ fn main()
     // structs::test_all();
     // slices::test_all();
     // strings::test_all();
+    smart_pointers::test_all();
     smart_pointers::test_all();
     // scoping_rules::test_all();
     // tuples::test_all();
