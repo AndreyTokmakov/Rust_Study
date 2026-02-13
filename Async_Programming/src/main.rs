@@ -11,6 +11,6 @@ mod Futures;
 
 fn main()
 {
-    // Tokio::tokio_tests();
-    Futures::future_tests();
+    Tokio::tokio_tests();
+    // Futures::future_tests();
 }

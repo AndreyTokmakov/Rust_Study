@@ -41,8 +41,34 @@ mod async_file_monitor
     }
 }
 
+mod async_file_read
+{
+    use tokio::fs::File;
+    use tokio::io::AsyncReadExt;
+    use std::path::{PathBuf};
+    use std::env;
+
+    #[tokio::main]
+    async fn readFile() -> Result<(), Box<dyn std::error::Error>>
+    {
+        let file_path: PathBuf = env::current_dir()?.join("resources/test_files/file1.txt");
+
+        let mut file: File = File::open(file_path).await?;
+        let mut content: String = String::new();
+        file.read_to_string(&mut content).await?;
+        println!("{}", content);
+        Ok(())
+    }
+
+    pub fn run()
+    {
+        let _ = readFile();
+    }
+}
+
 
 pub fn test_all()
 {
-    let _ = async_file_monitor::run();
+    // let _ = async_file_monitor::run();
+    async_file_read::run();
 }

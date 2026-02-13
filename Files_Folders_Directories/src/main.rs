@@ -14,9 +14,9 @@ mod monitoring;
 
 pub fn main()
 {
-    // asynch_io::test_all();
+    asynch_io::test_all();
     // files::test_all();
     // paths::test_all();
     // folders_directories::test_all();
-    monitoring::test_all();
+    // monitoring::test_all();
 }

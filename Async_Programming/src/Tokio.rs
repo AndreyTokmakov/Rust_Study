@@ -270,6 +270,37 @@ mod common_patterns_2
     }
 }
 
+mod handle_timeouts
+{
+    use tokio::time::{timeout, Duration};
+    use tokio::time::error::Elapsed;
+
+    #[tokio::main]
+    async fn executeTask(timeoutSec: u64)
+    {
+        let result: Result<i32, Elapsed> = timeout(Duration::from_secs(timeoutSec),
+            asyncWork(2),
+        ).await;
+
+        match result  {
+            Ok(value) => println!("Completed: {}", value),
+            Err(_) => println!("Timed out"),
+        }
+    }
+
+    async fn asyncWork(duration: u64) -> i32
+    {
+        tokio::time::sleep(Duration::from_secs(duration)).await;
+        42
+    }
+
+    pub fn run()
+    {
+        executeTask(1);
+        executeTask(3);
+    }
+}
+
 pub fn tokio_tests()
 {
     // basic_examples::test_bad();
@@ -281,5 +312,7 @@ pub fn tokio_tests()
     // practical_examples_2::concurrent_read_write_file_async();
 
     // common_patterns_1::wait_first_of_futures();
-    common_patterns_2::add_timeouts_to_async_operation();
+    // common_patterns_2::add_timeouts_to_async_operation();
+
+    handle_timeouts::run();
 }
