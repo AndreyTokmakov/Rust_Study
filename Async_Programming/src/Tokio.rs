@@ -301,6 +301,92 @@ mod handle_timeouts
     }
 }
 
+mod handle_timeouts_select
+{
+    use tokio::time::{sleep, Duration};
+    use tokio::select;
+
+    #[tokio::main]
+    async fn executeTask(timeoutSec: u64)
+    {
+        select! {
+            _ = asyncWork() =>{
+                println!("Completed");
+            }
+            _ = sleep(Duration::from_secs(timeoutSec)) => {
+                println!("Timeout");
+            }
+        }
+    }
+
+    async fn asyncWork()
+    {
+        sleep(Duration::from_secs(2)).await;
+    }
+
+    pub fn run()
+    {
+        executeTask(1);
+        executeTask(3);
+    }
+}
+
+mod handle_timeout_tcp
+{
+    use tokio::net::TcpStream;
+    use tokio::time::{timeout, Duration};
+
+    #[tokio::main]
+    async fn establishConnection(timeoutSec: u64)
+    {
+        let result = timeout(
+            Duration::from_secs(timeoutSec),
+            TcpStream::connect("1.1.1.1:80"),
+        )
+            .await;
+
+        match result  {
+            Ok(Ok(_)) => println!("Connected"),
+            Ok(Err(e)) => println!("Error: {}", e),
+            Err(_) => println!("Connection timed out"),
+        }
+    }
+
+    pub fn run()
+    {
+        establishConnection(1);
+    }
+}
+mod deadline
+{
+    use tokio::time::{ sleep_until, Instant, Duration, sleep };
+
+    #[tokio::main]
+    async fn executeTaskWithDeadline(deadlineSec: u64)
+    {
+        let deadline: Instant = Instant::now() + Duration::from_secs(deadlineSec);
+        tokio::select!  {
+            _ = asyncWork(2) => println!("Done"),
+            _ = sleep_until(deadline) => println!("Deadline reached"),
+        }
+    }
+
+    async fn asyncWork(timeout: u64)
+    {
+        sleep(Duration::from_secs(timeout)).await;
+    }
+
+    pub fn run()
+    {
+        executeTaskWithDeadline(1);
+        executeTaskWithDeadline(3);
+
+        // Deadline reached
+        // Done
+    }
+}
+
+
 pub fn tokio_tests()
 {
     // basic_examples::test_bad();
@@ -314,5 +400,9 @@ pub fn tokio_tests()
     // common_patterns_1::wait_first_of_futures();
     // common_patterns_2::add_timeouts_to_async_operation();
 
-    handle_timeouts::run();
+    // handle_timeouts::run();
+    // handle_timeouts_select::run();
+    // handle_timeout_tcp::run();
+
+    deadline::run();
 }

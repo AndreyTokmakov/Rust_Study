@@ -9,6 +9,9 @@
 #[path = "command/command_1.rs"] pub mod command_1;
 #[path = "command/command_func_ptr.rs"] pub mod command_func_ptr;
 #[path = "command/command_fn_traits.rs"] pub mod command_fn_traits;
+#[path = "factory/Factory.rs"] pub mod factory;
+#[path = "builder/Builder.rs"] pub mod builder;
+#[path = "strategy/Strategy.rs"] pub mod strategy;
 
 mod State;
 mod TaskPool;
@@ -20,5 +23,9 @@ fn main()
 
     // command_1::test_all();
     // command_func_ptr::test_all();
-    command_fn_traits::test_all();
+    // command_fn_traits::test_all();
+
+    // factory::test_all();
+    // builder::test_all();
+    strategy::test_all();
 }
