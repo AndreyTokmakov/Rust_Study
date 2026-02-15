@@ -6,16 +6,21 @@
     non_snake_case
 )]
 
-mod client;
-mod tcp_servers;
-mod udp_servers;
-mod dns;
-mod ProxyServer;
-mod web_sockets;
-mod listen_port;
-mod tokio_asynch_tcp_client;
-mod tokio_asynch_tcp_server;
-mod client_server_examples;
+#[path = "tokio/tokio_asynch_tcp_client.rs"] pub mod tokio_asynch_tcp_client;
+#[path = "tokio/tokio_asynch_tcp_server.rs"] pub mod tokio_asynch_tcp_server;
+
+#[path = "mio/Servers.rs"] pub mod mio_servers;
+
+#[path = "std/client.rs"] pub mod client;
+#[path = "std/tcp_servers.rs"] pub mod tcp_servers;
+#[path = "std/udp_servers.rs"] pub mod udp_servers;
+#[path = "std/dns.rs"] pub mod dns;
+#[path = "std/ProxyServer.rs"] pub mod ProxyServer;
+#[path = "std/web_sockets.rs"] pub mod web_sockets;
+#[path = "std/listen_port.rs"] pub mod listen_port;
+#[path = "std/client_server_examples.rs"] pub mod client_server_examples;
+
+
 
 pub fn main()
 {
@@ -27,8 +32,10 @@ pub fn main()
     // web_sockets::test_all();
     // ProxyServer::test_all();
 
-    client_server_examples::test_all();
+    // client_server_examples::test_all();
 
     // tokio_asynch_tcp_client::test_all();
     // tokio_asynch_tcp_server::test_all();
+
+    mio_servers::test_all();
 }
