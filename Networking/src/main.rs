@@ -21,6 +21,7 @@
 #[path = "std/client_server_examples.rs"] pub mod client_server_examples;
 
 
+#[path = "ssh/main.rs"] pub mod ssh;
 
 pub fn main()
 {
@@ -37,5 +38,7 @@ pub fn main()
     // tokio_asynch_tcp_client::test_all();
     // tokio_asynch_tcp_server::test_all();
 
-    mio_servers::test_all();
+    // mio_servers::test_all();
+
+    ssh::test_all();
 }
