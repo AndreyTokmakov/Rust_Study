@@ -16,3 +16,6 @@ native-tls = "0.2.16"
 mio = "1.1.1"
 anyhow = "1.0.101"
 ssh2 = "0.9.5"
+actix-web = "4"
+utoipa = { version = "4", features = ["actix_extras"] }
+utoipa-swagger-ui = { version = "6", features = ["actix-web"] }

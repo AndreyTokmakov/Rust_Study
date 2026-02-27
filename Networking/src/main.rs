@@ -20,8 +20,8 @@
 #[path = "std/listen_port.rs"] pub mod listen_port;
 #[path = "std/client_server_examples.rs"] pub mod client_server_examples;
 
-
 #[path = "ssh/main.rs"] pub mod ssh;
+#[path = "api_services/main.rs"] pub mod api_services;
 
 pub fn main()
 {
@@ -40,5 +40,7 @@ pub fn main()
 
     // mio_servers::test_all();
 
-    ssh::test_all();
+    // ssh::test_all();
+
+    api_services::test_all();
 }
