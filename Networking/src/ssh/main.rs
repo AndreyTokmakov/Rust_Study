@@ -125,13 +125,17 @@ mod openssl_pool_example
 mod ssh_pool_demo
 {
     use async_trait::async_trait;
-    use deadpool::managed::{Manager, Metrics, Object, Pool, RecycleError, RecycleResult, PoolError};
+    use deadpool::managed::{
+        Manager, Metrics, Object, Pool,
+        RecycleError, RecycleResult, PoolError
+    };
     use ssh2::{Channel, Session};
-    use std::io::Read;
+    use std::io::{Read, Write};
     use std::net::TcpStream;
     use std::sync::{Mutex, MutexGuard};
     use std::thread::JoinHandle;
     use std::time::Duration;
+    use thiserror::Error;
 
     type DynError = Box<dyn std::error::Error + Send + Sync + 'static>;
     type Result<T> = std::result::Result<T, DynError>;
@@ -139,6 +143,30 @@ mod ssh_pool_demo
     pub struct SshConnection {
         session: Session,
     }
+
+    pub struct CommandResult
+    {
+        pub stdout: String,
+        pub stderr: String,
+        pub exitCode: i32,
+    }
+
+    /*
+    #[derive(Debug, Error)]
+    pub enum SshError {
+        #[error("IO error: {0}")]
+        Io(#[from] std::io::Error),
+
+        #[error("SSH error: {0}")]
+        Ssh(#[from] ssh2::Error),
+
+        #[error("Authentication failed")]
+        AuthFailed,
+
+        #[error("Channel closed unexpectedly")]
+        ChannelClosed,
+    }
+    */
 
     impl SshConnection
     {
@@ -151,9 +179,11 @@ mod ssh_pool_demo
             tcp.set_read_timeout(Some(Duration::from_secs(10)))?;
             tcp.set_write_timeout(Some(Duration::from_secs(10)))?;
             let mut session: Session = Session::new()?;
+
             session.set_tcp_stream(tcp);
             session.handshake()?;
             session.userauth_password(user, password)?;
+
             if !session.authenticated() {
                 return Err("authentication failed".into());
             }
@@ -161,14 +191,32 @@ mod ssh_pool_demo
             Ok(Self { session })
         }
 
-        pub fn exec(&mut self, cmd: &str) -> Result<String>
+        pub fn exec(&mut self, cmd: &str, sudo: bool) -> Result<CommandResult>
         {
             let mut channel: Channel = self.session.channel_session()?;
-            channel.exec(cmd)?;
-            let mut output = String::new();
-            channel.read_to_string(&mut output)?;
+
+            if (sudo) {
+                let sudo_cmd: String = format!("sudo -S -p '' {}", cmd);
+                channel.exec(&sudo_cmd)?;
+                channel.write_all(format!("{}\n", "test").as_bytes())?;
+                channel.flush()?;
+            }
+            else {
+                channel.exec(&cmd)?;
+            }
+
+            let mut result: CommandResult = CommandResult {
+                stdout: String::new(),
+                stderr: String::new(),
+                exitCode: 0
+            };
+
+            channel.read_to_string(&mut result.stdout)?;
+            channel.stderr().read_to_string(&mut result.stderr)?;
+
             channel.wait_close()?;
-            Ok(output)
+            result.exitCode = channel.exit_status()?;
+            Ok(result)
         }
 
         pub fn is_alive(&self) -> bool {
@@ -182,6 +230,7 @@ mod ssh_pool_demo
         port: u16,
         user: String,
         password: String,
+        sudo_password: String,
     }
 
     impl SshManager {
@@ -191,6 +240,7 @@ mod ssh_pool_demo
                 port,
                 user: user.to_string(),
                 password: password.to_string(),
+                sudo_password: password.to_string(),
             }
         }
     }
@@ -201,26 +251,31 @@ mod ssh_pool_demo
         type Error = DynError;
 
         async fn create(&self) -> std::result::Result<Self::Type, Self::Error> {
+            println!("=====> Creating connection");
             let conn: SshConnection = SshConnection::connect(&self.host, self.port, &self.user, &self.password)?;
             Ok(Mutex::new(conn))
         }
 
         async fn recycle(&self, conn: &mut Self::Type, _: &Metrics) -> RecycleResult<Self::Error> {
             let conn: MutexGuard<SshConnection> = conn.lock().unwrap();
-            if conn.is_alive() { Ok(()) } else { Err(RecycleError::Message("SSH connection dead".into())) }
+            if conn.is_alive() {
+                Ok(())
+            } else {
+                Err(RecycleError::Message("SSH connection dead".into()))
+            }
         }
     }
 
-    async fn run_command(pool: &Pool<SshManager>, cmd: &str) -> Result<String>
+    async fn run_command(pool: &Pool<SshManager>, cmd: &str, sudo: bool) -> Result<CommandResult>
     {
         let conn: Object<SshManager> = pool.get().await
             .map_err(|e| Box::<dyn std::error::Error + Send + Sync>::from(format!("{}", e)))?;
-        let cmd = cmd.to_string();
-        let output = tokio::task::spawn_blocking(move || {
-            let mut conn = conn.lock().unwrap();
-            conn.exec(&cmd)
+        let cmd: String = cmd.to_string();
+        let result: CommandResult = tokio::task::spawn_blocking(move || {
+            let mut conn: MutexGuard<SshConnection> = conn.lock().unwrap();
+            conn.exec(&cmd, sudo)
         }).await??;
-        Ok(output)
+        Ok(result)
     }
 
     #[tokio::main]
@@ -230,9 +285,23 @@ mod ssh_pool_demo
         let pool: Pool<SshManager, Object<SshManager>> = Pool::builder(manager).max_size(4).build()?;
 
         for i in 0..3 {
-            let result = run_command(&pool, "echo hello").await?;
-            println!("Sequential {}: {}", i, result.trim());
+            let result: CommandResult = run_command(&pool, "ls -lar", false).await?;
+            println!("Sequential {}: {}", i, result.stdout.trim());
         }
+
+        Ok(())
+    }
+
+    #[tokio::main]
+    async fn exec_cmd_sudo() -> Result<()>
+    {
+        let manager: SshManager = SshManager::new("127.0.0.1", 22022, "test", "test");
+        let pool: Pool<SshManager, Object<SshManager>> = Pool::builder(manager).max_size(4).build()?;
+
+        // let result: CommandResult = run_command(&pool, "pwd", false).await?;
+        let result: CommandResult = run_command(&pool, "cat secret.txt", true).await?;
+
+        println!("Result: {}", result.stdout.trim());
 
         Ok(())
     }
@@ -247,8 +316,8 @@ mod ssh_pool_demo
         for i in 0..5 {
             let pool = pool.clone();
             handles.push(tokio::spawn(async move {
-                let result = run_command(&pool, "hostname").await.unwrap();
-                println!("Parallel {}: {}", i, result.trim());
+                let result: CommandResult = run_command(&pool, "hostname", false).await.unwrap();
+                println!("Parallel {}: {}", i, result.stdout.trim());
             }));
         }
 
@@ -262,7 +331,8 @@ mod ssh_pool_demo
     pub fn run()
     {
         // let _ = exec_cmd_sequential();
-        let _ = exec_cmd_parallel();
+        // let _ = exec_cmd_parallel();
+        let _ = exec_cmd_sudo();
     }
 }
 
