@@ -19,3 +19,6 @@ ssh2 = "0.9.5"
 actix-web = "4"
 utoipa = { version = "4", features = ["actix_extras"] }
 utoipa-swagger-ui = { version = "6", features = ["actix-web"] }
+openssh = "0.10"
+deadpool = "0.10"
+async-trait = "0.1"

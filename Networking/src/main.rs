@@ -40,7 +40,7 @@ pub fn main()
 
     // mio_servers::test_all();
 
-    // ssh::test_all();
+    ssh::test_all();
 
-    api_services::test_all();
+    // api_services::test_all();
 }
