@@ -1,4 +1,6 @@
 
+mod ssh_pool_private_key;
+
 mod ssh2_example
 {
     use ssh2::Session;
@@ -393,7 +395,9 @@ mod ssh_pool_demo
 pub fn test_all()
 {
     // ssh2_example::run();
-    ssh2_example_by_key::run();
+    // ssh2_example_by_key::run();
     // openssl_pool_example::run();
     // ssh_pool_demo::run();
+
+    ssh_pool_private_key::run_tests();
 }
