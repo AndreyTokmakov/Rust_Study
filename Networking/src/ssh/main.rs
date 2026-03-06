@@ -32,6 +32,59 @@ mod ssh2_example
     }
 }
 
+mod ssh2_example_by_key
+{
+    use ssh2::{Channel, Session};
+    use std::io::Read;
+    use std::net::TcpStream;
+    use std::path::Path;
+
+    fn exec_ssh_command() -> Result<(), Box<dyn std::error::Error>>
+    {
+        let userName: String = String::from("test");
+        let privateKey: &Path = Path::new("/home/andtokm/DiskS/ProjectsUbuntu/Rust_Study/resources/test_ssh_keys/id_ed25519");
+
+        let tcp: TcpStream = TcpStream::connect("127.0.0.1:22022")?;
+        let mut sshSession: Session = Session::new()?;
+        sshSession.set_tcp_stream(tcp);
+        sshSession.handshake()?;
+
+        sshSession.userauth_pubkey_file(
+            userName.as_str(),
+            None,
+            privateKey,
+            None,
+        )?;
+
+        if !sshSession.authenticated() {
+            panic!("Authentication failed");
+        }
+
+        println!("SSH authenticated");
+
+        let mut channel: Channel = sshSession.channel_session()?;
+
+        // execute command
+        channel.exec("uname -a")?;
+
+        let mut output: String = String::new();
+        channel.read_to_string(&mut output)?;
+
+        println!("Command output:");
+        println!("{output}");
+
+        channel.wait_close()?;
+
+        println!("Exit status: {}", channel.exit_status()?);
+        Ok(())
+    }
+
+    pub fn run()
+    {
+        exec_ssh_command().expect("TODO: panic message");
+    }
+}
+
 mod openssl_pool_example
 {
     use std::process::Output;
@@ -340,6 +393,7 @@ mod ssh_pool_demo
 pub fn test_all()
 {
     // ssh2_example::run();
+    ssh2_example_by_key::run();
     // openssl_pool_example::run();
-    ssh_pool_demo::run();
+    // ssh_pool_demo::run();
 }
