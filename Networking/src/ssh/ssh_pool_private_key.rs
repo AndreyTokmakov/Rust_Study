@@ -1,8 +1,10 @@
-use std::path::Path;
+use std::env;
+use std::path::{Path, PathBuf};
 use crate::ssh::ssh_pool_private_key::ssh_pool_impl::SshConnection;
 
 mod ssh_pool_impl
 {
+    use std::env;
     use std::fs::File;
     use async_trait::async_trait;
     use deadpool::managed::{
@@ -159,7 +161,7 @@ mod ssh_pool_impl
     pub async fn exec_cmd_sequential() -> Result<()>
     {
         let manager: SshManager = SshManager::new("127.0.0.1", 22022, "test", "test",
-            PathBuf::from("/home/andtokm/DiskS/ProjectsUbuntu/Rust_Study/resources/test_ssh_keys/id_ed25519")
+            env::current_dir().unwrap().join("resources/test_ssh_keys/id_ed25519")
         );
         let pool: Pool<SshManager, Object<SshManager>> = Pool::builder(manager).max_size(4).build()?;
 

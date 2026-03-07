@@ -35,12 +35,12 @@ pub fn main()
 
     // client_server_examples::test_all();
 
-    // tokio_asynch_tcp_client::test_all();
+    tokio_asynch_tcp_client::test_all();
     // tokio_asynch_tcp_server::test_all();
 
     // mio_servers::test_all();
 
-    ssh::test_all();
+    // ssh::test_all();
 
     // api_services::test_all();
 }
