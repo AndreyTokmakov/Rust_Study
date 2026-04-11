@@ -54,6 +54,7 @@ mod tracing_with_span
 
         info!("Processing request");
         info!(step = "db_query", "Fetching user data");
+        info!(step = "command ", "Running command");
     }
 
     pub fn example_2()
@@ -212,11 +213,11 @@ mod diff_levels_for_diff_modules
 
 pub fn test_all()
 {
-    tracing_basic::simple_logs();
+    // tracing_basic::simple_logs();
     // tracing_basic::simple_logs_2();
     // tracing_basic::simple_logs_3();
 
-    // tracing_with_span::example_1();
+    tracing_with_span::example_1();
     // tracing_with_span::example_2();
     // tracing_with_span::logs_json();
     // tracing_with_span::span_with_enter();

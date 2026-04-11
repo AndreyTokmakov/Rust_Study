@@ -6,16 +6,18 @@ pub fn test_all()
     // append_with_string();
     // concatenate_1();
     // concatenate_2();
-    concatenate_3();
-
-
+    // concatenate_3();
     // format_string();
-
     // iterate_string_0();
     // iterate_string_enumerate();
     // iterate_string_bytes();
-
     // split_string();
+
+
+    let mut text: String = "Hello".to_string();
+    text.push_str(" world");
+
+    println!("{}", text);
 }
 
 fn create()
