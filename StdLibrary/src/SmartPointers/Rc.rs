@@ -280,6 +280,123 @@ mod shared_configuration_access
     }
 }
 
+mod shared_counter
+{
+    use std::rc::Rc;
+
+    struct SharedCounter {
+        value: Rc<i32>,
+    }
+
+    impl SharedCounter
+    {
+        fn new(initial: i32) -> Self {
+            SharedCounter {
+                value: Rc::new(initial),
+            }
+        }
+
+        fn get(&self) -> i32 {
+            *self.value
+        }
+    }
+
+    pub fn demo()
+    {
+        let counter: SharedCounter = SharedCounter::new(42);
+
+        let counter_a: SharedCounter = counter; // Владение перемещено
+        // let counter_b = counter; // ❌ нельзя, владение уже перемещено
+
+        // А с Rc можно:
+        let rc_counter: Rc<i32>   = Rc::new(42);
+        let rc_counter_a: Rc<i32> = Rc::clone(&rc_counter);
+        let rc_counter_b: Rc<i32> = Rc::clone(&rc_counter);
+
+        println!("Value (a): {}, Value (b): {}", rc_counter_a, rc_counter_b);
+        println!("Ref count: {}", Rc::strong_count(&rc_counter)); // 3
+    }
+}
+
+mod message_bus
+{
+    use std::rc::Rc;
+
+    struct Message {
+        text: String,
+        from: String,
+    }
+
+    struct MessageBus {
+        messages: Vec<Rc<Message>>,
+    }
+
+    struct Subscriber {
+        name: String,
+        lastMessage: Option<Rc<Message>>,
+    }
+
+    impl MessageBus
+    {
+        fn new() -> Self {
+            MessageBus {
+                messages: Vec::new(),
+            }
+        }
+
+        fn send(&mut self, message: Message) -> Rc<Message> {
+            let msg: Rc<Message> = Rc::new(message);
+            self.messages.push(Rc::clone(&msg));
+            msg
+        }
+
+        fn get_last(&self) -> Option<Rc<Message>> {
+            self.messages.last().map(Rc::clone)
+        }
+    }
+
+    impl Subscriber
+    {
+        fn new(name: &str) -> Self {
+            Subscriber {
+                name: name.to_string(),
+                lastMessage: None,
+            }
+        }
+
+        fn receive(&mut self, message: Rc<Message>) {
+            println!("{} received: {}", self.name, message.text);
+            self.lastMessage = Some(message);
+        }
+    }
+
+    pub fn demo()
+    {
+        let mut messageBus: MessageBus = MessageBus::new();
+
+        let msg1: Rc<Message> = messageBus.send(Message {
+            text: "Hello everyone!".to_string(),
+            from: "Alice".to_string(),
+        });
+
+        let msg2: Rc<Message> = messageBus.send(Message {
+            text: "Rust is awesome!".to_string(),
+            from: "Bob".to_string(),
+        });
+
+        let mut sub1: Subscriber = Subscriber::new("Subscriber1");
+        let mut sub2: Subscriber = Subscriber::new("Subscriber2");
+
+        sub1.receive(Rc::clone(&msg1));
+        sub2.receive(Rc::clone(&msg1));
+        sub1.receive(Rc::clone(&msg2));
+
+        // Все сообщения всё ещё в bus
+        println!("Messages in bus: {}", messageBus.messages.len());
+        println!("Message1 ref count: {}", Rc::strong_count(&msg1)); // 4 (bus + sub1 + sub2 + msg1)
+    }
+}
+
 /**
     Rc<T> — разделяемое владение (однопоточное)
     Single-threaded reference-counting pointers. ‘Rc’ stands for ‘Reference Counted’.
@@ -306,6 +423,7 @@ pub fn test_all()
 
     // caching::demo();
     // observer::demo();
-
-    shared_configuration_access::demo();
+    // shared_counter::demo();
+    // shared_configuration_access::demo();
+    message_bus::demo();
 }

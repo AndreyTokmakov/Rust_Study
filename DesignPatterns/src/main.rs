@@ -12,6 +12,7 @@
 #[path = "factory/Factory.rs"] pub mod factory;
 #[path = "builder/Builder.rs"] pub mod builder;
 #[path = "strategy/Strategy.rs"] pub mod strategy;
+#[path = "undo/main.rs"] pub mod undo;
 
 mod State;
 mod TaskPool;
@@ -27,5 +28,7 @@ fn main()
 
     // factory::test_all();
     // builder::test_all();
-    strategy::test_all();
+    // strategy::test_all();
+
+    undo::test_all();
 }
