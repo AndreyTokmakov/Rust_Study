@@ -206,6 +206,7 @@ mod custom_smart_pointer
     }
 }
 
+// INFO: https://www.compilenrun.com/docs/language/rust/rust-memory-management/rust-box-type
 pub fn test_all()
 {
     // simple_example();

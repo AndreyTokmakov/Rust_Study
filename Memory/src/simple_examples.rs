@@ -84,7 +84,7 @@ mod replace
 
 pub fn test_all()
 {
-    // string_test();
+    string_test();
     // string_test_use_after_move();
     // clone_string();
     // drop_string();

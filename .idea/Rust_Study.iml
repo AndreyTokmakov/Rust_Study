@@ -21,6 +21,8 @@
       <sourceFolder url="file://$MODULE_DIR$/Files_Folders_Directories/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GRpc/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Tests_and_Experiments/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Memory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Performance/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

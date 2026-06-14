@@ -22,7 +22,6 @@
 #[path = "Conditions/conditions.rs"] pub mod conditions;
 #[path = "Lambdas/lambdas.rs"] pub mod lambdas;
 #[path = "Types/types_tests.rs"] pub mod types;
-#[path = "Memory/memory.rs"] pub mod memory;
 #[path = "OOP_Structures/main.rs"] pub mod structs;
 #[path = "OOP_Traits/traits.rs"] pub mod traits;
 #[path = "Enums/enums.rs"] pub mod enums;
@@ -73,7 +72,6 @@ fn main()
     // lifetime_borrowing::test_all();
     // unsafe_features::test_all();
     // documentation::test_all();
-    // memory::test_all();
     // operators::test_all();
     // operators_overload::test_all();
     // ownership::test_all();
