@@ -46,14 +46,17 @@ Common Combinations
 | Box<dyn Trait>             | Yes         | Trait objects, dynamic dispatch                |
 **/
 
+// https://www.compilenrun.com/docs/language/rust/rust-memory-management/
+
+
 pub fn test_all() 
 {
     // pass_String_as_str::test();
     // custom_smart_pointer::test_all();
     // Box::test_all();
     // drop::test_all(); 
-    // Rc::test_all();
-    Arc::test_all();
+    Rc::test_all();
+    // Arc::test_all();
     // Cell::test_all();
     // RefCell::test_all();
     // Mutex::test_all();

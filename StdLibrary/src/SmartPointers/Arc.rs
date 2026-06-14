@@ -174,6 +174,31 @@ mod reference_count
     }
 }
 
+mod shared_data_with_mutex
+{
+    use std::sync::{Arc, Mutex, MutexGuard};
+    use std::thread;
+    use std::thread::JoinHandle;
+
+    pub fn shared_counter()
+    {
+        let counter: Arc<Mutex<i32>> = Arc::new(Mutex::new(0));
+        let mut handles: Vec<JoinHandle<()>> = vec![];
+        for _ in 0..10 {
+            let counter: Arc<Mutex<i32>> = Arc::clone(&counter);
+            handles.push(thread::spawn(move || {
+                let mut num: MutexGuard<i32> = counter.lock().unwrap();
+                *num += 1;
+            }));
+        }
+
+        for handle in handles {
+            handle.join().unwrap();
+        }
+        println!("Result: {}", *counter.lock().unwrap()); //  ---> 10
+    }
+}
+
 
 /**
     Arc<T> — потокобезопасный Rc
@@ -185,7 +210,9 @@ pub fn test_all()
     // basic::example2();
     // basic::atomicCounter();
 
-    shared_access_to_config::run();
+    // shared_access_to_config::run();
     // consumer_producer::example();
     // reference_count::demo();
+
+    shared_data_with_mutex::shared_counter();
 }

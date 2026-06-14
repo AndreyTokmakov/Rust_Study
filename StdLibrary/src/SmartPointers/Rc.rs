@@ -89,6 +89,38 @@ fn reference_count_example()
     println!("count = {}", Rc::strong_count(&v));     // 2
 }
 
+fn reference_count_example_1()
+{
+    // Create a reference-counted string
+    let original: Rc<String> = Rc::new(String::from("Hello, Rust!"));
+    println!("Reference count after creation: {}", Rc::strong_count(&original));
+
+    // Create a clone (increases the reference count, doesn't copy the data)
+    let clone1: Rc<String> = Rc::clone(&original);
+    println!("Reference count after clone1: {}", Rc::strong_count(&original));
+
+    // Create another clone
+    let clone2: Rc<String> = Rc::clone(&original);
+    println!("Reference count after clone2: {}", Rc::strong_count(&original));
+
+    // Print the values
+    println!("Original: {}, Clone 1: {}, Clone 2: {}", original, clone1, clone2);
+
+    // When clone2 goes out of scope, the count decreases by 1
+    drop(clone2);
+    println!("Reference count after dropping clone2: {}", Rc::strong_count(&original));
+
+    // When clone1 goes out of scope, the count decreases by 1
+    drop(clone1);
+    println!("Reference count after dropping clone1: {}", Rc::strong_count(&original));
+
+    // Reference count after creation: 1
+    // Reference count after clone1: 2
+    // Reference count after clone2: 3
+    // Original: Hello, Rust!, Clone 1: Hello, Rust!, Clone 2: Hello, Rust!
+    // Reference count after dropping clone2: 2
+    // Reference count after dropping clone1: 1
+}
 
 mod caching
 {
@@ -418,6 +450,7 @@ pub fn test_all()
     // simple_example_1();
     // simple_example_2();
     // reference_count_example();
+    reference_count_example_1();
     // pointer_to_vector_clone();
     // pointer_to_vector_modify();
 
@@ -425,5 +458,5 @@ pub fn test_all()
     // observer::demo();
     // shared_counter::demo();
     // shared_configuration_access::demo();
-    message_bus::demo();
+    // message_bus::demo();
 }
