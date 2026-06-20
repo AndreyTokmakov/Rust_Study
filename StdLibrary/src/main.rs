@@ -84,8 +84,8 @@ fn main()
     // random::test_all();
     // structs::test_all();
     // slices::test_all();
-    // strings::test_all();
-    smart_pointers::test_all();
+    strings::test_all();
+    // smart_pointers::test_all();
     // scoping_rules::test_all();
     // tuples::test_all();
     // traits::test_all();

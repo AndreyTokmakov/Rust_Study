@@ -12,14 +12,15 @@
 #[path = "factory/Factory.rs"] pub mod factory;
 #[path = "builder/Builder.rs"] pub mod builder;
 #[path = "strategy/Strategy.rs"] pub mod strategy;
+#[path = "state/State.rs"] pub mod state;
 #[path = "undo/main.rs"] pub mod undo;
+#[path = "observer/Observer.rs"] pub mod observer;
 
-mod State;
 mod TaskPool;
 
 fn main()
 {
-    // State::test_all();
+    // state::test_all();
     // TaskPool::test_all();
 
     // command_1::test_all();
@@ -30,5 +31,7 @@ fn main()
     // builder::test_all();
     // strategy::test_all();
 
-    undo::test_all();
+    observer::test_all();
+
+    // undo::test_all();
 }
