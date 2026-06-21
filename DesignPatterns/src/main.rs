@@ -14,7 +14,8 @@
 #[path = "strategy/Strategy.rs"] pub mod strategy;
 #[path = "state/State.rs"] pub mod state;
 #[path = "undo/main.rs"] pub mod undo;
-#[path = "observer/Observer.rs"] pub mod observer;
+#[path = "observer/main.rs"] pub mod observer;
+
 
 mod TaskPool;
 

@@ -1,5 +1,5 @@
 
-mod temperature_sensor
+pub mod temperature_sensor
 {
     struct Logger;
     struct Display;
@@ -93,7 +93,4 @@ mod temperature_sensor
     }
 }
 
-pub fn test_all()
-{
-    temperature_sensor::demo();
-}
+
