@@ -15,7 +15,7 @@
 #[path = "state/State.rs"] pub mod state;
 #[path = "undo/main.rs"] pub mod undo;
 #[path = "observer/main.rs"] pub mod observer;
-
+#[path = "repository/main.rs"] pub mod repository;
 
 mod TaskPool;
 
@@ -31,8 +31,8 @@ fn main()
     // factory::test_all();
     // builder::test_all();
     // strategy::test_all();
-
-    observer::test_all();
+    // observer::test_all();
+    repository::test_all();
 
     // undo::test_all();
 }
