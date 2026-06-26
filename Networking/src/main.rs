@@ -14,6 +14,7 @@
 #[path = "std/client.rs"] pub mod client;
 #[path = "std/tcp_servers.rs"] pub mod tcp_servers;
 #[path = "std/udp_servers.rs"] pub mod udp_servers;
+#[path = "std/udp_multicast.rs"] pub mod udp_multicast;
 #[path = "std/dns.rs"] pub mod dns;
 #[path = "std/ProxyServer.rs"] pub mod ProxyServer;
 #[path = "std/web_sockets.rs"] pub mod web_sockets;
@@ -30,17 +31,13 @@ pub fn main()
     // listen_port::test_all();
     // tcp_servers::test_all();
     // udp_servers::test_all();
+    udp_multicast::test_all();
     // web_sockets::test_all();
     // ProxyServer::test_all();
-
     // client_server_examples::test_all();
-
-    tokio_asynch_tcp_client::test_all();
+    // tokio_asynch_tcp_client::test_all();
     // tokio_asynch_tcp_server::test_all();
-
     // mio_servers::test_all();
-
     // ssh::test_all();
-
     // api_services::test_all();
 }
