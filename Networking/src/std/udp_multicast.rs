@@ -34,7 +34,7 @@ mod producer
               time::Duration,
     };
 
-    fn main() -> io::Result<()>
+    pub fn run() -> io::Result<()>
     {
         let multicast: SocketAddrV4 = SocketAddrV4::new(Ipv4Addr::new(239, 255, 0, 1), 8888, );
         let socket: UdpSocket = UdpSocket::bind("0.0.0.0:0")?;
@@ -56,4 +56,5 @@ mod producer
 pub fn test_all()
 {
     receiver::run().unwrap();
+    producer::run().unwrap();
 }
