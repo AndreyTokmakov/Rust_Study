@@ -26,10 +26,10 @@ pub fn main()
     // threads::test_all();
     // atomics::test_all();
     // barrier::test_all();
-    thread_local::test_all();
+    // thread_local::test_all();
     // condition_variables::test_all();
     // mutex::test_all();
-    // arc::test_all();
+    arc::test_all();
     // locking::test_all();
     // sender_receiver::test_all();
     // mpsc_channel::test_all(); 

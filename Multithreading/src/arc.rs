@@ -51,11 +51,53 @@ fn share_data_with_arc()
     cloned_arc_my_data.print();
 }
 
+/// https://www.compilenrun.com/docs/language/rust/rust-memory-management/rust-arc-type#weak-references
+mod weak_references
+{
+    use std::sync::{Arc, Weak};
+    use std::cell::RefCell;
+
+    struct Node
+    {
+        value: i32,
+        parent: Option<Weak<RefCell<Node>>>,
+        children: Vec<Arc<RefCell<Node>>>,
+    }
+
+    pub fn demo()
+    {
+        let root: Arc<RefCell<Node>> = Arc::new(RefCell::new(Node {
+            value: 1,
+            parent: None,
+            children: vec![],
+        }));
+
+        let child: Arc<RefCell<Node>> = Arc::new(RefCell::new(Node {
+            value: 2,
+            parent: Some(Arc::downgrade(&root)),   // Use a Weak reference to the parent to avoid reference cycles
+            children: vec![],
+        }));
+
+        // Add the child to the root's children
+        root.borrow_mut().children.push(Arc::clone(&child));
+
+        // Access the child's parent (which is a Weak reference)
+        let parent: Option<Arc<RefCell<Node>>> = child.borrow().parent.as_ref().unwrap().upgrade();
+        if let Some(parent) = parent {
+            println!("Child's parent value: {}", parent.borrow().value);
+        }
+
+        // Output:
+        // Child's parent value: 1
+    }
+}
+
 // NOTE: https://doc.rust-lang.org/std/sync/struct.Arc.html#thread-safety
 pub fn test_all()
 {
-    modify_stored_values();
+    // modify_stored_values();
     // create_mutable();
-
     // share_data_with_arc();
+
+    weak_references::demo();
 }

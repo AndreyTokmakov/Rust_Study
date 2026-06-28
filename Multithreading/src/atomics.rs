@@ -31,6 +31,33 @@ mod basic
     } 
 }
 
+mod basic_example_2
+{
+    use std::sync::atomic::{AtomicUsize, Ordering};
+    use std::sync::Arc;
+    use std::thread;
+    use std::thread::JoinHandle;
+
+    pub fn demo()
+    {
+        let counter: Arc<AtomicUsize> = Arc::new(AtomicUsize::new(0));
+        let mut workers: Vec<JoinHandle<()>> = vec![];
+
+        for _ in 0..10 {
+            let counter_clone: Arc<AtomicUsize> = Arc::clone(&counter);
+            let handle: JoinHandle<()> = thread::spawn(move || {
+                counter_clone.fetch_add(1, Ordering::SeqCst);
+            });
+            workers.push(handle);
+        }
+
+        for handle in workers {
+            handle.join().unwrap();
+        }
+        println!("Final count: {}", counter.load(Ordering::SeqCst));
+    }
+}
+
 mod Atomic_Bool
 {
     use std::sync::Arc;
@@ -93,6 +120,7 @@ pub fn test_all()
 {
     // basic::fetch_add();
     // basic::fetch_sub_thread();
+    basic_example_2::demo();
     // SpinLock::demo();
-    Atomic_Bool::busy_waiting();
+    // Atomic_Bool::busy_waiting();
 }

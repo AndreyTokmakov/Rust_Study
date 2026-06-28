@@ -18,7 +18,6 @@ fn simple_example()
     println!("counter: {}", *counter.lock().unwrap());
 }
 
-
 fn demo()
 {
     let counter: Arc<Mutex<i32>> = Arc::new(Mutex::new(0));
@@ -118,13 +117,10 @@ mod consumer_producer_demo
 }
 
 
-
-
 pub fn test_all()
 {
     // simple_example();
     // demo();
     // lock_multiple_threads();
-
-    consumer_producer_demo::example();
+    // consumer_producer_demo::example();
 }
