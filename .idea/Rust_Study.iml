@@ -23,6 +23,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Tests_and_Experiments/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Memory/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Performance/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/DataStructures/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

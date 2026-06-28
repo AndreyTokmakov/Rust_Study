@@ -5,6 +5,7 @@ members = [
     "Collections",
     "Cryptogrphy_Encryption",
     "Databases",
+    "DataStructures",
     "DesignPatterns",
     "Files_Folders_Directories",
     "GRpc",
