@@ -31,8 +31,8 @@ fn main()
     // factory::test_all();
     // builder::test_all();
     // strategy::test_all();
-    // observer::test_all();
-    repository::test_all();
+    observer::test_all();
+    // repository::test_all();
 
     // undo::test_all();
 }

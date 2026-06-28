@@ -7,8 +7,10 @@
 )]
 
 #[path = "Cache/main.rs"] pub mod cache;
+#[path = "ObservableWrapper/ObservableWrapper.rs"] pub mod ObservableWrapper;
 
 fn main()
 {
-    cache::test_all()
+    // cache::test_all()
+    ObservableWrapper::observer_wrapper::test_all()
 }

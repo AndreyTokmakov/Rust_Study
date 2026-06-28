@@ -13,13 +13,15 @@ pub mod helpers
     {
         pub fn new(value: T) -> Self {
             let obj = Tracked { value };
-            println!("{:?} created", &obj);
+            println!(" => {:?} created", &obj);
             obj
         }
     }
 
-    impl<T> std::ops::Deref for Tracked<T> {
+    impl<T> std::ops::Deref for Tracked<T>
+    {
         type Target = T;
+
         fn deref(&self) -> &T {
             &self.value
         }
@@ -88,4 +90,13 @@ mod simple_example
 pub fn test_all()
 {
     simple_example::demo();
+
+    //  => Tracked { value: "Rust" } created
+    //  => Tracked { value: "Language" } created
+    // Name: Some(Tracked { value: "Rust" })
+    // Type: Some(Tracked { value: "Language" })
+    //  => Tracked { value: "Unknown" } created
+    // Type: Tracked(Language)
+    //  => Tracked { value: "1.0" } created
+    // Version: Tracked(1.0)
 }
